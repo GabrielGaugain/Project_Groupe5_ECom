@@ -269,9 +269,9 @@ public class ProduitDAOImpl implements IProduitDAO {
 
 		try {
 		
-		String Req ="SELECT * FROM categories WHERE nom_produit=?";	
+		String Req ="SELECT * FROM categories WHERE nom_produit LIKE '%?%'";	
 		ps = IProduitDAO.connexion_db_gestionECommerce.prepareStatement(Req);
-		ps.setLong(1, 1);
+		ps.setString(1, pMotCle);
 		rs = ps.executeQuery();
 			
 			while (rs.next()) {
