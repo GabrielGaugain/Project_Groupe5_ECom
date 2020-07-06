@@ -262,7 +262,41 @@ public class ProduitDAOImpl implements IProduitDAO {
 
 	@Override
 	public List<Produit> getByMotCle(String pMotCle) {
-		// TODO Auto-generated method stub
+		ResultSet rs = null;
+		PreparedStatement ps = null;
+		Produit produit = null;
+		List<Produit> listeProduits = new ArrayList<>();
+
+		try {
+		
+		String Req ="SELECT * FROM categories WHERE nom_produit=?";	
+		ps = IProduitDAO.connexion_db_gestionECommerce.prepareStatement(Req);
+		ps.setLong(1, 1);
+		rs = ps.executeQuery();
+			
+			while (rs.next()) {
+
+				// ctor :Produit(long idProduit, String nomProduit, String descriptionProduit, double prixProduit,boolean selectionne, String urlImageProduit, Long idCategorie)
+				produit = new Produit(rs.getLong(1), rs.getString(2), rs.getString(3), rs.getDouble(4),rs.getBoolean(5),rs.getString(6),rs.getLong(7));
+
+				listeProduits.add(produit);
+
+			} // end while
+
+			return listeProduits;
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (rs != null)
+					rs.close();
+			} catch (Exception e) {
+				System.out.println("erreur -dao");
+				e.printStackTrace();
+			}
+		}
+
 		return null;
 	}
 
