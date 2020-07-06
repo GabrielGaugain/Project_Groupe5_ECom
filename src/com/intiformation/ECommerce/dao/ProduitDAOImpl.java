@@ -6,20 +6,19 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.intiformation.ECommerce.modele.Categorie;
 import com.intiformation.ECommerce.modele.Produit;
 
 public class ProduitDAOImpl implements IProduitDAO {
 
 	@Override
 	public boolean add(Produit pProduit) {
-PreparedStatement ps = null;
+		PreparedStatement ps = null;
 		
 		try {
 			
 			String Req ="INSERT INTO produits (nom_produit,description_produit,prix_produit,id_photo,id_categorie) VALUES (?,?,?,?,?)";
 			
-			ps = ICategorieDAO.connexion_db_gestionECommerce.prepareStatement(Req);
+			ps = IProduitDAO.connexion_db_gestionECommerce.prepareStatement(Req);
 			
 			ps.setString(1, pProduit.getNomProduit());
 			ps.setString(2,pProduit.getDescriptionProduit());
@@ -54,7 +53,7 @@ PreparedStatement ps = null;
 		
 		String Req ="UPDATE produits SET nom_produit=?,description_produit=?,prix_produit=?, id_photo=?,id_categorie=? WHERE id_produit=?";
 		
-		ps = ICategorieDAO.connexion_db_gestionECommerce.prepareStatement(Req);
+		ps = IProduitDAO.connexion_db_gestionECommerce.prepareStatement(Req);
 		
 		ps.setString(1, pProduit.getNomProduit());
 		ps.setString(2,pProduit.getDescriptionProduit());
@@ -90,7 +89,7 @@ PreparedStatement ps = null;
 			
 			String Req ="DELETE FROM produits WHERE id_produit=?";
 			
-			ps = ICategorieDAO.connexion_db_gestionECommerce.prepareStatement(Req);
+			ps = IProduitDAO.connexion_db_gestionECommerce.prepareStatement(Req);
 			
 			ps.setLong(1, pIdProduit);
 			
@@ -120,7 +119,7 @@ PreparedStatement ps = null;
 
 		try {
 
-			rs = ICategorieDAO.connexion_db_gestionECommerce.prepareStatement("SELECT * FROM produits").executeQuery();
+			rs = IProduitDAO.connexion_db_gestionECommerce.prepareStatement("SELECT * FROM produits").executeQuery();
 			
 			while (rs.next()) {
 
@@ -149,14 +148,75 @@ PreparedStatement ps = null;
 	}// end getAll
 
 	@Override
-	public Produit getById(long id) {
-		// TODO Auto-generated method stub
-		return null;
+	public Produit getById(long pIdProduit) {
+		ResultSet rs = null;
+		PreparedStatement ps = null;
+		Produit produit = null;
+
+		try {
+		
+		String Req ="SELECT * FROM categories WHERE id_produit=?";	
+		ps = IProduitDAO.connexion_db_gestionECommerce.prepareStatement(Req);
+		ps.setLong(1, pIdProduit);
+		rs = ps.executeQuery();
+
+		rs.next();
+		// ctor :Produit(long idProduit, String nomProduit, String descriptionProduit, double prixProduit,boolean selectionne, String urlImageProduit, Long idCategorie)
+		produit = new Produit(rs.getLong(1), rs.getString(2), rs.getString(3), rs.getDouble(4),rs.getBoolean(5),rs.getString(6),rs.getLong(7));
+
+		return produit;
+
+	} catch (SQLException e) {
+		e.printStackTrace();
+	} finally {
+		try {
+			if (rs != null)
+				rs.close();
+		} catch (Exception e) {
+			System.out.println("erreur -dao");
+			e.printStackTrace();
+		}
 	}
+		return null;
+	}//end getById
 
 	@Override
 	public List<Produit> getAllProduitByCategorie(long pIdCategorie) {
-		// TODO Auto-generated method stub
+		ResultSet rs = null;
+		PreparedStatement ps = null;
+		Produit produit = null;
+		List<Produit> listeProduits = new ArrayList<>();
+
+		try {
+		
+		String Req ="SELECT * FROM categories WHERE id_categorie=?";	
+		ps = IProduitDAO.connexion_db_gestionECommerce.prepareStatement(Req);
+		ps.setLong(1, pIdCategorie);
+		rs = ps.executeQuery();
+			
+			while (rs.next()) {
+
+				// ctor :Produit(long idProduit, String nomProduit, String descriptionProduit, double prixProduit,boolean selectionne, String urlImageProduit, Long idCategorie)
+				produit = new Produit(rs.getLong(1), rs.getString(2), rs.getString(3), rs.getDouble(4),rs.getBoolean(5),rs.getString(6),rs.getLong(7));
+
+				listeProduits.add(produit);
+
+			} // end while
+
+			return listeProduits;
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (rs != null)
+					rs.close();
+			} catch (Exception e) {
+				System.out.println("erreur -dao");
+				e.printStackTrace();
+			}
+		}
+
 		return null;
 	}
 
