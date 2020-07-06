@@ -1,5 +1,122 @@
-package com.intiformation.ECommerce.controller;
+package com.intiformation.gestionbiblio.controller;
 
-public class AuthentificationBean {
+import java.io.Serializable;
 
-}
+import javax.faces.application.FacesMessage;
+import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpSession;
+
+import com.intiformation.gestionbiblio.dao.IUtilisateurDAO;
+import com.intiformation.gestionbiblio.dao.UtilisateurDAOImpl;
+
+/**
+ * ManagedBean pour l'authentification de l'utilisateur
+ * @author gabri
+ *
+ */
+
+@ManagedBean(name="authentificationBean")
+@SessionScoped
+public class AuthentificationBean implements Serializable{
+
+	/*_____________________________props_______________________________*/
+	private String userIdentifiant;
+	private String userMotDePasse;
+	private IUtilisateurDAO utilisateurDAO;
+	
+	/*_____________________________ctors_______________________________*/
+	public AuthentificationBean() {
+		utilisateurDAO = new UtilisateurDAOImpl();
+	}//end ctor vide
+
+
+	
+	
+	/*_____________________________meths_______________________________*/
+	/**
+	 * Permet de connecter l'utilisateur à son espace et lui créer une session http. <br/>
+	 * la méthode sera invoquée à la soumission de la form de 'authentification.xhtml'
+	 * @return
+	 */
+	public String connecterUtilisateur() {
+		
+		// 1. délcaration du context de JSF (l'objet FacesContext)
+		/**
+		 * javax.faces.FacesContext
+		 */
+		FacesContext contextJSF = FacesContext.getCurrentInstance();
+		
+		// 2. verif si l'utilisateur existe dans la  bdd
+		if(utilisateurDAO.isUtilisateurExists(userIdentifiant, userMotDePasse)) {
+			//----------------- l'utilisateur existe ----------------------------//
+			
+			//-> création de la session
+			HttpSession session = (HttpSession) contextJSF.getExternalContext().getSession(true);
+			
+			//->sauvegarde du login de l'utilisatuer dans la session
+			session.setAttribute("user_login", userIdentifiant);
+			
+			//-> navigation vers la page 'accueil.xhtml'
+			return "accueil.xhtml";
+			
+		}else {
+			//----------------- l'utilisateur n'existe pas ----------------------//
+			/**
+			 * envoi d'un message vers la vue
+			 */
+			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_FATAL, "Echec de connexion", "Identifiant ou Mot de passe incorrect");
+			
+			//-> envoi du massage vers la bue via le constex de JSF (l'objet 'FacesContext') et sa méthode addMessage()
+			contextJSF.addMessage(null, message );
+			
+			return "authentification.xhtml" ;
+		
+		}//end else
+		
+		
+		
+	}//end connecterUtilisateur
+	
+	
+	public String deconnecterUtilisateur() {
+		
+		// 1. recup du context JSF
+		FacesContext contextJSF = FacesContext.getCurrentInstance();
+		
+		// 2. recup de la session 
+		HttpSession session = (HttpSession) contextJSF.getExternalContext().getSession(false);
+		
+		// 3 deconnexion
+		session.invalidate();
+		
+		// 4. message de deco
+		FacesMessage facesMessages = new FacesMessage(FacesMessage.SEVERITY_INFO,"déconnexion", "- vous êtes déconnecté") ; 
+		contextJSF.addMessage(null, facesMessages);
+		
+		// 4. redirection vers 'authentification.xhtml'
+		return "authentification.xhtml";
+		
+	}//end deconnecterUtilisateur
+	
+	
+	/*_____________________________getters/setters_______________________________*/
+	
+	public String getUserIdentifiant() {
+		return userIdentifiant;
+	}
+
+	public void setUserIdentifiant(String userIdentifiant) {
+		this.userIdentifiant = userIdentifiant;
+	}
+
+	public String getUserMotDePasse() {
+		return userMotDePasse;
+	}
+
+	public void setUserMotDePasse(String userMotDePasse) {
+		this.userMotDePasse = userMotDePasse;
+	}
+	
+}// end class

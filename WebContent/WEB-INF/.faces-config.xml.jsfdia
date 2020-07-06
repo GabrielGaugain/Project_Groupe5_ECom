@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PROCESS model-entity="JSFProcess">
+ <PROCESS-ITEM NAME="rules:#accueil.xhtml" PATH="/accueil.xhtml"
+  SHAPE="272,33,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:#accueil.xhtml:0" NAME="item"
+   PATH="/accueil.xhtml" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT ID="login::#authentification.xhtml"
+    NAME="output" PATH="/authentification.xhtml"
+    TARGET="rules:#authentification.xhtml" TITLE="login" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="gotopanier::#panier.xhtml" NAME="output1"
+    PATH="/panier.xhtml" TARGET="rules:#panier.xhtml" TITLE="gotopanier" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:#authentification.xhtml"
+  PATH="/authentification.xhtml" SHAPE="496,193,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:#authentification.xhtml:0" NAME="item"
+   PATH="/authentification.xhtml" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT ID="gotoaccueil::#accueil.xhtml" NAME="output"
+    PATH="/accueil.xhtml" TARGET="rules:#accueil.xhtml"
+    TITLE="gotoaccueil" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="admin::#accueil-admin.xhtml" NAME="output1"
+    PATH="/accueil-admin.xhtml" TARGET="rules:#accueil-admin.xhtml"
+    TITLE="admin" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:#panier.xhtml" PATH="/panier.xhtml"
+  SHAPE="496,305,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#accueil-admin.xhtml"
+  PATH="/accueil-admin.xhtml" SHAPE="704,177,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#pannier.xhtml" PATH="/pannier.xhtml"
+  SHAPE="32,17,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:#pannier.xhtml:0" NAME="item"
+   PATH="/pannier.xhtml" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT ID="signin::#authentification.xhtml"
+    NAME="output" PATH="/authentification.xhtml"
+    TARGET="rules:#authentification.xhtml" TITLE="signin" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+</PROCESS>

@@ -1,0 +1,58 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html">
+
+
+<h:head>
+	<title> Page d'authentification</title>
+
+	<!--  lient vers la feuille de style bibliotheque.css -->
+	<h:outputStylesheet library="style" name="accueil.css"></h:outputStylesheet>
+	
+</h:head>
+
+
+<body>
+
+	<!-- ============================================================================== -->
+	<!-- ============ Affichage des message de AuthentificationBEan =================== -->
+	<!-- ============================================================================== -->
+	<h:messages globalOnly="true" layout="table" showDetail="true" styleClass="error" fatalStyle="font-style:bold"/>
+
+
+	<!-- ============================================================================== -->
+	<!-- ========== Formulaire de connexion =========================================== -->
+	<!-- ============================================================================== -->
+	
+	<h:form>
+		
+		<h:panelGrid columns="3" cellpadding="5" width="40%">
+			
+			<f:facet name="header">
+					Formulaire d'authentification
+			</f:facet>
+			
+			
+			<h:outputLabel for="idLogin" value="Identifiant : " />
+			<h:inputText id="idLogin" required="true" requiredMessage="Identifiant obligatoire" 
+						 value="#{authentificationBean.userIdentifiant}"	/>
+			<h:message for="idLogin" styleClass="error"/>
+			
+			<h:outputLabel for="idMdp" value="Mot de passe : " />
+			<h:inputSecret id="idMdp" required="true" requiredMessage="Mot de passe obligatoire"
+						   value="#{authentificationBean.userMotDePasse}"/>	
+			<h:message for="idMdp" styleClass="error"/>
+			
+			
+			<f:facet name="footer">
+				<h:commandButton  value="Se Connecter" action="#{authentificationBean.connecterUtilisateur()}" />
+			</f:facet>
+			
+					
+		</h:panelGrid>
+	</h:form>	
+	
+</body>
+</html>
