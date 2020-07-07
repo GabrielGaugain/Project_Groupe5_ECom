@@ -78,7 +78,7 @@ public class Test {
 		
 		
 		System.out.println("creation d'un nouveau ligneCommande ");
-		ligneService.ajouterLigneCommande(	new LigneCommande(3,300.99, 4, 1, 1 )	);	
+		ligneService.ajouterLigneCommande(	new LigneCommande(3,300.99, 4, 2, 1 )	);	
 		System.out.println("=========> creation d'un nouveau ligneCommande REUSSI ");		
 		
 		

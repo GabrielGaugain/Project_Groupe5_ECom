@@ -29,8 +29,6 @@ public class ClientDAOImpl implements IClientDAO {
 			ps.setString(2, t.getAdresseClient());
 			ps.setString(3, t.getEmailClient());
 			ps.setString(4, t.getTelephoneClient());
-			
-			ps.setLong(5, t.getIdClient());
 
 			// 3. exe de la requete et recup resultat (update car modif)
 			int verifAjout = ps.executeUpdate();
