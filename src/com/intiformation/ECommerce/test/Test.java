@@ -29,29 +29,19 @@ import com.intiformation.ECommerce.modele.*;
  */
 public class Test {
 	
-	private IClientService clientService;
-	private IUtilisateurService userService;
-	private ICategorieService categorieService;
-	private ILigneCommandeService ligneService;
-	private IPanierService panierService;
-	private IProduitService prodService;
-	private ICommandeService commService;
-	private IRoleService roleService;
-	
-	public void Test() {
-		clientService = new ClientServiceImpl();
-		userService = new UtilisateurServiceImpl();
-		categorieService = new CategorieServiceImpl();
-		ligneService = new LigneCommandeServiceImpl();
-		panierService = new PanierServiceImpl();
-		prodService = new ProduitServiceImpl();
-		commService = new CommandeServiceImpl();
-		roleService = new RoleServiceImpl();		
-	}
+
 	
 	
+	public static void main(String[] args) {
 	
-	public void main(String[] args) {
+		IClientService clientService = new ClientServiceImpl();
+		IUtilisateurService userService = new UtilisateurServiceImpl();
+		ICategorieService categorieService = new CategorieServiceImpl();
+		ILigneCommandeService ligneService = new LigneCommandeServiceImpl();
+		IPanierService panierServic = new PanierServiceImpl();
+		IProduitService prodService = new ProduitServiceImpl();
+		ICommandeService commService = new CommandeServiceImpl();
+		IRoleService roleService = new RoleServiceImpl();			
 		
 		System.out.println("");
 		
