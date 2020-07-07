@@ -1,5 +1,7 @@
 package com.intiformation.ECommerce.dao;
 
-public interface IRoleDAO {
+import com.intiformation.ECommerce.modele.Role;
+
+public interface IRoleDAO extends IGenericDAO<Role> {
 
 }
