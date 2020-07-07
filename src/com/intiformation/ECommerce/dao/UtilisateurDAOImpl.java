@@ -18,7 +18,7 @@ public class UtilisateurDAOImpl implements IUtilisateurDAO {
 		try {
 
 			// 1. definition du contenu de la requete SQL avec ? pour prepared statement
-			String requeteAjout = "INSERT INTO utilisateurs (identifiant, mot_de_passe,id_role, active ) "
+			String requeteAjout = "INSERT INTO utilisateurs (nom_utilisateur, mdp_utilisateur,id_role, active ) "
 					+ "VALUES (?, ?, ?, ?)";
 
 			// 2. creation preparedStatement

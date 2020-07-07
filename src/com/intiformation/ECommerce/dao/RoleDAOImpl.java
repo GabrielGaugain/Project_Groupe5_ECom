@@ -15,7 +15,7 @@ public class RoleDAOImpl implements IRoleDAO {
 		
 		try {
 			
-			String Req ="INSERT INTO roles (nom_categorie) VALUES (?)";
+			String Req ="INSERT INTO roles (nom_role) VALUES (?)";
 			
 			ps = ICategorieDAO.connection.prepareStatement(Req);
 			

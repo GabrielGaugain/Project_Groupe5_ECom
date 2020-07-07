@@ -18,7 +18,7 @@ public class PanierDAOImpl implements IPanierDAO {
 		
 		try {
 			
-			String Req ="INSERT INTO paniers";
+			String Req ="INSERT INTO paniers () values ()";
 			
 			st = ICategorieDAO.connection.prepareStatement(Req);
 			
