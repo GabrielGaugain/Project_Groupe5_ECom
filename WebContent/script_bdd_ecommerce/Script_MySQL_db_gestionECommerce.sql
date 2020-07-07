@@ -100,3 +100,12 @@ id_photo INT NOT NULL auto_increment,
 url_photo VARCHAR (200),
 constraint pk_photos PRIMARY KEY (id_photo)
 );
+
+
+
+-- TEST DAO CLIENTS
+
+
+
+-- TEST DAO UTILSATEUR
+
