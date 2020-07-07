@@ -16,7 +16,7 @@ PreparedStatement ps = null;
 		
 		try {
 			
-			String Req ="INSERT INTO lignecommande (quantite_commande, montant_commande, id_produit, id_commande, id_panier) VALUES (?,?,?,?,?)";
+			String Req ="INSERT INTO lignescommandes (quantite_commande, montant_commande, id_produit, id_commande, id_panier) VALUES (?,?,?,?,?)";
 			
 			ps = ICategorieDAO.connection.prepareStatement(Req);
 			
@@ -50,7 +50,7 @@ PreparedStatement ps = null;
 
 		try {
 			
-			String Req ="UPDATE lignecommande SET quantite_commande=?,montant_commande=?,id_produit=?,id_commande=?, id_panier=? WHERE id_lignecommande=?";
+			String Req ="UPDATE lignescommandes SET quantite_commande=?,montant_commande=?,id_produit=?,id_commande=?, id_panier=? WHERE id_lignecommande=?";
 			
 			ps = ICategorieDAO.connection.prepareStatement(Req);
 			
@@ -86,7 +86,7 @@ PreparedStatement ps = null;
 
 		try {
 			
-			String Req ="DELETE FROM lignecommande WHERE id_lignecommande=?";
+			String Req ="DELETE FROM lignescommandes WHERE id_lignecommande=?";
 			
 			ps = ICategorieDAO.connection.prepareStatement(Req);
 			
