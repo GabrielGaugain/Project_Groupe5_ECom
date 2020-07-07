@@ -38,7 +38,7 @@ public class Test {
 		IUtilisateurService userService = new UtilisateurServiceImpl();
 		ICategorieService categorieService = new CategorieServiceImpl();
 		ILigneCommandeService ligneService = new LigneCommandeServiceImpl();
-		IPanierService panierServic = new PanierServiceImpl();
+		IPanierService panierService = new PanierServiceImpl();
 		IProduitService prodService = new ProduitServiceImpl();
 		ICommandeService commService = new CommandeServiceImpl();
 		IRoleService roleService = new RoleServiceImpl();			
