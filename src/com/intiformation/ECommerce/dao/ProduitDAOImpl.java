@@ -18,7 +18,7 @@ public class ProduitDAOImpl implements IProduitDAO {
 			
 			String Req ="INSERT INTO produits (nom_produit,description_produit,prix_produit,id_photo,id_categorie) VALUES (?,?,?,?,?)";
 			
-			ps = IProduitDAO.connexion_db_gestionECommerce.prepareStatement(Req);
+			ps = IProduitDAO.connection.prepareStatement(Req);
 			
 			ps.setString(1, pProduit.getNomProduit());
 			ps.setString(2,pProduit.getDescriptionProduit());
@@ -53,7 +53,7 @@ public class ProduitDAOImpl implements IProduitDAO {
 		
 		String Req ="UPDATE produits SET nom_produit=?,description_produit=?,prix_produit=?, id_photo=?,id_categorie=? WHERE id_produit=?";
 		
-		ps = IProduitDAO.connexion_db_gestionECommerce.prepareStatement(Req);
+		ps = IProduitDAO.connection.prepareStatement(Req);
 		
 		ps.setString(1, pProduit.getNomProduit());
 		ps.setString(2,pProduit.getDescriptionProduit());
@@ -89,7 +89,7 @@ public class ProduitDAOImpl implements IProduitDAO {
 			
 			String Req ="DELETE FROM produits WHERE id_produit=?";
 			
-			ps = IProduitDAO.connexion_db_gestionECommerce.prepareStatement(Req);
+			ps = IProduitDAO.connection.prepareStatement(Req);
 			
 			ps.setLong(1, pIdProduit);
 			
@@ -119,7 +119,7 @@ public class ProduitDAOImpl implements IProduitDAO {
 
 		try {
 
-			rs = IProduitDAO.connexion_db_gestionECommerce.prepareStatement("SELECT * FROM produits").executeQuery();
+			rs = IProduitDAO.connection.prepareStatement("SELECT * FROM produits").executeQuery();
 			
 			while (rs.next()) {
 
@@ -156,7 +156,7 @@ public class ProduitDAOImpl implements IProduitDAO {
 		try {
 		
 		String Req ="SELECT * FROM categories WHERE id_produit=?";	
-		ps = IProduitDAO.connexion_db_gestionECommerce.prepareStatement(Req);
+		ps = IProduitDAO.connection.prepareStatement(Req);
 		ps.setLong(1, pIdProduit);
 		rs = ps.executeQuery();
 
@@ -190,7 +190,7 @@ public class ProduitDAOImpl implements IProduitDAO {
 		try {
 		
 		String Req ="SELECT * FROM categories WHERE id_categorie=?";	
-		ps = IProduitDAO.connexion_db_gestionECommerce.prepareStatement(Req);
+		ps = IProduitDAO.connection.prepareStatement(Req);
 		ps.setLong(1, pIdCategorie);
 		rs = ps.executeQuery();
 			
@@ -230,7 +230,7 @@ public class ProduitDAOImpl implements IProduitDAO {
 		try {
 		
 		String Req ="SELECT * FROM categories WHERE selectionne=?";	
-		ps = IProduitDAO.connexion_db_gestionECommerce.prepareStatement(Req);
+		ps = IProduitDAO.connection.prepareStatement(Req);
 		ps.setLong(1, 1);
 		rs = ps.executeQuery();
 			

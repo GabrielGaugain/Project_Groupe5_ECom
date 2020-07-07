@@ -7,7 +7,7 @@ import com.intiformation.ECommerce.util.ConnectionDB;
 
 public interface IGenericDAO <T> {
 	
-	public Connection connexion_db_gestionECommerce = ConnectionDB.getInstance();
+	public Connection connection = ConnectionDB.getInstance();
 	
 	
 	public boolean add(T t);

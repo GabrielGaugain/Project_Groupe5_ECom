@@ -19,7 +19,7 @@ public class CategorieDAOImpl implements ICategorieDAO {
 			
 			String Req ="INSERT INTO categories (nom_categorie,description_categorie,id_photo) VALUES (?,?,?)";
 			
-			ps = ICategorieDAO.connexion_db_gestionECommerce.prepareStatement(Req);
+			ps = ICategorieDAO.connection.prepareStatement(Req);
 			
 			ps.setString(1, pCategorie.getNomCategorie());
 			ps.setString(2,pCategorie.getDescriptionCategorie());
@@ -53,7 +53,7 @@ public class CategorieDAOImpl implements ICategorieDAO {
 		
 		String Req ="UPDATE categories SET nom_categorie=?,description_categorie=?,id_photo=? WHERE id_categorie=?";
 		
-		ps = ICategorieDAO.connexion_db_gestionECommerce.prepareStatement(Req);
+		ps = ICategorieDAO.connection.prepareStatement(Req);
 		
 		ps.setString(1, pCategorie.getNomCategorie());
 		ps.setString(2,pCategorie.getDescriptionCategorie());
@@ -88,7 +88,7 @@ public class CategorieDAOImpl implements ICategorieDAO {
 			
 			String Req ="DELETE FROM categories WHERE id_categorie=?";
 			
-			ps = ICategorieDAO.connexion_db_gestionECommerce.prepareStatement(Req);
+			ps = ICategorieDAO.connection.prepareStatement(Req);
 			
 			ps.setLong(1, pIdCategorie);
 			
@@ -118,7 +118,7 @@ public class CategorieDAOImpl implements ICategorieDAO {
 
 		try {
 
-			rs = ICategorieDAO.connexion_db_gestionECommerce.prepareStatement("SELECT * FROM categories").executeQuery();
+			rs = ICategorieDAO.connection.prepareStatement("SELECT * FROM categories").executeQuery();
 			
 			while (rs.next()) {
 
@@ -157,7 +157,7 @@ public class CategorieDAOImpl implements ICategorieDAO {
 		try {
 		
 		String Req ="SELECT * FROM categories WHERE id_categorie=?";	
-		ps = ICategorieDAO.connexion_db_gestionECommerce.prepareStatement(Req);
+		ps = ICategorieDAO.connection.prepareStatement(Req);
 		ps.setLong(1, pIdCategorie);
 		rs = ps.executeQuery();
 

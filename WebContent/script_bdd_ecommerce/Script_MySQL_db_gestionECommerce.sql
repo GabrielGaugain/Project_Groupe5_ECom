@@ -10,6 +10,8 @@ constraint pk_categories PRIMARY KEY (id_categorie)
 );
 ALTER TABLE db_gestionECommerce.categories ADD constraint fk_categories_photos FOREIGN KEY (id_photo) REFERENCES photos(id_photo);
 
+
+
 CREATE TABLE db_gestionECommerce.produits (
 id_produit LONG NOT NULL auto_increment,
 nom_produit VARCHAR (100),
@@ -23,6 +25,9 @@ constraint pk_produits PRIMARY KEY (id_produit)
 ALTER TABLE db_gestionECommerce.produits ADD constraint fk_produits_photos FOREIGN KEY (id_photo) REFERENCES photos(id_photo);
 ALTER TABLE db_gestionECommerce.produits ADD constraint fk_produits_categories FOREIGN KEY (id_categorie) REFERENCES categories(id_categorie);
 
+
+
+
 CREATE TABLE db_gestionECommerce.commandes (
 id_commande LONG NOT NULL auto_increment,
 date_commande datetime,
@@ -30,6 +35,9 @@ id_client LONG,
 constraint pk_commandes PRIMARY KEY (id_commande)
 );
 ALTER TABLE db_gestionECommerce.commandes ADD constraint fk_commandes_clients FOREIGN KEY (id_client) REFERENCES clients(id_client);
+
+
+
 
 CREATE TABLE db_gestionECommerce.lignescommandes (
 id_lignecommande LONG NOT NULL auto_increment,
@@ -44,6 +52,9 @@ ALTER TABLE db_gestionECommerce.lignescommandes ADD constraint fk_lignescommande
 ALTER TABLE db_gestionECommerce.lignescommandes ADD constraint fk_lignescommandes_commandes FOREIGN KEY (id_commande) REFERENCES commandes(id_commande);
 ALTER TABLE db_gestionECommerce.lignescommandes ADD constraint fk_lignescommandes_paniers FOREIGN KEY (id_panier) REFERENCES paniers(id_panier);
 
+
+
+
 CREATE TABLE db_gestionECommerce.clients (
 id_client LONG NOT NULL auto_increment,
 nom_client VARCHAR (100),
@@ -54,10 +65,15 @@ constraint pk_clients PRIMARY KEY (id_client)
 );
 
 
+
+
 CREATE TABLE db_gestionECommerce.paniers (
 id_panier LONG NOT NULL auto_increment,
 constraint pk_paniers PRIMARY KEY (id_panier)
 );
+
+
+
 
 CREATE TABLE db_gestionECommerce.utilisateurs (
 id_utilisateur LONG NOT NULL auto_increment,
@@ -68,6 +84,8 @@ active BOOLEAN,
 constraint pk_utilisateurs PRIMARY KEY (id_utilisateur)
 );
 ALTER TABLE db_gestionECommerce.utilisateurs ADD constraint fk_utilisateurs_roles FOREIGN KEY (id_role) REFERENCES roles(id_role);
+
+
 
 CREATE TABLE db_gestionECommerce.roles (
 id_role LONG NOT NULL auto_increment,
