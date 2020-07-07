@@ -221,7 +221,7 @@ public class ProduitDAOImpl implements IProduitDAO {
 	}
 
 	@Override
-	public List<Produit> getAllProduitSelectionne() {
+	public List<Produit> getProduitSelectionne() {
 		ResultSet rs = null;
 		PreparedStatement ps = null;
 		Produit produit = null;

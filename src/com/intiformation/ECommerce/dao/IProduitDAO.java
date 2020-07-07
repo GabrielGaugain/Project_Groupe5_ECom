@@ -8,7 +8,7 @@ public interface IProduitDAO extends IGenericDAO<Produit> {
 	
 	public List<Produit> getAllProduitByCategorie(long pIdCategorie);
 	
-	public List<Produit> getAllProduitSelectionne();
+	public List<Produit> getProduitSelectionne();
 	
 	public List<Produit> getByMotCle(String pMotCle);
 

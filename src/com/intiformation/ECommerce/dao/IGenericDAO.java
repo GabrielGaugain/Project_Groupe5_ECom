@@ -3,6 +3,7 @@ package com.intiformation.ECommerce.dao;
 import java.sql.Connection;
 import java.util.List;
 
+import com.intiformation.ECommerce.modele.Client;
 import com.intiformation.ECommerce.util.ConnectionDB;
 
 public interface IGenericDAO <T> {
