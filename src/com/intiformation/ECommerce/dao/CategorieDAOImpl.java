@@ -180,6 +180,6 @@ public class CategorieDAOImpl implements ICategorieDAO {
 	}
 
 	return null;
-	}
+	}//end getById
 
-}//end getById
+}//end class

@@ -1,5 +1,7 @@
 package com.intiformation.ECommerce.dao;
 
-public interface ICommandeDAO {
+import com.intiformation.ECommerce.modele.Commande;
 
-}
+public interface ICommandeDAO extends IGenericDAO<Commande>{
+
+}//end interface

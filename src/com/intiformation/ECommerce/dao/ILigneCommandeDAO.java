@@ -1,5 +1,7 @@
 package com.intiformation.ECommerce.dao;
 
-public interface ILigneCommandeDAO {
+import com.intiformation.ECommerce.modele.LigneCommande;
+
+public interface ILigneCommandeDAO extends IGenericDAO<LigneCommande> {
 
 }
