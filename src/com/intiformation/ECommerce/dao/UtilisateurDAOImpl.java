@@ -100,16 +100,18 @@ public class UtilisateurDAOImpl implements IUtilisateurDAO {
 
 		try {
 
-			// 1. definition du contenu de la requete SQL avec ? pour prepared statement
-			String requeteDropFk = "ALTER TABLE utilisateurs DROP CONSTRAINT fk_utilisateurs_roles ";
-			String requeteDel = "DELETE FROM utilisateurs WHERE id_utilisateur=? ";
-			String requeteAddFk = "ALTER TABLE utilisateurs ADD constraint fk_utilisateurs_roles "+
-								  "FOREIGN KEY (id_role) REFERENCES roles(id_role)";
 			
+			//String requeteDropFk = "ALTER TABLE utilisateurs DROP CONSTRAINT fk_utilisateurs_roles ";
+			//String requeteAddFk = "ALTER TABLE utilisateurs ADD constraint fk_utilisateurs_roles "+
+			//				  "FOREIGN KEY (id_role) REFERENCES roles(id_role)";
+		
 			// Drop la foreign key pour pouvoir supprimer 
-			ps = this.connection.prepareStatement(requeteDropFk);
-			ps.executeUpdate();
-			ps.close();
+			//ps = this.connection.prepareStatement(requeteDropFk);
+			//ps.executeUpdate();
+			//ps.close();
+			
+			// 1. definition du contenu de la requete SQL avec ? pour prepared statement
+			String requeteDel = "DELETE FROM utilisateurs WHERE id_utilisateur=? ";
 			
 			// 2. creation preparedStatement
 			ps = this.connection.prepareStatement(requeteDel);
@@ -118,12 +120,12 @@ public class UtilisateurDAOImpl implements IUtilisateurDAO {
 			
 			// 3. exe de la requete et recup resultat (update car modif)
 			int verifDel = ps.executeUpdate();
-			ps.close();
+			
 			
 			// Rajout de la foreign key pour après avoir supprimer 
-			ps = this.connection.prepareStatement(requeteAddFk);
-			ps.executeUpdate();
-			ps.close();
+			//ps = this.connection.prepareStatement(requeteAddFk);
+			//ps.executeUpdate();
+			//ps.close();
 			
 			
 			return verifDel == 1;
