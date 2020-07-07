@@ -98,6 +98,8 @@ INSERT INTO produits (nom_produit,description_produit,prix_produit,id_photo,id_c
 insert into roles (id_role,nom_role) values (1,'admin');
 insert into roles (id_role,nom_role) values (2,'client');
 
+insert into paniers () values ();
+
 
 INSERT into utilisateurs (nom_utilisateur , mdp_utilisateur, id_role, active) values ('Gabydu14','123',1,true); 
 
@@ -110,10 +112,15 @@ SELECT * FROM photos ;
 SELECT * FROM produits WHERE nom_produit LIKE '%test%' OR description_produit LIKE '%test%';
 
 select * from utilisateurs;
-
-
+select * from clients;
+select * from categories;
+select * from produits;
+select * from commandes;
 -- TEST DAO CLIENTS
 
+-- test commande
+update produits set nom_produit = 'macbook pro', description_produit= 'ordi trop cher avec une ^pomme' , prix_produit=1500.00, id_categorie=2
+			    where id_produit = 6;
 
 
 -- TEST DAO UTILSATEUR
