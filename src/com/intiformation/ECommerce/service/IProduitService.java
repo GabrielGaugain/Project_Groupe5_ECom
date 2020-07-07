@@ -11,9 +11,9 @@ public interface IProduitService {
 	public boolean supprimerProduit (long pIdProduit);
 	public List<Produit> afficherTousLesProduits();	
 	public Produit trouverProduitParId(int pIdProduit);
-	public List<Produit> trouverProduitParIdCategorie(pIdCategorie);	
+	public List<Produit> trouverProduitParIdCategorie(int pIdCategorie);	
 	public List<Produit> afficherProduitsSelectionnes();	
-	public List<Produit> trouverProduitParMotCle(pMotCle);	
+	public List<Produit> trouverProduitParMotCle(String pMotCle);	
 	
 	
 }

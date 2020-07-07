@@ -40,7 +40,7 @@ private IProduitDAO produitDAO;
 	}
 
 	@Override
-	public List<Produit> trouverProduitParIdCategorie(pIdCategorie) {
+	public List<Produit> trouverProduitParIdCategorie(int pIdCategorie) {
 		return produitDAO.getAllProduitByCategorie(pIdCategorie);
 	}
 
@@ -50,7 +50,7 @@ private IProduitDAO produitDAO;
 	}
 
 	@Override
-	public List<Produit> trouverProduitParMotCle(pMotCle) {
+	public List<Produit> trouverProduitParMotCle(String pMotCle) {
 		return produitDAO.getByMotCle(pMotCle);
 	}
 
