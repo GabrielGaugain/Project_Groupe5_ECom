@@ -9,6 +9,9 @@
     TARGET="rules:#authentification.xhtml" TITLE="login" model-entity="JSFProcessItemOutput"/>
    <PROCESS-ITEM-OUTPUT ID="gotopanier::#panier.xhtml" NAME="output1"
     PATH="/panier.xhtml" TARGET="rules:#panier.xhtml" TITLE="gotopanier" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="listaccueil::#accueil.xhtml" NAME="output2"
+    PATH="/accueil.xhtml" TARGET="rules:#accueil.xhtml"
+    TITLE="listaccueil" model-entity="JSFProcessItemOutput"/>
   </PROCESS-ITEM>
  </PROCESS-ITEM>
  <PROCESS-ITEM NAME="rules:#authentification.xhtml"
@@ -21,6 +24,9 @@
    <PROCESS-ITEM-OUTPUT ID="admin::#accueil-admin.xhtml" NAME="output1"
     PATH="/accueil-admin.xhtml" TARGET="rules:#accueil-admin.xhtml"
     TITLE="admin" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="tryagain::#authentification.xhtml"
+    NAME="output2" PATH="/authentification.xhtml"
+    TARGET="rules:#authentification.xhtml" TITLE="tryagain" model-entity="JSFProcessItemOutput"/>
   </PROCESS-ITEM>
  </PROCESS-ITEM>
  <PROCESS-ITEM NAME="rules:#panier.xhtml" PATH="/panier.xhtml"
