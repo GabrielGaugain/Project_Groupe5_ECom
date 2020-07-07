@@ -1,4 +1,4 @@
-package com.intiformation.gestionbiblio.controller;
+package com.intiformation.ECommerce.controller;
 
 import java.io.Serializable;
 
@@ -8,8 +8,8 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 
-import com.intiformation.gestionbiblio.dao.IUtilisateurDAO;
-import com.intiformation.gestionbiblio.dao.UtilisateurDAOImpl;
+import com.intiformation.ECommerce.dao.IUtilisateurDAO;
+import com.intiformation.ECommerce.dao.UtilisateurDAOImpl;
 
 /**
  * ManagedBean pour l'authentification de l'utilisateur
