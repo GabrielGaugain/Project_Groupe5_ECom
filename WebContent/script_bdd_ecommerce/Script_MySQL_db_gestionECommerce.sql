@@ -88,7 +88,7 @@ constraint pk_photos PRIMARY KEY (id_photo)
 
 
 -- inserts :
-INSERT INTO photos (url_photo, nom_photo) VALUE ('C:\Users\IN-ST-028\Documents\INTI Cours JAVA\Cours MEHDI_YOUNES\Devoirs\Project_Groupe5_ECom\WebContent\resources\images\test.jpg','test');
+INSERT INTO photos (url_photo, nom_photo) VALUE ('\Project_Groupe5_ECom\WebContent\resources\images\test.jpg','test');
 
 INSERT INTO categories (nom_categorie,description_categorie,id_photo) VALUES ('Categorie_Test','Cette catégorie a été inventée pour réaliser des tests sur la bdd',1) ;
 

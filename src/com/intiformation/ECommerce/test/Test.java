@@ -46,7 +46,7 @@ public class Test {
 		System.out.println("");
 		
 		System.out.println("creation d'un nouveau role ");
-		roleService.ajouterRole(	new Role("VIP")	);	
+		roleService.ajouterRole(new Role("VIP")	);	
 		System.out.println("=========> creation d'un nouveau role REUSSI ");		
 		
 		
@@ -80,6 +80,14 @@ public class Test {
 		System.out.println("creation d'un nouveau ligneCommande ");
 		ligneService.ajouterLigneCommande(	new LigneCommande(3,300.99, 4, 2, 1 )	);	
 		System.out.println("=========> creation d'un nouveau ligneCommande REUSSI ");		
+		
+		// TEST SUPPRESSION
+		
+		System.out.println("suppression d'une categorie ");
+		categorieService.supprimerCategorie(1);	
+		
+		System.out.println("=========> suppression d'une categorie reussie");		
+		
 		
 		
 		

@@ -82,26 +82,31 @@ public class CategorieDAOImpl implements ICategorieDAO {
 	@Override
 	public boolean delete(long pIdCategorie) {
 		
-		PreparedStatement ps = null;
+		PreparedStatement ps1 = null;
+		PreparedStatement ps2 = null;
 
 		try {
 			
-			String Req ="DELETE FROM categories WHERE id_categorie=?";
 			
-			ps = ICategorieDAO.connection.prepareStatement(Req);
+			ps1 = ICategorieDAO.connection.prepareStatement("DELETE FROM categories WHERE id_categorie=? ; ");
+			ps1.setLong(1, pIdCategorie);
 			
-			ps.setLong(1, pIdCategorie);
+			ps2 = ICategorieDAO.connection.prepareStatement("UPDATE produits SET id_categorie=null WHERE id_categorie=? ;");
+			ps2.setLong(1, pIdCategorie);
 			
-			int verif = ps.executeUpdate();
+			int verif2 = ps2.executeUpdate();
+			int verif1 = ps1.executeUpdate();
+			
 
-			return verif == 0 ? false : true;
+			return verif1 == 0 ? false : true && verif2 == 0 ? false : true;
+			
 
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
 			try {
-				if (ps != null) ps.close();
-				
+				if (ps1 != null) ps1.close();
+				if (ps2 != null) ps2.close();
 			} catch (Exception e) {
 				System.out.println("erreur -dao");
 				e.printStackTrace();
