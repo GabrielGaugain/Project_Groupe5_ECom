@@ -39,12 +39,12 @@
   			<b:navbarLinks pull="right" styleClass="hidden-xs">
     			<b:dropMenu value="Mes options">
       			<b:navLink value="Afficher les produits sélectionnés" href="#"></b:navLink>
-			      <b:navLink value="Voir mon panier" href="#"></b:navLink>
-			      <b:navLink value="Passer une commande" href="#"></b:navLink>
+			      <b:navLink value="Voir mon panier" outcome="gotopanier"></b:navLink>
+			      <b:navLink value="Voir mes commandes" outcome="gotocommande"></b:navLink>
 			      <b:navLink></b:navLink>
 			      <b:navLink header="Nav header"></b:navLink>
 			      <b:navLink value="Separated link" href="#"></b:navLink>
-			      <b:navLink value="One more separated link" href="#"></b:navLink>
+			      <b:navLink value="link " href="#"></b:navLink>
 			    </b:dropMenu>
 		     	<b:navLink value="Se déconnecter" action="#{authentificationBean.deconnecterUtilisateur()}"></b:navLink>
 		  	</b:navbarLinks>

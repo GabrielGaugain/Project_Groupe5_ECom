@@ -7,11 +7,15 @@
    <PROCESS-ITEM-OUTPUT ID="login::#authentification.xhtml"
     NAME="output" PATH="/authentification.xhtml"
     TARGET="rules:#authentification.xhtml" TITLE="login" model-entity="JSFProcessItemOutput"/>
-   <PROCESS-ITEM-OUTPUT ID="gotopanier::#panier.xhtml" NAME="output1"
-    PATH="/panier.xhtml" TARGET="rules:#panier.xhtml" TITLE="gotopanier" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="gotopanier::#acces_client#panier.xhtml"
+    NAME="output1" PATH="/acces_client/panier.xhtml"
+    TARGET="rules:#acces_client#panier.xhtml" TITLE="gotopanier" model-entity="JSFProcessItemOutput"/>
    <PROCESS-ITEM-OUTPUT ID="listaccueil::#accueil.xhtml" NAME="output2"
     PATH="/accueil.xhtml" TARGET="rules:#accueil.xhtml"
     TITLE="listaccueil" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="gotocommande::#acces_client#commande.xhtml"
+    NAME="output3" PATH="/acces_client/commande.xhtml"
+    TARGET="rules:#acces_client#commande.xhtml" TITLE="gotocommande" model-entity="JSFProcessItemOutput"/>
   </PROCESS-ITEM>
  </PROCESS-ITEM>
  <PROCESS-ITEM NAME="rules:#authentification.xhtml"
@@ -30,16 +34,21 @@
   </PROCESS-ITEM>
  </PROCESS-ITEM>
  <PROCESS-ITEM NAME="rules:#panier.xhtml" PATH="/panier.xhtml"
-  SHAPE="496,305,0,0" model-entity="JSFProcessGroup"/>
- <PROCESS-ITEM NAME="rules:#accueil-admin.xhtml"
-  PATH="/accueil-admin.xhtml" SHAPE="704,177,0,0" model-entity="JSFProcessGroup"/>
- <PROCESS-ITEM NAME="rules:#pannier.xhtml" PATH="/pannier.xhtml"
-  SHAPE="32,17,0,0" model-entity="JSFProcessGroup">
-  <PROCESS-ITEM ID="rules:#pannier.xhtml:0" NAME="item"
-   PATH="/pannier.xhtml" model-entity="JSFProcessItem">
-   <PROCESS-ITEM-OUTPUT ID="signin::#authentification.xhtml"
+  SHAPE="496,305,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:#panier.xhtml:0" NAME="item"
+   PATH="/panier.xhtml" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT ID="commande::#authentification.xhtml"
     NAME="output" PATH="/authentification.xhtml"
-    TARGET="rules:#authentification.xhtml" TITLE="signin" model-entity="JSFProcessItemOutput"/>
+    TARGET="rules:#authentification.xhtml" TITLE="commande" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="gotocommande::#acces_client#commande.xhtml"
+    NAME="output1" PATH="/acces_client/commande.xhtml"
+    TARGET="rules:#acces_client#commande.xhtml" TITLE="gotocommande" model-entity="JSFProcessItemOutput"/>
   </PROCESS-ITEM>
  </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:#accueil-admin.xhtml"
+  PATH="/accueil-admin.xhtml" SHAPE="704,177,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#acces_client#panier.xhtml"
+  PATH="/acces_client/panier.xhtml" SHAPE="496,17,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#acces_client#commande.xhtml"
+  PATH="/acces_client/commande.xhtml" SHAPE="736,385,0,0" model-entity="JSFProcessGroup"/>
 </PROCESS>

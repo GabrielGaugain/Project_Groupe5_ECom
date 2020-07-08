@@ -10,23 +10,81 @@
 	<title> Page pour admin </title>	
 </h:head>
 
-
-<body>
-
-	<h1> Bienvenue Admin </h1>
+<h:body style="padding-top: 50px; padding-bottom: 20px;">
 
 
+<b:navBar brand="Menu-Admin" brandHref="#" fluid="true" fixed="top" sticky="true">
+  			<b:navbarLinks>
+    			<b:dropMenu value="Gestion catégories">
+    			<b:navLink value="Ajouter une catégorie" href="#"></b:navLink>
+    			<b:navLink value="Modifier une catégorie" href="#"></b:navLink>
+    			<b:navLink value="Supprimer une catégorie" href="#"></b:navLink>
+    			<b:navLink value="Afficher toutes les catégories" href="#"></b:navLink>
+        		</b:dropMenu>
+        		<b:dropMenu value="Gestion produits">
+    			<b:navLink value="Ajouter un produit" href="#"></b:navLink>
+    			<b:navLink value="Modifier un produit" href="#"></b:navLink>
+    			<b:navLink value="Supprimer un produit" href="#"></b:navLink>
+    			<b:navLink value="Afficher tous les produits" href="#"></b:navLink>
+        		</b:dropMenu>
+        		<b:dropMenu value="Gestion utilisateurs">
+    			<b:navLink value="Ajouter un utilisateur" href="#"></b:navLink>
+    			<b:navLink value="Modifier un utilisateur" href="#"></b:navLink>
+    			<b:navLink value="Supprimer un utilisateur" href="#"></b:navLink>
+    			<b:navLink value="Afficher tous les utilisateurs" href="#"></b:navLink>
+        		</b:dropMenu>
+  			</b:navbarLinks>
+  			<b:navbarLinks pull="right">
+		     	<b:navLink value="Se déconnecter" action="#{authentificationBean.deconnecterUtilisateur()}"></b:navLink>
+		  	</b:navbarLinks>
+		</b:navBar>
+
+
+
+<b:container style="width : 100% ;padding-top: 50px; padding-left: 50px; padding-right: 50px; padding-bottom: 20px;">
+	<b:row>
+            <h1>Bienvenue Admin !</h1>
+            
+            <h:commandButton action="newCategorie" actionListener="#{categorieBean.initCategorie()}" value="Ajouter Une Nouvelle Catégorie" />
+    </b:row>
 <h:form>
-  <b:dataTable value="#{carPool.carPool}"
-               var="car">
-    <b:dataTableColumn value="#{car.brand}" />
-    <b:dataTableColumn value="#{car.type}" />
-    <b:dataTableColumn value="#{car.color}" />
-    <b:dataTableColumn value="#{car.year}"  order="asc"/>
-    <b:dataTableColumn value="#{car.price}" />
-    <b:dataTableColumn value="#{car.enginePower}" label="Engine Power (hp)" />
+  <b:dataTable caption="Catégories" value="#{categorieBean.listeCate}" var="cate" >
+    <b:dataTableColumn value="#{cate.idCategorie}"  order="asc"/>
+    <b:dataTableColumn value="#{cate.nomCategorie}" />
+    <b:dataTableColumn value="#{cate.descriptionCategorie}" />
+    <b:dataTableColumn value="#{cate.urlImageCategorie}" />
   </b:dataTable>
 </h:form>
 
-</body>
+<h:form>
+  <b:dataTable caption="Produits" value="#{prodPool.prodPool}" var="prod" >
+    <b:dataTableColumn value="#{prod.id}" order="asc" />
+    <b:dataTableColumn value="#{prod.nom}" />
+    <b:dataTableColumn value="#{prod.description}" />
+    <b:dataTableColumn value="#{prod.categorie}"  />
+    <b:dataTableColumn value="#{prod.image}" />
+  </b:dataTable>
+</h:form>
+
+<h:form>
+  <b:dataTable caption="Utilisateurs" value="#{userPool.userPool}" var="user" >
+    <b:dataTableColumn value="#{user.id}" order="asc"/>
+    <b:dataTableColumn value="#{user.nom}" />
+    <b:dataTableColumn value="#{user.mdp}" />
+    <b:dataTableColumn value="#{user.role}"  />
+    <b:dataTableColumn value="#{user.active}" />
+  </b:dataTable>
+</h:form>
+
+</b:container>
+
+
+		<b:container style="width : 100% ;padding-top: 50px; padding-left: 50px; padding-right: 50px; padding-bottom: 20px;">
+  
+            <hr/>
+            <footer style="width : 100% ;">
+            <p>© Gab&#x26;Cam 2020</p>
+            </footer>
+        </b:container>
+ </h:body>
 </html>

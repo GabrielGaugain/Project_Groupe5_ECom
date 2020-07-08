@@ -35,7 +35,7 @@
 			<!-- 1.3.1 clé d'outcom -->
 			<from-outcome>gotopanier</from-outcome>
 			<!-- 1.3.2. destination -->
-			<to-view-id>/panier.xhtml</to-view-id>
+			<to-view-id>/acces_client/panier.xhtml</to-view-id>
 			<redirect/>
 		</navigation-case>
 			
@@ -47,9 +47,15 @@
 			<from-outcome>listaccueil</from-outcome>
 			<!-- 1.4.2. destination -->
 			<to-view-id>/accueil.xhtml</to-view-id>
-			<redirect/>			
+			<redirect/>	
 			
-		</navigation-case>		
+		</navigation-case>	
+		
+		<navigation-case>
+			<from-outcome>gotocommande</from-outcome>
+			<to-view-id>/acces_client/commande.xhtml</to-view-id>
+			<redirect/>
+		</navigation-case>	
 		
 
 		
@@ -84,22 +90,22 @@
 	</navigation-rule>
 	
 	
-	<!-- 3. règle de navigation pour la page 'pannier.xhtml' -->
+	<!-- 3. règle de navigation pour la page 'panier.xhtml' -->
 	<!-- ******************************************************** -->
 	<navigation-rule>
-		<from-view-id>/pannier.xhtml</from-view-id>
+		<from-view-id>/panier.xhtml</from-view-id>
 		
 		<!-- redirection vers l'authentification si le client n'est pas id -->
 		<navigation-case>
-			<from-outcome>signin</from-outcome>
+			<from-outcome>commande</from-outcome>
 			<to-view-id>/authentification.xhtml</to-view-id>
 			<redirect/>
 		</navigation-case>
 		
 		<!-- redirection vers la page de commande si le client est deja identifié -->
 		<navigation-case>
-			<from-outcome>signin</from-outcome>
-			<to-view-id>/authentification.xhtml</to-view-id>
+			<from-outcome>gotocommande</from-outcome>
+			<to-view-id>/acces_client/commande.xhtml</to-view-id>
 			<redirect/>
 		</navigation-case>
 

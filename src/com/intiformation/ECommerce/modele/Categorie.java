@@ -33,6 +33,10 @@ public class Categorie {
 
 	/* __________________ getters/setters ________________ */
 	
+	public Categorie() {
+	}
+
+
 	public long getIdCategorie() {
 		return idCategorie;
 	}
