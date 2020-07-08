@@ -6,7 +6,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.intiformation.ECommerce.modele.Categorie;
 import com.intiformation.ECommerce.modele.Photo;
 
 public class PhotoDAOImpl implements IPhotoDAO {

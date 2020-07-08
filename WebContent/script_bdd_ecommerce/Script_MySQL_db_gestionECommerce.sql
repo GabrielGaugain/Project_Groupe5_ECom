@@ -107,6 +107,7 @@ insert into paniers () values ();
 
 
 INSERT into utilisateurs (nom_utilisateur , mdp_utilisateur, id_role, active) values ('Gabydu14','123',1,true); 
+INSERT into utilisateurs (nom_utilisateur , mdp_utilisateur, id_role, active) values ('admin','admin',1,true);
 
 INSERT INTO clients (nom_client, adresse_client, email_client, telephone_client) values  ("Michelle","12 rue du bout perdu","mich@gmail.com","0202020202");
 INSERT INTO commandes (date_commande ,id_client) values ('10.01.2020',1);
@@ -119,6 +120,8 @@ delete from utilisateurs where id_utilisateur =1;
 SELECT * FROM photos ;
 
 SELECT * FROM produits WHERE nom_produit LIKE '%test%' OR description_produit LIKE '%test%';
+
+SELECT COUNT(id_utilisateur) utilisateur FROM utilisateurs LEFT JOIN roles ON (utilisateurs.id_role = roles.id_role ) WHERE utilisateurs.nom_utilisateur=? AND roles.nom_role=? ;
 
 
 

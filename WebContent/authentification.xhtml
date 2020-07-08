@@ -36,9 +36,9 @@
 			
 			<h:outputLabel for="idStatut" value="Se connecter en tant que : " /> 
 		
-			<h:selectOneMenu id="idStatut" layout="lineDirection" required="true" requiredMessage="Veuillez choisir un statut"> 
-				<f:selectItem itemLabel="client" itemValue="#{authentificationBean.userStatut}" /> 
-				<f:selectItem itemLabel="admin" itemValue="#{authentificationBean.userStatut}" /> 
+			<h:selectOneMenu id="idStatut" layout="lineDirection" value="#{authentificationBean.userStatut}"> 
+				<f:selectItem itemLabel="client" caption="selectClient" itemValue="client"/> 
+				<f:selectItem itemLabel="admin" caption="selectadmin" itemValue="admin" /> 
 			</h:selectOneMenu>
 			
 			<h:message for="idLogin" styleClass="error"/>

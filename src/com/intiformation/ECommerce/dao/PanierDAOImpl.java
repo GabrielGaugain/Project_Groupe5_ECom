@@ -7,7 +7,6 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.intiformation.ECommerce.modele.Categorie;
 import com.intiformation.ECommerce.modele.Panier;
 
 public class PanierDAOImpl implements IPanierDAO {
@@ -85,7 +84,6 @@ public class PanierDAOImpl implements IPanierDAO {
 	public List<Panier> getAll() {
 		ResultSet rs = null;
 		Panier panier = null;
-		PreparedStatement ps = null;
 		List<Panier> listePaniers = new ArrayList<>();
 
 		try {

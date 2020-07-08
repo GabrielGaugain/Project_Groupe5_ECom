@@ -2,7 +2,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:h="http://java.sun.com/jsf/html">
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:b="http://bootsfaces.net/ui">
 
 
 <h:head>
@@ -12,8 +13,20 @@
 
 <body>
 
-	<h1> Bienvenue ADmin </h1>
+	<h1> Bienvenue Admin </h1>
 
+
+<h:form>
+  <b:dataTable value="#{carPool.carPool}"
+               var="car">
+    <b:dataTableColumn value="#{car.brand}" />
+    <b:dataTableColumn value="#{car.type}" />
+    <b:dataTableColumn value="#{car.color}" />
+    <b:dataTableColumn value="#{car.year}"  order="asc"/>
+    <b:dataTableColumn value="#{car.price}" />
+    <b:dataTableColumn value="#{car.enginePower}" label="Engine Power (hp)" />
+  </b:dataTable>
+</h:form>
 
 </body>
 </html>

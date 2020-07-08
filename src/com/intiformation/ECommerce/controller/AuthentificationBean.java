@@ -32,8 +32,6 @@ public class AuthentificationBean implements Serializable{
 		utilisateurDAO = new UtilisateurDAOImpl();
 	}//end ctor vide
 
-
-	
 	
 	/*_____________________________meths_______________________________*/
 	/**
@@ -65,7 +63,10 @@ public class AuthentificationBean implements Serializable{
 				
 				//->sauvegarde du statut de l'utilisatuer dans la session
 				session.setAttribute("user_statut", userStatut);
-				
+				if(("admin").equals(userStatut)) {
+					//-> navigation vers la page 'accueil-admin.xhtml'
+					return "acces_admin/accueil-admin.xhtml";
+				}
 				//-> navigation vers la page 'accueil.xhtml'
 				return "accueil.xhtml";
 				
