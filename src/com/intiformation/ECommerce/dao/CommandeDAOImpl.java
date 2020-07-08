@@ -49,7 +49,7 @@ public class CommandeDAOImpl implements ICommandeDAO {
 
 		try {
 			
-			String Req ="UPDATE categories SET date_commande=?,id_client=? WHERE id_commande=?";
+			String Req ="UPDATE commandes SET date_commande=?,id_client=? WHERE id_commande=?";
 			
 			ps = ICategorieDAO.connection.prepareStatement(Req);
 			
@@ -79,24 +79,29 @@ public class CommandeDAOImpl implements ICommandeDAO {
 	@Override
 	public boolean delete(long pIdCommande) {
 		PreparedStatement ps = null;
+		PreparedStatement ps1 = null;
 
 		try {
 			
-			String Req ="DELETE FROM categories WHERE id_commande=?";
-			
-			ps = ICategorieDAO.connection.prepareStatement(Req);
-			
+			String Req ="DELETE FROM commandes WHERE id_commande=?";
+			ps = ICommandeDAO.connection.prepareStatement(Req);
 			ps.setLong(1, pIdCommande);
+			
+			ps1 = ICommandeDAO.connection.prepareStatement("DELETE FROM lignescommandes WHERE id_commande=? ; ");
+			ps1.setLong(1, pIdCommande);
+			
+			int verif1 = ps1.executeUpdate();
 			
 			int verif = ps.executeUpdate();
 
-			return verif == 0 ? false : true;
+			return verif == 0 ? false : true && verif1 == 0 ? false : true;
 
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
 			try {
 				if (ps != null) ps.close();
+				if (ps1 != null) ps1.close();
 				
 			} catch (Exception e) {
 				System.out.println("erreur -dao");

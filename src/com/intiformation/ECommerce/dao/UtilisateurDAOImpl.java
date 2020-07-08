@@ -28,7 +28,7 @@ public class UtilisateurDAOImpl implements IUtilisateurDAO {
 			ps.setString(1, t.getNomUtilisateur());
 			ps.setString(2, t.getMdpUtilisateur());
 			ps.setLong(3, t.getIdRole());
-			ps.setBoolean(4, t.isActive());
+			ps.setBoolean(4, t.getActive());
 
 
 
@@ -69,9 +69,9 @@ public class UtilisateurDAOImpl implements IUtilisateurDAO {
 			ps.setString(1, t.getNomUtilisateur());
 			ps.setString(2, t.getMdpUtilisateur());
 			ps.setLong(3, t.getIdRole());
-			ps.setBoolean(4, t.isActive());
+			ps.setBoolean(4, t.getActive());
 			
-			ps.setLong(4, t.getIdUtilisateur());
+			ps.setLong(5, t.getIdUtilisateur());
 
 			// 3. exe de la requete et recup resultat (update car modif)
 			int verifUp = ps.executeUpdate();

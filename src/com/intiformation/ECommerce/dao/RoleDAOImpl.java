@@ -75,24 +75,29 @@ public class RoleDAOImpl implements IRoleDAO {
 	@Override
 	public boolean delete(long pIdRole) {
 		PreparedStatement ps = null;
+		PreparedStatement ps1 = null;
 
 		try {
 			
-			String Req ="DELETE FROM roles WHERE id_role=?";
-			
-			ps = ICategorieDAO.connection.prepareStatement(Req);
-			
+			String Req ="DELETE FROM roles WHERE id_role=?";		
+			ps = IRoleDAO.connection.prepareStatement(Req);
 			ps.setLong(1, pIdRole);
+			
+			ps1 = IRoleDAO.connection.prepareStatement("UPDATE utilisateurs SET id_role=null WHERE id_role=? ;");
+			ps1.setLong(1, pIdRole);
+			
+			int verif1 = ps1.executeUpdate();
 			
 			int verif = ps.executeUpdate();
 
-			return verif == 0 ? false : true;
+			return verif == 0 ? false : true && verif1 == 0 ? false : true;
 
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
 			try {
 				if (ps != null) ps.close();
+				if (ps1 != null) ps1.close();
 				
 			} catch (Exception e) {
 				System.out.println("erreur -dao");

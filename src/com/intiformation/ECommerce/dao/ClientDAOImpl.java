@@ -61,7 +61,7 @@ public class ClientDAOImpl implements IClientDAO {
 		try {
 
 			// 1. definition du contenu de la requete SQL avec ? pour prepared statement
-			String requeteUp = "UPDATE clients SET nom_client=?, adresse_client=?, email_client=?, codePostal=?, telephone_client=?"
+			String requeteUp = "UPDATE clients SET nom_client=?, adresse_client=?, email_client=?, telephone_client=?"
 					+ " WHERE id_client=? ";
 
 			// 2. creation preparedStatement
@@ -101,22 +101,31 @@ public class ClientDAOImpl implements IClientDAO {
 	@Override
 	public boolean delete(long id) {
 		PreparedStatement ps = null;
+		PreparedStatement ps1 = null;
+		PreparedStatement ps2 = null;
 
 		try {
 
 			// 1. definition du contenu de la requete SQL avec ? pour prepared statement
 			String requeteDel  = "DELETE FROM clients WHERE id_client=?" ;
-
 			// 2. creation preparedStatement
 			ps = this.connection.prepareStatement(requeteDel);
-
 			ps.setLong(1, id);
+			
+			ps1 = IClientDAO.connection.prepareStatement("DELETE FROM commandes WHERE id_client=? ;");
+			ps1.setLong(1, id);
+			
+			ps2 = IClientDAO.connection.prepareStatement("DELETE lignescommandes.* FROM lignescommandes RIGHT JOIN commandes ON (lignescommandes.id_commande = commandes.id_commande ) WHERE commandes.id_client=?");
+			ps2.setLong(1, id);
+	
 
 
 			// 3. exe de la requete et recup resultat (update car modif)
+			int verif2 = ps2.executeUpdate();
+			int verif1 = ps1.executeUpdate();
 			int verifDel = ps.executeUpdate();
 
-			return (verifDel == 1);
+			return (verifDel == 1) && (verif1 == 0 ? false : true) && (verif2 == 0 ? false : true);
 
 		} catch (SQLException e) {
 			System.out.println("...Erreur lors de la suppression d'un objet Client de la bdd ...");
@@ -126,6 +135,8 @@ public class ClientDAOImpl implements IClientDAO {
 				if (ps != null) {
 					ps.close();
 				}
+				if (ps1 != null) ps1.close();
+				if (ps2 != null) ps2.close();
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}

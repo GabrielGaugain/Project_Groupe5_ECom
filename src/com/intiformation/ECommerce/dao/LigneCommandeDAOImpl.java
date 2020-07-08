@@ -59,7 +59,7 @@ PreparedStatement ps = null;
 			ps.setLong(3,pLigneCommande.getIdProduit());
 			ps.setLong(4,pLigneCommande.getIdCommande());
 			ps.setLong(5,pLigneCommande.getIdPanier());
-			ps.setLong(4, pLigneCommande.getIdCommande());
+			ps.setLong(6, pLigneCommande.getIdLigneCommande());
 
 			
 			int verif = ps.executeUpdate();

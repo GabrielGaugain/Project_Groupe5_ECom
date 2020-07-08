@@ -62,7 +62,7 @@ public class Utilisateur {
 		this.idRole = idRole;
 	}
 
-	public boolean isActive() {
+	public boolean getActive() {
 		return active;
 	}
 

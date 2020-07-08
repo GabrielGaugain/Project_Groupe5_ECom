@@ -51,16 +51,17 @@ public class ProduitDAOImpl implements IProduitDAO {
 
 	try {
 		
-		String Req ="UPDATE produits SET nom_produit=?,description_produit=?,prix_produit=?, id_photo=?,id_categorie=? WHERE id_produit=?";
+		String Req ="UPDATE produits SET nom_produit=?,description_produit=?,prix_produit=?, selectionne=?, id_photo=?,id_categorie=? WHERE id_produit=?";
 		
 		ps = IProduitDAO.connection.prepareStatement(Req);
 		
 		ps.setString(1, pProduit.getNomProduit());
 		ps.setString(2,pProduit.getDescriptionProduit());
 		ps.setDouble(3, pProduit.getPrixProduit());
-		ps.setString(4, pProduit.getUrlImageProduit());
-		ps.setLong(5, pProduit.getIdCategorie());
-		ps.setLong(5, pProduit.getIdProduit());
+		ps.setBoolean(4, false);
+		ps.setString(5, pProduit.getUrlImageProduit());
+		ps.setLong(6, pProduit.getIdCategorie());
+		ps.setLong(7, pProduit.getIdProduit());
 
 		
 		int verif = ps.executeUpdate();
@@ -84,24 +85,27 @@ public class ProduitDAOImpl implements IProduitDAO {
 	@Override
 	public boolean delete(long pIdProduit) {
 		PreparedStatement ps = null;
+		PreparedStatement ps1 = null;
 
 		try {
 			
 			String Req ="DELETE FROM produits WHERE id_produit=?";
-			
 			ps = IProduitDAO.connection.prepareStatement(Req);
-			
 			ps.setLong(1, pIdProduit);
 			
-			int verif = ps.executeUpdate();
-
-			return verif == 0 ? false : true;
+			ps1 = IProduitDAO.connection.prepareStatement("DELETE FROM lignescommandes WHERE id_produit=? ; ");
+			ps1.setLong(1, pIdProduit);
+			
+			int verif1 = ps1.executeUpdate();
+			int verif = ps1.executeUpdate();
+			return verif == 0 ? false : true && verif1 == 0 ? false : true;
 
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
 			try {
 				if (ps != null) ps.close();
+				if (ps1 != null) ps1.close();
 				
 			} catch (Exception e) {
 				System.out.println("erreur -dao");
@@ -155,7 +159,7 @@ public class ProduitDAOImpl implements IProduitDAO {
 
 		try {
 		
-		String Req ="SELECT * FROM categories WHERE id_produit=?";	
+		String Req ="SELECT * FROM produits WHERE id_produit=?";	
 		ps = IProduitDAO.connection.prepareStatement(Req);
 		ps.setLong(1, pIdProduit);
 		rs = ps.executeQuery();

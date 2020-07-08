@@ -10,7 +10,7 @@ description_categorie VARCHAR (200),
 id_photo INT,
 constraint pk_categories PRIMARY KEY (id_categorie)
 );
-ALTER TABLE db_gestionECommerce.categories ADD constraint fk_categories_photos FOREIGN KEY (id_photo) REFERENCES photos(id_photo);
+
 
 CREATE TABLE db_gestionECommerce.produits (
 id_produit INT auto_increment,
@@ -22,8 +22,7 @@ id_photo INT,
 id_categorie INT,
 constraint pk_produits PRIMARY KEY (id_produit)
 );
-ALTER TABLE db_gestionECommerce.produits ADD constraint fk_produits_photos FOREIGN KEY (id_photo) REFERENCES photos(id_photo);
-ALTER TABLE db_gestionECommerce.produits ADD constraint fk_produits_categories FOREIGN KEY (id_categorie) REFERENCES categories(id_categorie);
+
 
 CREATE TABLE db_gestionECommerce.commandes (
 id_commande INT auto_increment,
@@ -31,7 +30,7 @@ date_commande datetime,
 id_client INT,
 constraint pk_commandes PRIMARY KEY (id_commande)
 );
-ALTER TABLE db_gestionECommerce.commandes ADD constraint fk_commandes_clients FOREIGN KEY (id_client) REFERENCES clients(id_client);
+
 
 CREATE TABLE db_gestionECommerce.lignescommandes (
 id_lignecommande INT auto_increment,
@@ -42,9 +41,7 @@ id_commande INT,
 id_panier INT,
 constraint pk_lignescommandes PRIMARY KEY (id_lignecommande)
 );
-ALTER TABLE db_gestionECommerce.lignescommandes ADD constraint fk_lignescommandes_produits FOREIGN KEY (id_produit) REFERENCES produits(id_produit);
-ALTER TABLE db_gestionECommerce.lignescommandes ADD constraint fk_lignescommandes_commandes FOREIGN KEY (id_commande) REFERENCES commandes(id_commande);
-ALTER TABLE db_gestionECommerce.lignescommandes ADD constraint fk_lignescommandes_paniers FOREIGN KEY (id_panier) REFERENCES paniers(id_panier);
+
 
 CREATE TABLE db_gestionECommerce.clients (
 id_client INT  auto_increment,
@@ -69,7 +66,7 @@ id_role INT,
 active BOOLEAN,
 constraint pk_utilisateurs PRIMARY KEY (id_utilisateur)
 );
-ALTER TABLE db_gestionECommerce.utilisateurs ADD constraint fk_utilisateurs_roles FOREIGN KEY (id_role) REFERENCES roles(id_role);
+
 
 CREATE TABLE db_gestionECommerce.roles (
 id_role INT auto_increment,
@@ -86,6 +83,14 @@ constraint pk_photos PRIMARY KEY (id_photo)
 );
 
 
+ALTER TABLE db_gestionECommerce.categories ADD constraint fk_categories_photos FOREIGN KEY (id_photo) REFERENCES photos(id_photo);
+ALTER TABLE db_gestionECommerce.produits ADD constraint fk_produits_photos FOREIGN KEY (id_photo) REFERENCES photos(id_photo);
+ALTER TABLE db_gestionECommerce.produits ADD constraint fk_produits_categories FOREIGN KEY (id_categorie) REFERENCES categories(id_categorie);
+ALTER TABLE db_gestionECommerce.commandes ADD constraint fk_commandes_clients FOREIGN KEY (id_client) REFERENCES clients(id_client);
+ALTER TABLE db_gestionECommerce.lignescommandes ADD constraint fk_lignescommandes_produits FOREIGN KEY (id_produit) REFERENCES produits(id_produit);
+ALTER TABLE db_gestionECommerce.lignescommandes ADD constraint fk_lignescommandes_commandes FOREIGN KEY (id_commande) REFERENCES commandes(id_commande);
+ALTER TABLE db_gestionECommerce.lignescommandes ADD constraint fk_lignescommandes_paniers FOREIGN KEY (id_panier) REFERENCES paniers(id_panier);
+ALTER TABLE db_gestionECommerce.utilisateurs ADD constraint fk_utilisateurs_roles FOREIGN KEY (id_role) REFERENCES roles(id_role);
 
 -- inserts :
 INSERT INTO photos (url_photo, nom_photo) VALUE ('\Project_Groupe5_ECom\WebContent\resources\images\test.jpg','test');
@@ -103,6 +108,10 @@ insert into paniers () values ();
 
 INSERT into utilisateurs (nom_utilisateur , mdp_utilisateur, id_role, active) values ('Gabydu14','123',1,true); 
 
+INSERT INTO clients (nom_client, adresse_client, email_client, telephone_client) values  ("Michelle","12 rue du bout perdu","mich@gmail.com","0202020202");
+INSERT INTO commandes (date_commande ,id_client) values ('10.01.2020',1);
+INSERT INTO lignescommandes (quantite_commande ,montant_commande,id_produit ,id_commande ,id_panier ) values (3,300.22, 1, 5, 2);
+
 
 delete from utilisateurs where id_utilisateur =1;
 -- tests
@@ -111,11 +120,18 @@ SELECT * FROM photos ;
 
 SELECT * FROM produits WHERE nom_produit LIKE '%test%' OR description_produit LIKE '%test%';
 
+
+
+DELETE lignescommandes.* FROM lignescommandes RIGHT JOIN commandes ON (lignescommandes.id_commande = commandes.id_commande ) WHERE commandes.id_client=2  ;
+
+select * from paniers;
+select * from roles;
 select * from utilisateurs;
 select * from clients;
 select * from categories;
 select * from produits;
 select * from commandes;
+select * from lignescommandes;
 -- TEST DAO CLIENTS
 
 -- test commande
