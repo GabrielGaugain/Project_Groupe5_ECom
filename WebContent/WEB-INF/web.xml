@@ -37,4 +37,31 @@
     <servlet-name>Faces Servlet</servlet-name>
     <url-pattern>*.xhtml</url-pattern>
   </servlet-mapping>
-</web-app>
+  
+   <!-- ============================================================ -->
+  <!-- ================ Filtres =================================== -->
+  <!-- ============================================================ -->  
+<filter>
+       <filter-name>AccesClientFilter</filter-name>
+       <filter-class>com.intiformation.ECommerce.filtre.AccesClientFilter</filter-class>
+</filter>
+   
+<filter-mapping>
+       <filter-name>AccesClientFilter</filter-name>
+       <url-pattern>/acces_client/*</url-pattern>
+</filter-mapping>
+
+<filter>
+       <filter-name>AccesAdminFilter</filter-name>
+       <filter-class>com.intiformation.ECommerce.filtre.AccesAdminFilter</filter-class>
+</filter>
+   
+<filter-mapping>
+       <filter-name>AccesAdminFilter</filter-name>
+       <url-pattern>/acces_admin/*</url-pattern>
+</filter-mapping>
+  
+</web-app> 
+
+
+

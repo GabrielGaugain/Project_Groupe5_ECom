@@ -115,7 +115,7 @@ public class ClientDAOImpl implements IClientDAO {
 			ps1 = IClientDAO.connection.prepareStatement("DELETE FROM commandes WHERE id_client=? ;");
 			ps1.setLong(1, id);
 			
-			ps2 = IClientDAO.connection.prepareStatement("DELETE lignescommandes.* FROM lignescommandes RIGHT JOIN commandes ON (lignescommandes.id_commande = commandes.id_commande ) WHERE commandes.id_client=?");
+			ps2 = IClientDAO.connection.prepareStatement("DELETE lignescommandes.* FROM lignescommandes LEFT JOIN commandes ON (lignescommandes.id_commande = commandes.id_commande ) WHERE commandes.id_client=?");
 			ps2.setLong(1, id);
 	
 

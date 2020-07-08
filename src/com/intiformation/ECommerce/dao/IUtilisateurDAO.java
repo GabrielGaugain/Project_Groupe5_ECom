@@ -10,5 +10,6 @@ public interface IUtilisateurDAO extends IGenericDAO<Utilisateur>{
 
 	
 	public boolean isUtilisateurExists(String pIdentifiant, String pMotDePasse);
+	public boolean isUtilisateurAutorise(String pIdentifiant,String pMotDePasse, String pStatut);
 
 }

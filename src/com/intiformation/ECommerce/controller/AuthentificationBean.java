@@ -24,6 +24,7 @@ public class AuthentificationBean implements Serializable{
 	/*_____________________________props_______________________________*/
 	private String userIdentifiant;
 	private String userMotDePasse;
+	private String userStatut ;
 	private IUtilisateurDAO utilisateurDAO;
 	
 	/*_____________________________ctors_______________________________*/
@@ -52,15 +53,35 @@ public class AuthentificationBean implements Serializable{
 		if(utilisateurDAO.isUtilisateurExists(userIdentifiant, userMotDePasse)) {
 			//----------------- l'utilisateur existe ----------------------------//
 			
-			//-> création de la session
-			HttpSession session = (HttpSession) contextJSF.getExternalContext().getSession(true);
+			// 2.1 verif du statut de l'utilisateur dans la  bdd par rapport à son statut de connexion
 			
-			//->sauvegarde du login de l'utilisatuer dans la session
-			session.setAttribute("user_login", userIdentifiant);
+			if(utilisateurDAO.isUtilisateurAutorise(userIdentifiant, userMotDePasse, userStatut)) {
+				
+				//-> création de la session
+				HttpSession session = (HttpSession) contextJSF.getExternalContext().getSession(true);
+				
+				//->sauvegarde du login de l'utilisatuer dans la session
+				session.setAttribute("user_login", userIdentifiant);
+				
+				//->sauvegarde du statut de l'utilisatuer dans la session
+				session.setAttribute("user_statut", userStatut);
+				
+				//-> navigation vers la page 'accueil.xhtml'
+				return "accueil.xhtml";
+				
+			}else{
+				//----------------- l'utilisateur essaie de se connecter avec le mauvais statut ----------------------//
+
+				FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_FATAL, "Echec de connexion", "Vous n'êtes pas autorisé à vous connecter en tant que : "+ userStatut);
+				
+				//-> envoi du massage vers la bue via le constex de JSF (l'objet 'FacesContext') et sa méthode addMessage()
+				contextJSF.addMessage(null, message );
+				
+				return "authentification.xhtml" ;
 			
-			//-> navigation vers la page 'accueil.xhtml'
-			return "accueil.xhtml";
+			}//end else
 			
+
 		}else {
 			//----------------- l'utilisateur n'existe pas ----------------------//
 			/**
@@ -117,6 +138,14 @@ public class AuthentificationBean implements Serializable{
 
 	public void setUserMotDePasse(String userMotDePasse) {
 		this.userMotDePasse = userMotDePasse;
+	}
+	
+	public String getUserStatut() {
+		return userStatut;
+	}
+
+	public void setUserStatut(String userStatut) {
+		this.userStatut = userStatut;
 	}
 	
 }// end class

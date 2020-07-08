@@ -308,7 +308,51 @@ public class UtilisateurDAOImpl implements IUtilisateurDAO {
 			}// end catch
 			
 		} //  end finally
-		return false;	}	
+		return false;	}// end isExists
+
+	@Override
+	public boolean isUtilisateurAutorise(String pIdentifiant,String pMotDePasse, String pStatut) {
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		
+		try {
+			// 1. contenu requete
+			String requeteAutorise = "SELECT COUNT(id_utilisateur) utilisateur FROM utilisateurs LEFT JOIN roles ON (utilisateurs.id_role = roles.id_role ) WHERE utilisateurs.nom_utilisateur=? AND roles.nom_role=? ;";
+			
+			//2. def de la requete JDBC
+			ps = this.connection.prepareStatement(requeteAutorise);
+			
+			// 3. passage de param a la requete
+			ps.setString(1, pIdentifiant);
+			ps.setString(2, pStatut);
+			
+			// 4. exe requete
+			rs = ps.executeQuery();
+			
+			// 5. extraction des données du rs
+	
+			// 5.1. init de la tete de lectue
+			rs.next();
+			
+			// 5.2. extraction
+			int verif = rs.getInt(1);
+			
+			// 6 renvoi du resultat
+			return (verif == 1);
+			
+			
+		} catch (SQLException e ) {
+			e.printStackTrace();
+		}finally {
+			try {
+				if(rs!=null) { rs.close();}
+				if(ps!=null) { ps.close();}
+			}catch (SQLException e) {
+				e.printStackTrace();
+			}// end catch
+			
+		} //  end finally
+		return false;	} //end isAutorise
 	
 	
-}
+}//end class

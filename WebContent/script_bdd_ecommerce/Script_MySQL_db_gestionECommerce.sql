@@ -122,7 +122,7 @@ SELECT * FROM produits WHERE nom_produit LIKE '%test%' OR description_produit LI
 
 
 
-DELETE lignescommandes.* FROM lignescommandes RIGHT JOIN commandes ON (lignescommandes.id_commande = commandes.id_commande ) WHERE commandes.id_client=2  ;
+DELETE lignescommandes.* FROM lignescommandes LEFT JOIN commandes ON (lignescommandes.id_commande = commandes.id_commande ) WHERE commandes.id_client=2  ;
 
 select * from paniers;
 select * from roles;
