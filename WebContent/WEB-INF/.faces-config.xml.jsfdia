@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <PROCESS model-entity="JSFProcess">
- <PROCESS-ITEM NAME="rules:#accueil.xhtml" PATH="/accueil.xhtml"
-  SHAPE="272,33,0,0" model-entity="JSFProcessGroup">
-  <PROCESS-ITEM ID="rules:#accueil.xhtml:0" NAME="item"
-   PATH="/accueil.xhtml" model-entity="JSFProcessItem">
+ <PROCESS-ITEM NAME="rules:#accueil-bootfaces.xhtml"
+  PATH="/accueil-bootfaces.xhtml" SHAPE="272,33,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:#accueil-bootfaces.xhtml:0" NAME="item"
+   PATH="/accueil-bootfaces.xhtml" model-entity="JSFProcessItem">
    <PROCESS-ITEM-OUTPUT ID="login::#authentification.xhtml"
     NAME="output" PATH="/authentification.xhtml"
     TARGET="rules:#authentification.xhtml" TITLE="login" model-entity="JSFProcessItemOutput"/>
    <PROCESS-ITEM-OUTPUT ID="gotopanier::#acces_client#panier.xhtml"
     NAME="output1" PATH="/acces_client/panier.xhtml"
     TARGET="rules:#acces_client#panier.xhtml" TITLE="gotopanier" model-entity="JSFProcessItemOutput"/>
-   <PROCESS-ITEM-OUTPUT ID="listaccueil::#accueil.xhtml" NAME="output2"
-    PATH="/accueil.xhtml" TARGET="rules:#accueil.xhtml"
-    TITLE="listaccueil" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="listaccueil::#accueil-bootfaces.xhtml"
+    NAME="output2" PATH="/accueil-bootfaces.xhtml"
+    TARGET="rules:#accueil-bootfaces.xhtml" TITLE="listaccueil" model-entity="JSFProcessItemOutput"/>
    <PROCESS-ITEM-OUTPUT ID="gotocommande::#acces_client#commande.xhtml"
     NAME="output3" PATH="/acces_client/commande.xhtml"
     TARGET="rules:#acces_client#commande.xhtml" TITLE="gotocommande" model-entity="JSFProcessItemOutput"/>
@@ -22,9 +22,9 @@
   PATH="/authentification.xhtml" SHAPE="496,193,0,0" model-entity="JSFProcessGroup">
   <PROCESS-ITEM ID="rules:#authentification.xhtml:0" NAME="item"
    PATH="/authentification.xhtml" model-entity="JSFProcessItem">
-   <PROCESS-ITEM-OUTPUT ID="gotoaccueil::#accueil.xhtml" NAME="output"
-    PATH="/accueil.xhtml" TARGET="rules:#accueil.xhtml"
-    TITLE="gotoaccueil" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="gotoaccueil::#accueil-bootfaces.xhtml"
+    NAME="output" PATH="/accueil-bootfaces.xhtml"
+    TARGET="rules:#accueil-bootfaces.xhtml" TITLE="gotoaccueil" model-entity="JSFProcessItemOutput"/>
    <PROCESS-ITEM-OUTPUT ID="admin::#accueil-admin.xhtml" NAME="output1"
     PATH="/accueil-admin.xhtml" TARGET="rules:#accueil-admin.xhtml"
     TITLE="admin" model-entity="JSFProcessItemOutput"/>

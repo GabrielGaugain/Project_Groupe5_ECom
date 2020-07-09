@@ -267,16 +267,12 @@ public class ProduitDAOImpl implements IProduitDAO {
 	@Override
 	public List<Produit> getByMotCle(String pMotCle) {
 		ResultSet rs = null;
-		PreparedStatement ps = null;
 		Produit produit = null;
 		List<Produit> listeProduits = new ArrayList<>();
 
 		try {
 		
-		String Req ="SELECT * FROM categories WHERE nom_produit LIKE '%?%'";	
-		ps = IProduitDAO.connection.prepareStatement(Req);
-		ps.setString(1, pMotCle);
-		rs = ps.executeQuery();
+		rs = IProduitDAO.connection.prepareStatement("SELECT * FROM produits WHERE nom_produit LIKE '%"+pMotCle+"%' ;").executeQuery();
 			
 			while (rs.next()) {
 

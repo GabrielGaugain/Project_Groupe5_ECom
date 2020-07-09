@@ -1,126 +1,25 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:b="http://bootsfaces.net/ui">
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
 
 
 <h:head>
-	<title> Page d'accueil </title>	
+	<title>Page d'accueil</title>
 </h:head>
 
 
-    <h:body style="padding-top: 50px; padding-bottom: 20px;">
-        <b:navBar brand="Brand" brandHref="#" fluid="true" fixed="top" sticky="true">
-  			<b:navbarLinks>
-    			<b:navLink value="Link" href="#"></b:navLink>
-    			<b:navLink value="Se connecter" outcome="login"></b:navLink>
-    			<b:dropMenu value="Rechercher" iconAwesome="fa-search">
-      			<b:navLink value="Afficher tous les produits" href="#"></b:navLink>
-     			<b:navLink value="Consulter les produits d’une catégorie" href="#"></b:navLink>
-      			<b:navLink value="Consulter les produits sélectionnés" href="#"></b:navLink>
-      			<b:navLink></b:navLink>
-      			<b:navLink header="Nav header"></b:navLink>
-      			<b:navLink value="Consulter les produits d’une catégorie" href="#" iconAwesome="fa-tags"></b:navLink>
-      			<b:dropMenu value="Chercher des produits par mot clé" iconAwesome="fa-font">
-        		<b:navLink value="You can nest menus" href="#"></b:navLink>
-        		<b:dropMenu value="Nested sub-submenu">
-          		<b:navLink value="... as deep as ..." href="#"></b:navLink>
-          		<b:dropMenu value="Nested sub-sub-submenu">
-            	<b:navLink value="... you want!" href="#"></b:navLink>
-          		</b:dropMenu>
-        		</b:dropMenu>
-      			</b:dropMenu>
-      			<b:navLink value="One more separated link" href="#"></b:navLink>
-    			</b:dropMenu>
-  			</b:navbarLinks>
-			<b:navbarLinks pull="right"><b:navLink value="    " href="#"></b:navLink></b:navbarLinks>
-  			<b:navbarLinks pull="right" styleClass="hidden-xs">
-    			<b:dropMenu value="Mes options">
-      			<b:navLink value="Afficher les produits sélectionnés" href="#"></b:navLink>
-			      <b:navLink value="Voir mon panier" outcome="gotopanier"></b:navLink>
-			      <b:navLink value="Voir mes commandes" outcome="gotocommande"></b:navLink>
-			      <b:navLink></b:navLink>
-			      <b:navLink header="Nav header"></b:navLink>
-			      <b:navLink value="Separated link" href="#"></b:navLink>
-			      <b:navLink value="link " href="#"></b:navLink>
-			    </b:dropMenu>
-		     	<b:navLink value="Se déconnecter" action="#{authentificationBean.deconnecterUtilisateur()}"></b:navLink>
-		  	</b:navbarLinks>
-		</b:navBar>
-        
-<b:container style="width : 100% ;padding-top: 50px; padding-left: 50px; padding-right: 50px; padding-bottom: 20px;">
-    <b:row>
-		<b:column span="12">
-		<b:row>
-                <h1>Bienvenue chez Ecolovie (c'est cela oui...)!</h1>
-                <p>Que penses-tu de ce template/Layout ?  TROP LAID ! Nous devons faire mieux !</p>
-        </b:row>
-        <b:row>
-        <b:panel look="primary" title="Rechercher" iconAwesome="fa-search" showCollapseLink="false" collapsed="true">
-    			
+<h:body>
 	<h:form>
-  		<b:panelGrid colSpans="2,8,2">
-    		<h:outputLabel value="Catégorie" />
-    		<b:selectMultiMenu  value="#{selectMultiMenuBean.type}" id="typeID" required="true">
-     			<f:selectItem itemLabel="Catégorie A" itemValue="1"/>
-      			<f:selectItem itemLabel="Catégorie B" itemValue="2"/>
-      			<f:selectItem itemLabel="Catégorie C" itemValue="3"/>
-    		</b:selectMultiMenu>
-    		<b:commandButton value="Submit"/>
-    		</b:panelGrid>
+		<h:panelGrid columns="4" cellpadding="5">
+			<h:outputLabel for="mot-cle" value="Mot-cle :" style="font-weight:bold" />
+			<p:inputText id="mot-cle" value="#{produitBean.motCle}" />
+			<p:commandButton value="Submit" update="display" icon="pi pi-check" />
+			<h:outputText id="display" value="#{produitBean.getListeProdMC()}" />
+		</h:panelGrid>
 	</h:form>
-	<hr/>
-	<h:form>
-	<b:panelGrid colSpans="2,8,2">
-    		<h:outputLabel value="Mot-clé" />
-    		<b:inputText  value="# {settingsBean.mot-clé}"  />
-    		<b:commandButton value="Submit"/>
-  		</b:panelGrid>
-	</h:form>
-  			</b:panel>
-        </b:row>
-       </b:column>
-	</b:row>
-	
-    <b:row>       
-                <b:column col-md="4">
-                <b:panel look="primary">
-                    <h2>Heading</h2>
-                    <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, 
-                       ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-                    <p><b:button outcome="" value="View details »"/></p>
-                </b:panel>
-                </b:column>
-                <b:column col-md="4">
-                    <h2>Heading</h2>
-                    <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, 
-                       ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-                    <p><b:button outcome="" value="View details »"/></p>
-                </b:column>
-                <b:column col-md="4">
-                    <h2>Heading</h2>
-                    <p>Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, 
-                       ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui. </p>
-                    <p><b:button outcome="" value="View details »"/></p>
-                </b:column>
 
-            </b:row>	
-	
-	
-
-
-</b:container>
-
-
-		<b:container style="width : 100% ;padding-top: 50px; padding-left: 50px; padding-right: 50px; padding-bottom: 20px;">
-  
-            <hr/>
-            <footer style="width : 100% ;">
-            <p>© Gab&#x26;Cam 2020</p>
-            </footer>
-        </b:container>
-
-    </h:body>
+</h:body>
 </html>

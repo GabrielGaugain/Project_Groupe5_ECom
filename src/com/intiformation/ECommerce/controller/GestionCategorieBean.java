@@ -35,6 +35,7 @@ public class GestionCategorieBean implements Serializable {
 	private Collection<Categorie> listeCateBDD;
 	private Categorie categorie;
 	private Part uploadedFile;
+	private String formulaire ;
 
 	/* _____________________________ctors_______________________________ */
 	public GestionCategorieBean() {
@@ -168,5 +169,14 @@ public class GestionCategorieBean implements Serializable {
 	public void setUploadedFile(Part uploadedFile) {
 		this.uploadedFile = uploadedFile;
 	}
+
+	public String getFormulaire() {
+		return formulaire;
+	}
+
+	public void setFormulaire(String formulaire) {
+		this.formulaire = formulaire;
+	}
+	
 
 }// end class
