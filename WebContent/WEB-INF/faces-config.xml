@@ -8,7 +8,7 @@
  ******************************************************** -->
  <navigation-rule>
   <!-- 1.1. page de départ -->
-  <from-view-id>/accueil-bootfaces.xhtml</from-view-id>
+  <from-view-id>/accueil.xhtml</from-view-id>
   <!-- 1.2. cas de nav : de 'accueil.xhtml' vers 'authentification.xhtml' -->
   <navigation-case>
    <!-- redirection vers la page de panier au click sur signin 
@@ -32,7 +32,7 @@
  1.4.1 clé d'outcom -->
    <from-outcome>listaccueil</from-outcome>
    <!-- 1.4.2. destination -->
-   <to-view-id>/accueil-bootfaces.xhtml</to-view-id>
+   <to-view-id>/accueil.xhtml</to-view-id>
    <redirect/>
   </navigation-case>
   <navigation-case>

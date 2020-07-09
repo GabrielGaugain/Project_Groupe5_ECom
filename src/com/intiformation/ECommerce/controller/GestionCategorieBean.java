@@ -149,14 +149,6 @@ public class GestionCategorieBean implements Serializable {
 		this.categorieDAO = categorieDAO;
 	}
 
-	public Collection<Categorie> getListeCateBDD() {
-		return listeCateBDD = (Collection<Categorie>)categorieDAO.getAll();
-	}
-
-	public void setListeCateBDD(Collection<Categorie> listeCateBDD) {
-		this.listeCateBDD = listeCateBDD;
-	}
-
 	public Categorie getCategorie() {
 		return categorie;
 	}

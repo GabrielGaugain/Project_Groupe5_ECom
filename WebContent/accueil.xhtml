@@ -16,6 +16,15 @@
 
 <h:body>
 
+<h:form>  
+    <p:growl id="messages"/>
+ 
+    <p:menubar>
+    	<p:menuitem value="TestAuthentificationPage" outcome="login" icon="pi pi-home" />
+    	<p:menuitem value="TestSeDéconnecter" action="#{authentificationBean.deconnecterUtilisateur()}" icon="pi pi-times" />
+    </p:menubar>
+</h:form>
+
 	<h:form>
 
 		<p:tabView>
@@ -241,7 +250,11 @@
 
 
 	</h:form>
+	
+	
 
 </p:outputPanel>
+
+
 </h:body>
 </html>

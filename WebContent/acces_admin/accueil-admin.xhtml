@@ -1,18 +1,196 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:h="http://java.sun.com/jsf/html"
-       xmlns:p="http://primefaces.org/ui">
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
 
 
 <h:head>
-	<title> Page pour admin </title>	
+	<title>Page pour admin</title>
+	<link href="resources/styles/accueil.css" rel="stylesheet" />
+	<link href="resources/styles/accueil-admin.css" rel="stylesheet" />
+	<h:outputStylesheet name="primeicons/primeicons.css"
+		library="primefaces" />
 </h:head>
 
 <h:body>
 
+	<h:form>
+		<p:growl id="messages" />
 
+		<p:menubar>
+			<p:submenu label="Ajouter" icon="pi pi-file">
+					<p:menuitem value="Catégorie" url="#" />
+					<p:separator />
+					<p:menuitem value="Produit" url="#" />
+					<p:separator />
+					<p:menuitem value="Utilisateur" url="#" />
+			</p:submenu>
+			<p:submenu label="Ajouter" icon="pi pi-pencil">
+					<p:menuitem value="Catégorie" url="#" />
+					<p:separator />
+					<p:menuitem value="Produit" url="#" />
+					<p:separator />
+					<p:menuitem value="Utilisateur" url="#" />
+			</p:submenu>
+			<p:submenu label="Ajouter" icon="pi pi-times">
+					<p:menuitem value="Catégorie" url="#" />
+					<p:separator />
+					<p:menuitem value="Produit" url="#" />
+					<p:separator />
+					<p:menuitem value="Utilisateur" url="#" />
+			</p:submenu>
+			<p:menuitem url="#" type="button" value="Se déconnecter" icon="pi pi-home"
+					action="#{authentificationBean.deconnecterUtilisateur()}" />
 
- </h:body>
+		</p:menubar>
+	</h:form>
+
+	<h:form id="form">
+
+		<p:growl id="msgs" showDetail="true" skipDetailIfEqualsSummary="true" />
+
+		<h3 style="margin-top: 0">Bienvenue Admin !</h3>
+		<p:tabView>
+			<p:tab title="Gestion Catégories">
+				<h:panelGrid columns="2" cellpadding="10">
+
+					<p:dataTable var="cat" value="#{categorieBean.listeCate}">
+						<p:column headerText="Id_Catégorie">
+							<h:outputText value="#{cat.idCategorie}" />
+						</p:column>
+
+						<p:column headerText="Nom_Catégorie">
+							<h:outputText value="#{cat.nomCategorie}" />
+						</p:column>
+
+						<p:column headerText="Description_Catégorie">
+							<h:outputText value="#{cat.descriptionCategorie}" />
+						</p:column>
+
+						<p:column headerText="URL_Image_Catégorie">
+							<h:outputText value="#{cat.urlImageCategorie}" />
+						</p:column>
+					</p:dataTable>
+				</h:panelGrid>
+			</p:tab>
+			<p:tab title="Gestion Produits">
+				<h:panelGrid columns="2" cellpadding="10">
+
+					<p:dataTable var="pd" value="#{produitBean.listeProd}">
+
+						<p:column headerText="Id_Catégorie">
+							<h:outputText value="#{pd.idCategorie}" />
+						</p:column>
+						<p:column headerText="Id_Produit">
+							<h:outputText value="#{pd.idProduit}" />
+						</p:column>
+
+						<p:column headerText="Nom">
+							<h:outputText value="#{pd.nomProduit}" />
+						</p:column>
+
+						<p:column headerText="Description">
+							<h:outputText value="#{pd.descriptionProduit}" />
+						</p:column>
+
+						<p:column headerText="Prix">
+							<h:outputText value="#{pd.prixProduit}" />
+						</p:column>
+						<p:column headerText="Selectionné">
+							<h:outputText value="#{pd.selectionne}" />
+						</p:column>
+
+					</p:dataTable>
+				</h:panelGrid>
+			</p:tab>
+			<p:tab title="Gestion Utilisateurs">
+				<h:panelGrid columns="2" cellpadding="10">
+					<p:dataTable var="us" value="#{utilisateurBean.getListeUser()}">
+
+						<p:column headerText="Id_Utilisateur">
+							<h:outputText value="#{us.idUtilisateur}" />
+						</p:column>
+						<p:column headerText="Id_Role_Utilisateur">
+							<h:outputText value="#{us.idRole}" />
+						</p:column>
+
+						<p:column headerText="Nom">
+							<h:outputText value="#{us.nomUtilisateur}" />
+						</p:column>
+
+						<p:column headerText="MDP">
+							<h:outputText value="#{us.mdpUtilisateur}" />
+						</p:column>
+
+						<p:column headerText="Activé">
+							<h:outputText value="#{us.active}" />
+						</p:column>
+					</p:dataTable>
+				</h:panelGrid>
+			</p:tab>
+		</p:tabView>
+	</h:form>
+	<!--  ==================================== TEST WIZZARD ========================================-->
+	
+	<h:form>
+         
+    <p:growl id="growl" sticky="true" showDetail="true"/>
+ 
+    <p:wizard flowListener="#{utilisateurBean.onFlowProcess}">
+        <p:tab id="personal" title="Personal">
+            <p:panel header="Personal Details">
+                <p:messages />
+                <h:panelGrid columns="2" columnClasses="label, value">
+                    <h:outputText value="Firstname: *" />
+                    <p:inputText value="#{utilisateurBean.user.idUtilisateur}" required="true" label="Firstname"/>
+ 
+                    <h:outputText value="Lastname: *" />
+                    <p:inputText value="#{utilisateurBean.user.nomUtilisateur}" required="true" label="Lastname"/>
+ 
+                    <h:outputText value="Age: " />
+                    <p:inputText value="#{utilisateurBean.user.mdpUtilisateur}" />
+                    
+                     <h:outputText value="Age: " />
+                    <p:inputText value="#{utilisateurBean.user.idRole}" />
+                    
+                       <h:outputText value="Age: " />
+                    <p:inputText value="#{utilisateurBean.user.active}" />
+ 
+                    <h:outputText value="Skip to last: " />
+                    <h:selectBooleanCheckbox value="#{utilisateurBean.skip}" />
+                </h:panelGrid>
+            </p:panel>
+        </p:tab>
+        <p:tab id="confirm" title="Confirmation">
+            <p:panel header="Confirmation">
+                <h:panelGrid id="confirmation" columns="3" columnClasses="grid,grid,grid">
+
+                    <h:panelGrid columns="2" columnClasses="label, value">
+                                           <h:outputText value="Firstname: *" />
+                    <h:outputText value="#{utilisateurBean.user.idUtilisateur}" required="true" label="Firstname"/>
+ 
+                    <h:outputText value="Lastname: *" />
+                    <h:outputText value="#{utilisateurBean.user.nomUtilisateur}" required="true" label="Lastname"/>
+ 
+                    <h:outputText value="Age: " />
+                    <h:outputText value="#{utilisateurBean.user.mdpUtilisateur}" />
+                    
+                     <h:outputText value="Age: " />
+                    <h:outputText value="#{utilisateurBean.user.idRole}" />
+                    
+                       <h:outputText value="Age: " />
+                    <h:outputText value="#{utilisateurBean.user.active}" />
+                    </h:panelGrid>
+                </h:panelGrid>
+ 
+                <p:commandButton value="Submit" action="#{utilisateurBean.save}" update="growl" process="@this"/>
+            </p:panel>
+        </p:tab>
+    </p:wizard>
+ 
+</h:form>
+
+</h:body>
 </html>

@@ -30,6 +30,9 @@ public class Utilisateur {
 
 	/* __________________ getters/setters ________________ */
 	
+	public Utilisateur() {
+	}
+
 	public long getIdUtilisateur() {
 		return idUtilisateur;
 	}
