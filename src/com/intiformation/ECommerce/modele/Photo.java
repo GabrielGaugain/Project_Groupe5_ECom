@@ -4,18 +4,12 @@ public class Photo {
 
 	/* __________________ props __________________________ */
 	
-	private long idPhoto ;
 	private String urlPhoto;
 	private String nomPhoto ;
 	
 	/* __________________ ctors __________________________ */
 	
-	public Photo(long idPhoto, String urlPhoto, String nomPhoto) {
-		super();
-		this.idPhoto = idPhoto;
-		this.urlPhoto = urlPhoto;
-		this.nomPhoto = nomPhoto;
-	}//end ctor avec id
+
 	
 	public Photo(String urlPhoto, String nomPhoto) {
 		super();
@@ -26,13 +20,6 @@ public class Photo {
 	
 	/* __________________ getters/setters ________________ */
 
-	public long getIdPhoto() {
-		return idPhoto;
-	}
-
-	public void setIdPhoto(long idPhoto) {
-		this.idPhoto = idPhoto;
-	}
 
 	public String getUrlPhoto() {
 		return urlPhoto;
@@ -54,7 +41,7 @@ public class Photo {
 	
 	@Override
 	public String toString() {
-		return "Photo [idPhoto=" + idPhoto + ", urlPhoto=" + urlPhoto + ", nomPhoto=" + nomPhoto + "]";
+		return "Photo [urlPhoto=" + urlPhoto + ", nomPhoto=" + nomPhoto + "]";
 	}
 	
 	

@@ -16,7 +16,7 @@ public class ProduitDAOImpl implements IProduitDAO {
 		
 		try {
 			
-			String Req ="INSERT INTO produits (nom_produit,description_produit,prix_produit,id_photo,id_categorie) VALUES (?,?,?,?,?)";
+			String Req ="INSERT INTO produits (nom_produit,description_produit,prix_produit,url_photo,id_categorie) VALUES (?,?,?,?,?)";
 			
 			ps = IProduitDAO.connection.prepareStatement(Req);
 			
@@ -51,7 +51,7 @@ public class ProduitDAOImpl implements IProduitDAO {
 
 	try {
 		
-		String Req ="UPDATE produits SET nom_produit=?,description_produit=?,prix_produit=?, selectionne=?, id_photo=?,id_categorie=? WHERE id_produit=?";
+		String Req ="UPDATE produits SET nom_produit=?,description_produit=?,prix_produit=?, selectionne=?, url_photo=?,id_categorie=? WHERE id_produit=?";
 		
 		ps = IProduitDAO.connection.prepareStatement(Req);
 		
@@ -193,7 +193,7 @@ public class ProduitDAOImpl implements IProduitDAO {
 
 		try {
 		
-		String Req ="SELECT * FROM categories WHERE id_categorie=?";	
+		String Req ="SELECT * FROM produits WHERE id_categorie=?";	
 		ps = IProduitDAO.connection.prepareStatement(Req);
 		ps.setLong(1, pIdCategorie);
 		rs = ps.executeQuery();
@@ -272,7 +272,7 @@ public class ProduitDAOImpl implements IProduitDAO {
 
 		try {
 		
-		rs = IProduitDAO.connection.prepareStatement("SELECT * FROM produits WHERE nom_produit LIKE '%"+pMotCle+"%' ;").executeQuery();
+		rs = IProduitDAO.connection.prepareStatement("SELECT * FROM produits WHERE nom_produit LIKE '%"+pMotCle+"%' OR description_produit LIKE '%"+pMotCle+"%' ;").executeQuery();
 			
 			while (rs.next()) {
 

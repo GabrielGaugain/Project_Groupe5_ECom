@@ -2,12 +2,18 @@ package com.intiformation.ECommerce.controller;
 
 import java.io.Serializable;
 import java.util.Collection;
+import java.util.List;
 
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 
+import com.intiformation.ECommerce.dao.CategorieDAOImpl;
+import com.intiformation.ECommerce.dao.ICategorieDAO;
 import com.intiformation.ECommerce.dao.IProduitDAO;
 import com.intiformation.ECommerce.dao.ProduitDAOImpl;
+import com.intiformation.ECommerce.modele.Categorie;
 import com.intiformation.ECommerce.modele.Produit;
 
 @ManagedBean(name = "produitBean")
@@ -17,13 +23,16 @@ public class GestionProduitBean implements Serializable {
 	/* _____________________________props_______________________________ */
 
 	IProduitDAO prodDAO;
+	private Collection<Categorie> listeCateBDD;
 	private Collection<Produit> listeProdBDD;
 	private Collection<Produit> listeProdCateBDD;
 	private Collection<Produit> listeProdMCBDD;
 	private Produit produit;
-	private int idCategorie ;
+	private Produit SelectedProd;
+	private long idCategorie ;
 	private String motCle ;
-
+	private boolean coche;
+	
 	/* _____________________________ctors_______________________________ */
 	public GestionProduitBean() {
 		prodDAO = new ProduitDAOImpl();
@@ -32,6 +41,15 @@ public class GestionProduitBean implements Serializable {
 	
 	/* _____________________________meths_______________________________ */
 
+	public Collection<Categorie> getListeCate() {
+		ICategorieDAO catDAO = new CategorieDAOImpl();
+		return listeCateBDD = catDAO.getAll();
+	}
+	
+	public Collection<Produit> getListeProd() {
+		return listeProdBDD = prodDAO.getAll();
+	}
+	
 	public Collection<Produit> getListeProdCate() {
 		return listeProdCateBDD = prodDAO.getAllProduitByCategorie(idCategorie);
 	}
@@ -39,7 +57,10 @@ public class GestionProduitBean implements Serializable {
 	public Collection<Produit> getListeProdMC() {
 		 return listeProdMCBDD = prodDAO.getByMotCle(motCle) ;
 	}
-	
+	public void addMessage() {
+        String summary = coche ? "Produit ajouté à la sélection" : "Produit retiré de la sélection";
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(summary));
+    }
 	
 	/* _______________________ GETTERS/SETTERS ________________________________ */
 
@@ -78,13 +99,10 @@ public class GestionProduitBean implements Serializable {
 		return idCategorie;
 	}
 
-	public void setIdCategorie(int idCategorie) {
+	public void setIdCategorie(long idCategorie) {
 		this.idCategorie = idCategorie;
 	}
 
-	public Collection<Produit> getListeProd() {
-		 return listeProdBDD = prodDAO.getAll();
-	}
 
 
 	public Collection<Produit> getListeProdMCBDD() {
@@ -105,7 +123,25 @@ public class GestionProduitBean implements Serializable {
 	public void setMotCle(String motCle) {
 		this.motCle = motCle;
 	}
-	
-	
+
+
+	public Produit getSelectedProd() {
+		return SelectedProd;
+	}
+
+
+	public void setSelectedProd(Produit selectedProd) {
+		SelectedProd = selectedProd;
+	}
+
+
+	public boolean isCoche() {
+		return coche;
+	}
+
+
+	public void setCoche(boolean coche) {
+		this.coche = coche;
+	}
 
 }// end class

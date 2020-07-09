@@ -48,13 +48,13 @@ public class PhotoDAOImpl implements IPhotoDAO {
 
 		try {
 			
-			String Req ="UPDATE photos SET url_photo=?,nom_photo=? WHERE id_photo=?";
+			String Req ="UPDATE photos SET url_photo=?,nom_photo=? WHERE url_photo=?";
 			
 			ps = IPhotoDAO.connection.prepareStatement(Req);
 			
 			ps.setString(1, pPhoto.getUrlPhoto());
 			ps.setString(2,pPhoto.getNomPhoto());
-			ps.setLong(3, pPhoto.getIdPhoto());
+			ps.setString(3, pPhoto.getUrlPhoto());
 
 			
 			int verif = ps.executeUpdate();
@@ -76,7 +76,7 @@ public class PhotoDAOImpl implements IPhotoDAO {
 	}//end update 
 
 	@Override
-	public boolean delete(long pIdPhoto) {
+	public boolean delete(String pUrlPhoto) {
 		PreparedStatement ps = null;
 		PreparedStatement ps1 = null;
 		PreparedStatement ps2 = null;
@@ -84,14 +84,14 @@ public class PhotoDAOImpl implements IPhotoDAO {
 		try {
 			
 			
-			ps = IPhotoDAO.connection.prepareStatement("DELETE FROM photos WHERE id_photo=? ; ");
-			ps.setLong(1, pIdPhoto);
+			ps = IPhotoDAO.connection.prepareStatement("DELETE FROM photos WHERE url_photo=? ; ");
+			ps.setString(1, pUrlPhoto);
 			
-			ps1 = ICategorieDAO.connection.prepareStatement("UPDATE produits SET id_photo=null WHERE id_photo=? ;");
-			ps1.setLong(1, pIdPhoto);
+			ps1 = ICategorieDAO.connection.prepareStatement("UPDATE produits SET url_photo=null WHERE url_photo=? ;");
+			ps1.setString(1, pUrlPhoto);
 			
-			ps2 = ICategorieDAO.connection.prepareStatement("UPDATE categories SET id_photo=null WHERE id_photo=? ;");
-			ps2.setLong(1, pIdPhoto);
+			ps2 = ICategorieDAO.connection.prepareStatement("UPDATE categories SET url_photo=null WHERE url_photo=? ;");
+			ps2.setString(1, pUrlPhoto);
 			
 			
 			int verif2 = ps2.executeUpdate();
@@ -129,8 +129,8 @@ public class PhotoDAOImpl implements IPhotoDAO {
 			
 			while (rs.next()) {
 
-				// ctor :Photo(long idPhoto, String urlPhoto, String nomPhoto)
-				photo = new Photo(rs.getLong(1), rs.getString(2), rs.getString(3));
+				// ctor :Photo( String urlPhoto, String nomPhoto)
+				photo = new Photo(rs.getString(1), rs.getString(2));
 
 				listePhotos.add(photo);
 
@@ -162,14 +162,14 @@ public class PhotoDAOImpl implements IPhotoDAO {
 
 		try {
 		
-		String Req ="SELECT * FROM photos WHERE id_photo=?";	
+		String Req ="SELECT * FROM photos WHERE url_photo=?";	
 		ps = ICategorieDAO.connection.prepareStatement(Req);
 		ps.setLong(1, pIdPhoto);
 		rs = ps.executeQuery();
 
 		rs.next();
-		// ctor :Photo(long idPhoto, String urlPhoto, String nomPhoto)
-		photo = new Photo(rs.getLong(1), rs.getString(2), rs.getString(3));
+		// ctor :Photo(String urlPhoto, String nomPhoto)
+		photo = new Photo(rs.getString(1), rs.getString(2));
 
 
 		return photo;
@@ -188,5 +188,11 @@ public class PhotoDAOImpl implements IPhotoDAO {
 
 	return null;
 	}//end getById
+
+	@Override
+	public boolean delete(long id) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 
 }//end class

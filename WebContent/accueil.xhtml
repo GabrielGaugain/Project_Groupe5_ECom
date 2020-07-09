@@ -8,18 +8,240 @@
 
 <h:head>
 	<title>Page d'accueil</title>
+	<link href="resources/styles/accueil.css" rel="stylesheet" />
+	<h:outputStylesheet name="primeicons/primeicons.css"
+		library="primefaces" />
 </h:head>
 
 
 <h:body>
+
 	<h:form>
-		<h:panelGrid columns="4" cellpadding="5">
-			<h:outputLabel for="mot-cle" value="Mot-cle :" style="font-weight:bold" />
-			<p:inputText id="mot-cle" value="#{produitBean.motCle}" />
-			<p:commandButton value="Submit" update="display" icon="pi pi-check" />
-			<h:outputText id="display" value="#{produitBean.getListeProdMC()}" />
-		</h:panelGrid>
+
+		<p:tabView>
+		
+			<p:tab title="Afficher tous les produits">
+				<h:panelGrid columns="4" cellpadding="5">
+				<p:commandButton value="Rafraichir" update="display" icon="pi pi-check" />
+					<p:outputPanel id="display">
+						<h:form>
+							<p:dataTable var="prod" value="#{produitBean.listeProd}">
+
+								<p:column headerText="Id_Catégorie">
+									<h:outputText value="#{prod.idCategorie}" />
+								</p:column>
+								<p:column headerText="Id_Produit">
+									<h:outputText value="#{prod.idProduit}" />
+								</p:column>
+
+								<p:column headerText="Nom">
+									<h:outputText value="#{prod.nomProduit}" />
+								</p:column>
+
+								<p:column headerText="Description">
+									<h:outputText value="#{prod.descriptionProduit}" />
+								</p:column>
+
+								<p:column headerText="Prix">
+									<h:outputText value="#{prod.prixProduit}" />
+								</p:column>
+								<p:column headerText="Selectionné">
+									<h:outputText value="#{prod.selectionne}" />
+								</p:column>
+
+							</p:dataTable>
+						</h:form>
+					</p:outputPanel>
+				</h:panelGrid>
+			</p:tab>
+			<p:tab title="Rechercher par Catégorie">
+				<h:panelGrid columns="4" cellpadding="5">
+					<p:outputLabel for="ctg" value="Catégorie :" />
+					<p:selectOneMenu id="ctg" value="#{produitBean.idCategorie}"
+						style="width:125px">
+						<f:selectItem itemLabel="categorieA" itemValue="1" />
+						<f:selectItem itemLabel="categorieB" itemValue="2" />
+						<f:selectItem itemLabel="categorieC" itemValue="3" />
+						<f:selectItem itemLabel="categorieD" itemValue="4" />
+						<f:facet name="footer">
+							<p:separator />
+							<h:outputText value="3 consoles" style="font-weight:bold;" />
+						</f:facet>
+					</p:selectOneMenu>
+					<p:commandButton value="Rechercher" update="displayct" icon="pi pi-check" />
+					<p:outputPanel id="displayct">
+						<h:form>
+							<p:dataTable var="pct" value="#{produitBean.listeProdCate}">
+
+								<p:column headerText="Id_Catégorie">
+									<h:outputText value="#{pct.idCategorie}" />
+								</p:column>
+								<p:column headerText="Id_Produit">
+									<h:outputText value="#{pct.idProduit}" />
+								</p:column>
+
+								<p:column headerText="Nom">
+									<h:outputText value="#{pct.nomProduit}" />
+								</p:column>
+
+								<p:column headerText="Description">
+									<h:outputText value="#{pct.descriptionProduit}" />
+								</p:column>
+
+								<p:column headerText="Prix">
+									<h:outputText value="#pct.prixProduit}" />
+								</p:column>
+								<p:column headerText="Selectionné">
+									<h:outputText value="#{pct.selectionne}" />
+								</p:column>
+
+							</p:dataTable>
+						</h:form>
+					</p:outputPanel>
+				</h:panelGrid>
+			</p:tab>
+			<p:tab title="Rechercher par Mot-Clé">
+				<h:panelGrid columns="4" cellpadding="5">
+					<h:outputLabel for="mot-cle" value="Mot-cle :"
+						style="font-weight:bold" />
+					<p:inputText id="mot-cle" value="#{produitBean.motCle}" />
+					<p:commandButton value="Rechercher" update="displaymc"
+						icon="pi pi-check" />
+					<p:outputPanel id="displaymc">
+						<h:form>
+							<p:dataTable var="prod" value="#{produitBean.listeProdMC}">
+
+								<p:column headerText="Id_Catégorie">
+									<h:outputText value="#{prod.idCategorie}" />
+								</p:column>
+								<p:column headerText="Id_Produit">
+									<h:outputText value="#{prod.idProduit}" />
+								</p:column>
+
+								<p:column headerText="Nom">
+									<h:outputText value="#{prod.nomProduit}" />
+								</p:column>
+
+								<p:column headerText="Description">
+									<h:outputText value="#{prod.descriptionProduit}" />
+								</p:column>
+
+								<p:column headerText="Prix">
+									<h:outputText value="#{prod.prixProduit}" />
+								</p:column>
+								<p:column headerText="Selectionné">
+									<h:outputText value="#{prod.selectionne}" />
+								</p:column>
+
+							</p:dataTable>
+						</h:form>
+					</p:outputPanel>
+				</h:panelGrid>
+			</p:tab>
+		</p:tabView>
 	</h:form>
 
+<p:outputPanel>
+	<h:form id="form">
+		<p:dataView var="prod" value="#{produitBean.listeProd}"
+			gridIcon="pi pi-th-large" listIcon="pi pi-bars">
+
+			<p:dataViewGridItem>
+				<p:panel header="#{prod.idProduit}" style="text-align:center">
+					<h:panelGrid columns="1" style="width:100%">
+						<p:graphicImage name="images/#{prod.urlImageProduit}" />
+
+						<h:outputText value="#{prod.nomProduit}" />
+
+						<p:commandLink update=":form:prodDetail"
+							oncomplete="PF('prodDialog').show()" title="Voir en détail">
+							<h:outputText styleClass="ui-icon pi pi-search"
+								style="margin:0 auto;" />
+							<f:setPropertyActionListener value="#{prod}"
+								target="#{produitBean.selectedProd}" />
+						</p:commandLink>
+
+					</h:panelGrid>
+				</p:panel>
+			</p:dataViewGridItem>
+
+			<p:dataViewListItem>
+				<h:panelGrid columns="3" style="width:100%"
+					columnClasses="logo,detail">
+					<p:graphicImage name="images/#{prod.urlImageProduit}" />
+
+					<p:outputPanel>
+						<h:panelGrid columns="2" cellpadding="5">
+							<h:outputText value="Id:" />
+							<h:outputText value="#{prod.idProduit}" style="font-weight: bold" />
+
+							<h:outputText value="Catégorie:" />
+							<h:outputText value="#{prod.idCategorie}"
+								style="font-weight: bold" />
+
+							<h:outputText value="Nom:" />
+							<h:outputText value="#{prod.nomProduit}"
+								style="font-weight: bold" />
+						</h:panelGrid>
+					</p:outputPanel>
+
+					<p:selectBooleanCheckbox value="#{produitBean.coche}"
+						itemLabel="Selectionné">
+						<p:ajax update="msg" listener="#{produitBean.addMessage()}" />
+						<p:growl id="msg" />
+					</p:selectBooleanCheckbox>
+
+					<p:dialog header="Values" modal="true" resizable="false"
+						showEffect="fade" widgetVar="dlg">
+						<h:panelGrid columns="1" id="display">
+							<h:outputText value="#{selectBooleanView.coche}" />
+						</h:panelGrid>
+					</p:dialog>
+
+					<p:commandLink update=":form:prodDetail"
+						oncomplete="PF('prodDialog').show()" title="Voir en détail">
+						<h:outputText styleClass="ui-icon pi pi-search"
+							style="margin:0 auto;" />
+						<f:setPropertyActionListener value="#{prod}"
+							target="#{produitBean.selectedProd}" />
+					</p:commandLink>
+				</h:panelGrid>
+			</p:dataViewListItem>
+		</p:dataView>
+
+		<p:dialog header="Détail du produit" widgetVar="prodDialog"
+			modal="true" showEffect="fade" hideEffect="fade" resizable="false">
+			<p:outputPanel id="prodDetail" style="text-align:center;">
+				<p:panelGrid columns="2"
+					rendered="#{not empty produitBean.selectedProd}"
+					columnClasses="label,value">
+					<f:facet name="header">
+						<p:graphicImage
+							name="images/#{produitBean.selectedProd.urlImageProduit}" />
+					</f:facet>
+
+					<h:outputText value="Id :" />
+					<h:outputText value="#{produitBean.selectedProd.idProduit}" />
+
+					<h:outputText value="Catégorie :" />
+					<h:outputText value="#{produitBean.selectedProd.idCategorie}" />
+
+					<h:outputText value="Nom :" />
+					<h:outputText value="#{produitBean.selectedProd.nomProduit}" />
+
+					<h:outputText value="Description :" />
+					<h:outputText
+						value="#{produitBean.selectedProd.descriptionProduit}" />
+
+					<h:outputText value="Prix :" />
+					<h:outputText value="#{produitBean.selectedProd.prixProduit} €" />
+				</p:panelGrid>
+			</p:outputPanel>
+		</p:dialog>
+
+
+	</h:form>
+
+</p:outputPanel>
 </h:body>
 </html>

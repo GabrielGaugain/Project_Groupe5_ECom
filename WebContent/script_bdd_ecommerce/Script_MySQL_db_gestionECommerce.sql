@@ -7,7 +7,7 @@ CREATE TABLE db_gestionECommerce.categories (
 id_categorie INT auto_increment,
 nom_categorie VARCHAR (100),
 description_categorie VARCHAR (200),
-id_photo INT,
+url_photo VARCHAR (200),
 constraint pk_categories PRIMARY KEY (id_categorie)
 );
 
@@ -18,7 +18,7 @@ nom_produit VARCHAR (100),
 description_produit VARCHAR (200),
 prix_produit DECIMAL (10,2),
 selectionne BOOLEAN,
-id_photo INT,
+url_photo VARCHAR (200),
 id_categorie INT,
 constraint pk_produits PRIMARY KEY (id_produit)
 );
@@ -76,15 +76,14 @@ constraint pk_roles PRIMARY KEY (id_role)
 
 
 CREATE TABLE db_gestionECommerce.photos (
-id_photo INT auto_increment,
 url_photo VARCHAR (200),
 nom_photo VARCHAR (200),
-constraint pk_photos PRIMARY KEY (id_photo)
+constraint pk_photos PRIMARY KEY (url_photo)
 );
 
 
-ALTER TABLE db_gestionECommerce.categories ADD constraint fk_categories_photos FOREIGN KEY (id_photo) REFERENCES photos(id_photo);
-ALTER TABLE db_gestionECommerce.produits ADD constraint fk_produits_photos FOREIGN KEY (id_photo) REFERENCES photos(id_photo);
+ALTER TABLE db_gestionECommerce.categories ADD constraint fk_categories_photos FOREIGN KEY (url_photo) REFERENCES photos(url_photo);
+ALTER TABLE db_gestionECommerce.produits ADD constraint fk_produits_photos FOREIGN KEY (url_photo) REFERENCES photos(url_photo);
 ALTER TABLE db_gestionECommerce.produits ADD constraint fk_produits_categories FOREIGN KEY (id_categorie) REFERENCES categories(id_categorie);
 ALTER TABLE db_gestionECommerce.commandes ADD constraint fk_commandes_clients FOREIGN KEY (id_client) REFERENCES clients(id_client);
 ALTER TABLE db_gestionECommerce.lignescommandes ADD constraint fk_lignescommandes_produits FOREIGN KEY (id_produit) REFERENCES produits(id_produit);
@@ -93,12 +92,15 @@ ALTER TABLE db_gestionECommerce.lignescommandes ADD constraint fk_lignescommande
 ALTER TABLE db_gestionECommerce.utilisateurs ADD constraint fk_utilisateurs_roles FOREIGN KEY (id_role) REFERENCES roles(id_role);
 
 -- inserts :
-INSERT INTO photos (url_photo, nom_photo) VALUE ('\Project_Groupe5_ECom\WebContent\resources\images\test.jpg','test');
+INSERT INTO photos (url_photo, nom_photo) VALUE ('test.jpg','test');
+INSERT INTO photos (url_photo, nom_photo) VALUE ('panda3.gif','panda');
 
-INSERT INTO categories (nom_categorie,description_categorie,id_photo) VALUES ('Categorie_Test','Cette catégorie a été inventée pour réaliser des tests sur la bdd',1) ;
+INSERT INTO categories (nom_categorie,description_categorie,url_photo) VALUES ('Categorie_Test','Cette catégorie a été inventée pour réaliser des tests sur la bdd','panda3.gif') ;
+INSERT INTO categories (nom_categorie,description_categorie,url_photo) VALUES ('Categorie_Test2','Cette catégorie a été inventée ','panda3.gif') ;
 
-INSERT INTO produits (nom_produit,description_produit,prix_produit,id_photo,id_categorie) VALUES ('Produit_Test','Ce produit a été inventé pour réaliser des tests sur la base de données',3.50,1,1);
-INSERT INTO produits (nom_produit,description_produit,prix_produit,id_photo,id_categorie) VALUES ('Produit_test','Ce produit a été inventé ',3.50,1,1);
+INSERT INTO produits (nom_produit,description_produit,prix_produit,url_photo,id_categorie) VALUES ('Produit_Test','Ce produit a été inventé pour réaliser des tests sur la base de données',3.50,'test.jpg',1);
+INSERT INTO produits (nom_produit,description_produit,prix_produit,url_photo,id_categorie) VALUES ('Produit_test','Ce produit a été inventé ',3.50,'test.jpg',2);
+INSERT INTO produits (nom_produit,description_produit,prix_produit,url_photo,id_categorie) VALUES ('BLABLA','blablaZZZ',3.50,'test.jpg',1);
 
 insert into roles (id_role,nom_role) values (1,'admin');
 insert into roles (id_role,nom_role) values (2,'client');
@@ -111,10 +113,10 @@ INSERT into utilisateurs (nom_utilisateur , mdp_utilisateur, id_role, active) va
 
 INSERT INTO clients (nom_client, adresse_client, email_client, telephone_client) values  ("Michelle","12 rue du bout perdu","mich@gmail.com","0202020202");
 INSERT INTO commandes (date_commande ,id_client) values ('10.01.2020',1);
-INSERT INTO lignescommandes (quantite_commande ,montant_commande,id_produit ,id_commande ,id_panier ) values (3,300.22, 1, 5, 2);
+INSERT INTO lignescommandes (quantite_commande ,montant_commande,id_produit ,id_commande ,id_panier ) values (3,300.22, 1, 1, 1);
 
 
-delete from utilisateurs where id_utilisateur =1;
+delete from produits where id_produit =6;
 -- tests
 
 SELECT * FROM photos ;

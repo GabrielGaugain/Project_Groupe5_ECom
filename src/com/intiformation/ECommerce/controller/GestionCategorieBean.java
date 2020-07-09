@@ -2,6 +2,7 @@ package com.intiformation.ECommerce.controller;
 
 import java.io.Serializable;
 import java.util.Collection;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -43,6 +44,8 @@ public class GestionCategorieBean implements Serializable {
 	}// end ctor vide
 
 	/* _____________________________meths_______________________________ */
+
+	
 
 	public Collection<Categorie> getListeCate() {
 		return listeCateBDD = categorieDAO.getAll();
@@ -147,7 +150,7 @@ public class GestionCategorieBean implements Serializable {
 	}
 
 	public Collection<Categorie> getListeCateBDD() {
-		return listeCateBDD;
+		return listeCateBDD = (Collection<Categorie>)categorieDAO.getAll();
 	}
 
 	public void setListeCateBDD(Collection<Categorie> listeCateBDD) {
@@ -177,6 +180,9 @@ public class GestionCategorieBean implements Serializable {
 	public void setFormulaire(String formulaire) {
 		this.formulaire = formulaire;
 	}
-	
+
+
+
+
 
 }// end class

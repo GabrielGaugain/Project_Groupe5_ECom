@@ -60,8 +60,23 @@
        <filter-name>AccesAdminFilter</filter-name>
        <url-pattern>/acces_admin/*</url-pattern>
 </filter-mapping>
+
+   <!-- ============================================================ -->
+  <!-- ================ Gestion extensions des photos =================================== -->
+  <!-- ============================================================ --> 
+
+	<mime-mapping>
+        <extension>jpg</extension>
+        <mime-type>resources/images</mime-type>
+    </mime-mapping>
+    
+    <mime-mapping>
+        <extension>gif</extension>
+        <mime-type>resources/images</mime-type>
+    </mime-mapping>
   
 </web-app> 
+
 
 
 
