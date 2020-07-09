@@ -93,10 +93,10 @@ ALTER TABLE db_gestionECommerce.utilisateurs ADD constraint fk_utilisateurs_role
 
 -- inserts :
 INSERT INTO photos (url_photo, nom_photo) VALUE ('test.jpg','test');
-INSERT INTO photos (url_photo, nom_photo) VALUE ('panda3.gif','panda');
+INSERT INTO photos (url_photo, nom_photo) VALUE ('testbleu.jpg','testbleu');
 
-INSERT INTO categories (nom_categorie,description_categorie,url_photo) VALUES ('Categorie_Test','Cette catégorie a été inventée pour réaliser des tests sur la bdd','panda3.gif') ;
-INSERT INTO categories (nom_categorie,description_categorie,url_photo) VALUES ('Categorie_Test2','Cette catégorie a été inventée ','panda3.gif') ;
+INSERT INTO categories (nom_categorie,description_categorie,url_photo) VALUES ('Categorie_Test','Cette catégorie a été inventée pour réaliser des tests sur la bdd','testbleu.jpg') ;
+INSERT INTO categories (nom_categorie,description_categorie,url_photo) VALUES ('Categorie_Test2','Cette catégorie a été inventée ','testbleu.jpg') ;
 
 INSERT INTO produits (nom_produit,description_produit,prix_produit,url_photo,id_categorie) VALUES ('Produit_Test','Ce produit a été inventé pour réaliser des tests sur la base de données',3.50,'test.jpg',1);
 INSERT INTO produits (nom_produit,description_produit,prix_produit,url_photo,id_categorie) VALUES ('Produit_test','Ce produit a été inventé ',3.50,'test.jpg',2);

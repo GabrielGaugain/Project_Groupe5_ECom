@@ -70,10 +70,6 @@
         <mime-type>resources/images</mime-type>
     </mime-mapping>
     
-    <mime-mapping>
-        <extension>gif</extension>
-        <mime-type>resources/images</mime-type>
-    </mime-mapping>
   
 </web-app> 
 
