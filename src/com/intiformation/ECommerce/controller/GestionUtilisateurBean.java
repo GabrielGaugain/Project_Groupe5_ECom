@@ -46,41 +46,5 @@ public class GestionUtilisateurBean implements Serializable {
 		this.listeUserBDD = listeUserBDD;
 	}
 	
-	/* _______________________ TEST WIZZARD ________________________________ */
 	
-	private Utilisateur user = new Utilisateur();
-    
-    private boolean skip;
-     
-    public Utilisateur getUser() {
-        return user;
-    }
- 
-    public void setUser(Utilisateur user) {
-        this.user = user;
-    }
-     
-    public void save() {        
-        FacesMessage msg = new FacesMessage("Successful", "Welcome :" + user.getNomUtilisateur());
-        FacesContext.getCurrentInstance().addMessage(null, msg);
-    }
-     
-    public boolean isSkip() {
-        return skip;
-    }
- 
-    public void setSkip(boolean skip) {
-        this.skip = skip;
-    }
-     
-    public String onFlowProcess(FlowEvent event) {
-        if(skip) {
-            skip = false;   //reset in case user goes back
-            return "confirm";
-        }
-        else {
-            return event.getNewStep();
-        }
-    }
-
 }//end class

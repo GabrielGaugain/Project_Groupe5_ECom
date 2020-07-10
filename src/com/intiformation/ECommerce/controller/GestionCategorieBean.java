@@ -48,11 +48,12 @@ public class GestionCategorieBean implements Serializable {
 	
 
 	public Collection<Categorie> getListeCate() {
-		return listeCateBDD = categorieDAO.getAll();
+		return setListeCateBDD(categorieDAO.getAll());
 	}
 
 	public void initCategorie(ActionEvent event) {
 		setCategorie(new Categorie());
+		System.out.println("dans le init de Caté "+ categorie);
 	}
 
 	public void selectCategorie(ActionEvent event) {
@@ -78,7 +79,9 @@ public class GestionCategorieBean implements Serializable {
 	        //-------------------------------------------
 	        // cas : ajout 
 	        //-------------------------------------------
+		System.out.println("dans le save de Caté "+ categorie);
 	        if (categorie.getIdCategorie()== 0) {
+	        	System.out.println("dans le save de Caté IF "+ categorie);
 
 	            try {
 	                // traitement du fileUpload : recup du nom de l'image
@@ -121,6 +124,7 @@ public class GestionCategorieBean implements Serializable {
 	            }
 	        	}
 	            if (categorie.getIdCategorie() != 0) {
+	            	System.out.println("dans le save de Caté AUTRE IF "+ categorie);
 
 	                if (uploadedFile != null) {
 
@@ -171,6 +175,15 @@ public class GestionCategorieBean implements Serializable {
 
 	public void setFormulaire(String formulaire) {
 		this.formulaire = formulaire;
+	}
+
+	public Collection<Categorie> getListeCateBDD() {
+		return listeCateBDD;
+	}
+
+	public Collection<Categorie> setListeCateBDD(Collection<Categorie> listeCateBDD) {
+		this.listeCateBDD = listeCateBDD;
+		return listeCateBDD;
 	}
 
 

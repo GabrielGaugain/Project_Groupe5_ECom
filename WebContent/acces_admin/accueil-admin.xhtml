@@ -21,28 +21,29 @@
 
 		<p:menubar>
 			<p:submenu label="Ajouter" icon="pi pi-file">
-					<p:menuitem value="Catégorie" url="#" />
-					<p:separator />
-					<p:menuitem value="Produit" url="#" />
-					<p:separator />
-					<p:menuitem value="Utilisateur" url="#" />
+				<p:menuitem value="Catégorie" url="#" />
+				<p:separator />
+				<p:menuitem value="Produit" url="#" />
+				<p:separator />
+				<p:menuitem value="Utilisateur" url="#" />
 			</p:submenu>
 			<p:submenu label="Ajouter" icon="pi pi-pencil">
-					<p:menuitem value="Catégorie" url="#" />
-					<p:separator />
-					<p:menuitem value="Produit" url="#" />
-					<p:separator />
-					<p:menuitem value="Utilisateur" url="#" />
+				<p:menuitem value="Catégorie" url="#" />
+				<p:separator />
+				<p:menuitem value="Produit" url="#" />
+				<p:separator />
+				<p:menuitem value="Utilisateur" url="#" />
 			</p:submenu>
 			<p:submenu label="Ajouter" icon="pi pi-times">
-					<p:menuitem value="Catégorie" url="#" />
-					<p:separator />
-					<p:menuitem value="Produit" url="#" />
-					<p:separator />
-					<p:menuitem value="Utilisateur" url="#" />
+				<p:menuitem value="Catégorie" url="#" />
+				<p:separator />
+				<p:menuitem value="Produit" url="#" />
+				<p:separator />
+				<p:menuitem value="Utilisateur" url="#" />
 			</p:submenu>
-			<p:menuitem url="#" type="button" value="Se déconnecter" icon="pi pi-home"
-					action="#{authentificationBean.deconnecterUtilisateur()}" />
+			<p:menuitem url="#" type="button" value="Se déconnecter"
+				icon="pi pi-home"
+				action="#{authentificationBean.deconnecterUtilisateur()}" />
 
 		</p:menubar>
 	</h:form>
@@ -74,6 +75,80 @@
 						</p:column>
 					</p:dataTable>
 				</h:panelGrid>
+				<h:panelGrid columns="2" cellpadding="10">
+					<p:menubar>
+						<p:submenu label="Rechercher" icon="pi pi-search">
+							<p:menuitem value="Par id" url="#" />
+							<p:menuitem value="Par mot-clé" url="#" />
+						</p:submenu>
+						<p:menuitem value="Ajouter" icon="pi pi-plus" action="listeCate" actionListener="#{categorieBean.initCategorie()}" />
+						<p:menuitem value="Modifier" icon="pi pi-pencil" url="#" />
+						<p:menuitem value="Supprimer" icon="pi pi-times" url="#" />
+						<p:menuitem url="#" type="button" value="Ajouter au panier"
+							icon="pi pi-shopping-cart" />
+					</p:menubar>
+				</h:panelGrid>
+				<h:form id="form">
+					<p:growl id="msgs" showDetail="true"
+						skipDetailIfEqualsSummary="true" />
+					<p:tabView>
+						<p:tab title="Ajouter">
+						<h:commandButton action="listeCate"
+			actionListener="#{categorieBean.initCategorie()}"
+			value="Ajouter Un Nouveau Livre" />
+
+							<h:panelGrid columns="2" cellpadding="10">
+								<h:form enctype="multipart/form-data">
+
+									<h:inputHidden value="#{categorieBean.categorie.idCategorie}" />
+									
+
+									<h:panelGrid columns="2" border="1">
+
+
+										<h:outputLabel value="Nom_Catégorie : " />
+										<h:inputText value="#{categorieBean.categorie.nomCategorie}" />
+
+										<h:outputLabel value="Description : " />
+										<h:inputText
+											value="#{categorieBean.categorie.descriptionCategorie}" />
+
+										<h:outputLabel value="Image_Catégorie : " />
+<!-- 										<h:panelGroup> -->
+<!-- 											<h:graphicImage -->
+<!-- 												value="images/#{categorieBean.categorie.urlImageCategorie}" -->
+<!-- 												width="50" height="90" -->
+<!-- 												rendered="#{categorieBean.categorie.idCategorie gt 0}" /> -->
+<!-- 											<h:inputFile id="file" value="#{gestionLivreBean.uploadedFile}" /> -->
+<!-- 										</h:panelGroup> -->
+
+										<f:facet name="footer">
+											<h:commandButton value="save" action="listCate"
+												actionListener="#{categorieBean.saveCategorie()}" />
+										</f:facet>
+
+									</h:panelGrid>
+
+								</h:form>
+
+							</h:panelGrid>
+						</p:tab>
+						<p:tab title="Modifier">
+							
+
+							<h:panelGrid columns="2" cellpadding="10">
+	
+							</h:panelGrid>
+						</p:tab>
+						<p:tab title="Supprimer">
+							<h:panelGrid columns="2" cellpadding="10">
+								<h:outputText
+									value="After a break of more than 15 years, director Francis Ford Coppola and writer Mario Puzo returned to the well for this third and final story of the fictional Corleone crime family.
+                    Two decades have passed, and crime kingpin Michael Corleone, now divorced from his wife Kay has nearly succeeded in keeping his promise that his family would one day be completely legitimate." />
+							</h:panelGrid>
+						</p:tab>
+					</p:tabView>
+				</h:form>
 			</p:tab>
 			<p:tab title="Gestion Produits">
 				<h:panelGrid columns="2" cellpadding="10">
@@ -132,65 +207,13 @@
 			</p:tab>
 		</p:tabView>
 	</h:form>
-	<!--  ==================================== TEST WIZZARD ========================================-->
-	
-	<h:form>
-         
-    <p:growl id="growl" sticky="true" showDetail="true"/>
- 
-    <p:wizard flowListener="#{utilisateurBean.onFlowProcess}">
-        <p:tab id="personal" title="Personal">
-            <p:panel header="Personal Details">
-                <p:messages />
-                <h:panelGrid columns="2" columnClasses="label, value">
-                    <h:outputText value="Firstname: *" />
-                    <p:inputText value="#{utilisateurBean.user.idUtilisateur}" required="true" label="Firstname"/>
- 
-                    <h:outputText value="Lastname: *" />
-                    <p:inputText value="#{utilisateurBean.user.nomUtilisateur}" required="true" label="Lastname"/>
- 
-                    <h:outputText value="Age: " />
-                    <p:inputText value="#{utilisateurBean.user.mdpUtilisateur}" />
-                    
-                     <h:outputText value="Age: " />
-                    <p:inputText value="#{utilisateurBean.user.idRole}" />
-                    
-                       <h:outputText value="Age: " />
-                    <p:inputText value="#{utilisateurBean.user.active}" />
- 
-                    <h:outputText value="Skip to last: " />
-                    <h:selectBooleanCheckbox value="#{utilisateurBean.skip}" />
-                </h:panelGrid>
-            </p:panel>
-        </p:tab>
-        <p:tab id="confirm" title="Confirmation">
-            <p:panel header="Confirmation">
-                <h:panelGrid id="confirmation" columns="3" columnClasses="grid,grid,grid">
+	<!--  ==================================== Gestion ========================================-->
 
-                    <h:panelGrid columns="2" columnClasses="label, value">
-                                           <h:outputText value="Firstname: *" />
-                    <h:outputText value="#{utilisateurBean.user.idUtilisateur}" required="true" label="Firstname"/>
- 
-                    <h:outputText value="Lastname: *" />
-                    <h:outputText value="#{utilisateurBean.user.nomUtilisateur}" required="true" label="Lastname"/>
- 
-                    <h:outputText value="Age: " />
-                    <h:outputText value="#{utilisateurBean.user.mdpUtilisateur}" />
-                    
-                     <h:outputText value="Age: " />
-                    <h:outputText value="#{utilisateurBean.user.idRole}" />
-                    
-                       <h:outputText value="Age: " />
-                    <h:outputText value="#{utilisateurBean.user.active}" />
-                    </h:panelGrid>
-                </h:panelGrid>
- 
-                <p:commandButton value="Submit" action="#{utilisateurBean.save}" update="growl" process="@this"/>
-            </p:panel>
-        </p:tab>
-    </p:wizard>
- 
-</h:form>
+	<h:form>
+
+
+
+	</h:form>
 
 </h:body>
 </html>

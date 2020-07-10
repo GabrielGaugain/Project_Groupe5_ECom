@@ -38,28 +38,6 @@
     <url-pattern>*.xhtml</url-pattern>
   </servlet-mapping>
   
-   <!-- ============================================================ -->
-  <!-- ================ Filtres =================================== -->
-  <!-- ============================================================ -->  
-<filter>
-       <filter-name>AccesClientFilter</filter-name>
-       <filter-class>com.intiformation.ECommerce.filtre.AccesClientFilter</filter-class>
-</filter>
-   
-<filter-mapping>
-       <filter-name>AccesClientFilter</filter-name>
-       <url-pattern>/acces_client/*</url-pattern>
-</filter-mapping>
-
-<filter>
-       <filter-name>AccesAdminFilter</filter-name>
-       <filter-class>com.intiformation.ECommerce.filtre.AccesAdminFilter</filter-class>
-</filter>
-   
-<filter-mapping>
-       <filter-name>AccesAdminFilter</filter-name>
-       <url-pattern>/acces_admin/*</url-pattern>
-</filter-mapping>
 
    <!-- ============================================================ -->
   <!-- ================ Gestion extensions des photos =================================== -->
@@ -69,6 +47,16 @@
         <extension>jpg</extension>
         <mime-type>resources/images</mime-type>
     </mime-mapping>
+    
+    <mime-mapping>
+        <extension>gif</extension>
+        <mime-type>resources/images</mime-type>
+    </mime-mapping>
+    
+    <context-param>
+  	<param-name>file-upload</param-name>
+  	<param-value>resources/images/</param-value>
+  	</context-param>
     
   
 </web-app> 
