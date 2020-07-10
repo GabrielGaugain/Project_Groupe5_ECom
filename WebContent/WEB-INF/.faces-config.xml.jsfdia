@@ -35,9 +35,9 @@
   PATH="/acces_admin/accueil-admin.xhtml" SHAPE="688,145,0,0" model-entity="JSFProcessGroup">
   <PROCESS-ITEM ID="rules:#acces_admin#accueil-admin.xhtml:0"
    NAME="item" PATH="/acces_admin/accueil-admin.xhtml" model-entity="JSFProcessItem">
-   <PROCESS-ITEM-OUTPUT ID="listCate::#acces_admin#accueil-admin.xhtml"
-    NAME="output" PATH="/acces_admin/accueil-admin.xhtml"
-    TARGET="rules:#acces_admin#accueil-admin.xhtml" TITLE="listCate" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="edit::#acces_admin#edit.xhtml" NAME="output"
+    PATH="/acces_admin/edit.xhtml"
+    TARGET="rules:#acces_admin#edit.xhtml" TITLE="edit" model-entity="JSFProcessItemOutput"/>
   </PROCESS-ITEM>
  </PROCESS-ITEM>
  <PROCESS-ITEM NAME="rules:#accueil.xhtml" PATH="/accueil.xhtml"
@@ -60,4 +60,13 @@
  </PROCESS-ITEM>
  <PROCESS-ITEM NAME="rules:#commande.xhtml" PATH="/commande.xhtml"
   SHAPE="752,353,0,0" model-entity="JSFProcessGroup"/>
+ <PROCESS-ITEM NAME="rules:#acces_admin#edit.xhtml"
+  PATH="/acces_admin/edit.xhtml" SHAPE="960,129,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:#acces_admin#edit.xhtml:0" NAME="item"
+   PATH="/acces_admin/edit.xhtml" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT ID="listeCate::#acces_admin#accueil-admin.xhtml"
+    NAME="output" PATH="/acces_admin/accueil-admin.xhtml"
+    TARGET="rules:#acces_admin#accueil-admin.xhtml" TITLE="listeCate" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
 </PROCESS>

@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 
-@WebFilter(filterName = "AccesFilter", urlPatterns = {"/acces_admin/*" })
+@WebFilter(filterName = "AdminFilter", urlPatterns = {"/acces_admin/*" })
 public class AccesAdminFilter implements Filter {
 
 	FacesContext contextJSF = FacesContext.getCurrentInstance();
@@ -34,16 +34,17 @@ public class AccesAdminFilter implements Filter {
 			HttpServletRequest req = (HttpServletRequest) request;
 			HttpServletResponse resp = (HttpServletResponse) response;
 			HttpSession session = req.getSession(false);
+			String userStatut = (String) session.getAttribute("user_statut") ;
 			
 			String reqURI = req.getRequestURI();
 			if ((session != null && session.getAttribute("user_login") != null)|| reqURI.contains("javax.faces.resource"))
 			{
-				if(session.getAttribute("user_statut") != "admin"){
+				if(("admin").equals(userStatut)){
+					chain.doFilter(request, response);
+				}else {
 					FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_WARN, "Statut 'admin' nécessaire", "Connectez vous en tant qu'administrateur pour accéder à l'espace gestion de l'application");
 					contextJSF.addMessage(null, message );
 					resp.sendRedirect(req.getContextPath() + "/authentification.xhtml");
-				}else {
-					chain.doFilter(request, response);
 				}//end else
 			}else {
 				FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_WARN, "Connexion nécessaire", "Connectez vous pour accéder aux fonctionnalités de l'application"); 

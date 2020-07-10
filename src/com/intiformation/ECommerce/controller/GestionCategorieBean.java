@@ -1,193 +1,208 @@
 package com.intiformation.ECommerce.controller;
 
-import java.io.Serializable;
-import java.util.Collection;
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
-import javax.faces.component.UIParameter;
-import javax.faces.event.ActionEvent;
-import javax.servlet.http.Part;
+import com.intiformation.ECommerce.modele.Categorie;
+import com.intiformation.ECommerce.dao.CategorieDAOImpl;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.io.Serializable;
+import java.util.Collection;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.component.UIParameter;
 import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
+import javax.servlet.ServletContext;
+import javax.servlet.http.Part;
 
-import com.intiformation.ECommerce.dao.CategorieDAOImpl;
-import com.intiformation.ECommerce.dao.ICategorieDAO;
-import com.intiformation.ECommerce.modele.Categorie;
-
-@ManagedBean(name = "categorieBean")
+/**
+ * @author INTIFORMATION
+ */
+@ManagedBean (name = "categorieBean")
 @SessionScoped
 public class GestionCategorieBean implements Serializable {
 
-	/* _____________________________props_______________________________ */
-
-	ICategorieDAO categorieDAO;
-	private Collection<Categorie> listeCateBDD;
-	private Categorie categorie;
-	private Part uploadedFile;
-	private String formulaire ;
-
-	/* _____________________________ctors_______________________________ */
-	public GestionCategorieBean() {
-		categorieDAO = new CategorieDAOImpl();
-	}// end ctor vide
-
-	/* _____________________________meths_______________________________ */
-
+	private static final long serialVersionUID = 1L;
 	
+	/*_____________________________ CHAMPS __________________________________*/
+    private Collection<Categorie> categories;
+    
+    private Categorie categorie;
 
-	public Collection<Categorie> getListeCate() {
-		return setListeCateBDD(categorieDAO.getAll());
-	}
+    // file upload de l'API servlet
+    private Part uploadedFile;
 
-	public void initCategorie(ActionEvent event) {
-		setCategorie(new Categorie());
-		System.out.println("dans le init de Caté "+ categorie);
-	}
+    // dao 
+    CategorieDAOImpl categorieDAO;
 
-	public void selectCategorie(ActionEvent event) {
+    /*_____________________________ CTORS __________________________________*/
+    /**
+     * ctor Creates a new instance of GestionCategorie
+     */
+    public GestionCategorieBean() {
+    	categorieDAO = new CategorieDAOImpl();
+    }
 
-		UIParameter cp = (UIParameter) event.getComponent().findComponent("modifID");
-		int id = (int) cp.getValue();
+    /*_____________________________ METHODES __________________________________*/
+    /**
+     * recup de la liste des categories Ã  partir de la BDD <br/>
+     * @return
+     */
+    public Collection<Categorie> getCategories() {
 
-		Categorie categorie = categorieDAO.getById(id);
+        categories = categorieDAO.getAll() ;
+        return categories;
+    }
 
-		setCategorie(categorie);
-	}
+    /**
+     * permet d'initialiser une cate appelÃ©e lors de l'ajout de cate
+     *
+     * @param event
+     */
+    public void initCat(ActionEvent event) {
+        setCategorie(new Categorie());
+    }
 
-	public void deleteCategorie(ActionEvent event) {
+    /**
+     * modif d'une cate
+     *
+     * @param event
+     */
+    public void selectCat(ActionEvent event) {
 
-		UIParameter cp = (UIParameter) event.getComponent().findComponent("deleteID");
-		int id = (int) cp.getValue();
+        UIParameter cp = (UIParameter) event.getComponent().findComponent("editID");
+        int id = (int) cp.getValue();
 
-		categorieDAO.delete(id);
-	}
+        Categorie cat = categorieDAO.getById(id) ;
 
-	public void saveCategorie(ActionEvent event) {
+        setCategorie(cat);
+       
+    }
 
-	        //-------------------------------------------
-	        // cas : ajout 
-	        //-------------------------------------------
-		System.out.println("dans le save de Caté "+ categorie);
-	        if (categorie.getIdCategorie()== 0) {
-	        	System.out.println("dans le save de Caté IF "+ categorie);
+    /**
+     * suppression d'une cate
+     * @param event
+     */
+    public void deleteCat(ActionEvent event) {
 
-	            try {
-	                // traitement du fileUpload : recup du nom de l'image
-	                String fileName = uploadedFile.getSubmittedFileName();
-	                
-	                // affectation du nom à  la prop urlImage de la cate
-	                categorie.setUrlImageCategorie(fileName);
-	                
-	                // ajout de la categorie dans la bdd
-	                categorieDAO.add(categorie);
+        UIParameter cp = (UIParameter) event.getComponent().findComponent("deleteID");
+        int id = (int) cp.getValue();
 
-	                //----------------------------------------------
-	                // ajout de la photo dans le dossier images
-	                //----------------------------------------------
-	                
-	                // recup du contenu de l'image
-	                InputStream imageContent = uploadedFile.getInputStream();
+        categorieDAO.delete(id);
+    }
 
-	                // recup de la valeur du param d'initialisation context-param de web.xml
-	                FacesContext fContext = FacesContext.getCurrentInstance();
-	                String pathTmp = fContext.getExternalContext().getInitParameter("file-upload");
-	                
-	                String filePath = fContext.getExternalContext().getRealPath(pathTmp);
+    /**
+     * sauvegarder une cate categorie: celui qui est declaré dans les champs du
+     * formulaire de edit.jsp
+     *
+     * @param event
+     */
+    public void saveCat(ActionEvent event) {
 
-	                // création du fichier image (conteneur de l'image) 
-	                File targetFile = new File(filePath, fileName);
+        //-------------------------------------------
+        // cas : ajout 
+        //-------------------------------------------
+        if (categorie.getIdCategorie() == 0) {
 
-	                // instanciation du flux de sortie vers le fichier image
-	                OutputStream outStream = new FileOutputStream(targetFile);
-	                byte[] buf = new byte[1024];
-	                int len;
+            try {
+                // traitement du fileUpload : recup du nom de l'image
+                String fileName = uploadedFile.getSubmittedFileName();
+                
+                // affectation du nom à  la prop urlImage de la cate
+                categorie.setUrlImageCategorie(fileName);
+                
+                // ajout de la cate dans la bdd
+                categorieDAO.add(categorie);
 
-	                while ((len = imageContent.read(buf)) > 0) {
-	                    outStream.write(buf, 0, len);
-	                }
-	                
-	                outStream.close();
-	            } catch (IOException ex) {
-	                Logger.getLogger(GestionCategorieBean.class.getName()).log(Level.SEVERE, null, ex);
-	            }
-	        	}
-	            if (categorie.getIdCategorie() != 0) {
-	            	System.out.println("dans le save de Caté AUTRE IF "+ categorie);
+                //----------------------------------------------
+                // ajout de la photo dans le dossier images du projet
+                //-----------------------------------------------
+             
+                // recup du contenu de l'image
+                InputStream imageContent = uploadedFile.getInputStream();
 
-	                if (uploadedFile != null) {
+                // recup de la valeur du param d'initialisation context-param de web.xml
+                FacesContext fContext = FacesContext.getCurrentInstance();
+                String pathTmp = fContext.getExternalContext().getInitParameter("file-upload");
+                
+                String filePath = fContext.getExternalContext().getRealPath(pathTmp);
 
-	                    String fileNameToUpdate = uploadedFile.getSubmittedFileName();
+                // création du fichier image (conteneur de l'image) 
+                File targetFile = new File(filePath, fileName);
 
-	                    if (!"".equals(fileNameToUpdate) && fileNameToUpdate != null) {
+                // instanciation du flux de sortie vers le fichier image
+                OutputStream outStream = new FileOutputStream(targetFile);
+                byte[] buf = new byte[1024];
+                int len;
 
-	                        // affectation du nouveau nom Ã  la prop urlImage cate
-	                    	categorie.setUrlImageCategorie(fileNameToUpdate);
-	                    }
-	                }
-	            }
+                while ((len = imageContent.read(buf)) > 0) {
+                    outStream.write(buf, 0, len);
+                }
+                
+                outStream.close();
 
-	                categorieDAO.update(categorie);
-	                
-	                  
-	        }// end saveCate()
+            } catch (IOException ex) {
+                Logger.getLogger(GestionCategorieBean.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
 
-	/* _______________________ GETTERS/SETTERS ________________________________ */
+        //-------------------------------------------
+        // cas : modif 
+        //-------------------------------------------
+        if (categorie.getIdCategorie() != 0) {
 
-	public ICategorieDAO getCategorieDAO() {
-		return categorieDAO;
-	}
+            if (uploadedFile != null) {
 
-	public void setCategorieDAO(ICategorieDAO categorieDAO) {
-		this.categorieDAO = categorieDAO;
-	}
+                String fileNameToUpdate = uploadedFile.getSubmittedFileName();
 
-	public Categorie getCategorie() {
-		return categorie;
-	}
+                if (!"".equals(fileNameToUpdate) && fileNameToUpdate != null) {
 
-	public void setCategorie(Categorie categorie) {
-		this.categorie = categorie;
-	}
+                    // affectation du nouveau nom Ã  la prop urlImage de la cate 
+                    categorie.setUrlImageCategorie(fileNameToUpdate);
+                }
+            }
 
-	public Part getUploadedFile() {
-		return uploadedFile;
-	}
+            categorieDAO.update(categorie);
+        }
 
-	public void setUploadedFile(Part uploadedFile) {
-		this.uploadedFile = uploadedFile;
-	}
+    }//end saveCat()
 
-	public String getFormulaire() {
-		return formulaire;
-	}
+    /*_______________________ GETTERS/SETTERS ________________________________*/
+    /**
+     * @return the categorie
+     */
+    public Categorie getCategorie(){
+        return categorie;
+    }
 
-	public void setFormulaire(String formulaire) {
-		this.formulaire = formulaire;
-	}
+    /**
+     * @param categorie the categorie to set
+     */
+    public void setCategorie(Categorie categorie) {
+        this.categorie = categorie;
+    }
 
-	public Collection<Categorie> getListeCateBDD() {
-		return listeCateBDD;
-	}
+    public void setCategories(Collection<Categorie> categories) {
+        this.categories = categories;
+    }
 
-	public Collection<Categorie> setListeCateBDD(Collection<Categorie> listeCateBDD) {
-		this.listeCateBDD = listeCateBDD;
-		return listeCateBDD;
-	}
+    /**
+     * @return the uploadedFile
+     */
+    public Part getUploadedFile() {
+        return uploadedFile;
+    }
 
+    /**
+     * @param uploadedFile the uploadedFile to set
+     */
+    public void setUploadedFile(Part uploadedFile) {
+        this.uploadedFile = uploadedFile;
+    }
 
-
-
-
-}// end class
+}//end class

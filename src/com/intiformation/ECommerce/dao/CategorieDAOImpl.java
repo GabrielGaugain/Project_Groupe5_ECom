@@ -17,7 +17,7 @@ public class CategorieDAOImpl implements ICategorieDAO {
 		
 		try {
 			
-			String Req ="INSERT INTO categories (nom_categorie,description_categorie,id_photo) VALUES (?,?,?)";
+			String Req ="INSERT INTO categories (nom_categorie,description_categorie,url_photo) VALUES (?,?,?)";
 			
 			ps = ICategorieDAO.connection.prepareStatement(Req);
 			
@@ -51,7 +51,7 @@ public class CategorieDAOImpl implements ICategorieDAO {
 
 	try {
 		
-		String Req ="UPDATE categories SET nom_categorie=?,description_categorie=?,id_photo=? WHERE id_categorie=?";
+		String Req ="UPDATE categories SET nom_categorie=?,description_categorie=?,url_photo=? WHERE id_categorie=?";
 		
 		ps = ICategorieDAO.connection.prepareStatement(Req);
 		
