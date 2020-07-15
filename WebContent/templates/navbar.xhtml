@@ -1,0 +1,81 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:b="http://bootsfaces.net/ui">
+      
+      		
+<h:head>
+
+
+</h:head>
+
+	<ui:composition >
+	<style>
+	.form-group {
+		width:100%;
+	
+	}
+	
+	.input-group{
+	
+		width:100%;
+	}
+</style>
+	
+	
+	        <b:navBar brand="Ecolovie" brandHref="#" fluid="true" fixed="top" sticky="true">
+  			<b:navbarLinks>
+    			<b:navLink value="Link" href="#"></b:navLink>
+    			
+    			<b:dropMenu value="Catégories" iconAwesome="fa-tags">   
+      			<b:navLink value="Afficher tous les produits" href="#"></b:navLink>
+     			<b:navLink value="Consulter les produits d’une catégorie" href="#"></b:navLink>
+      			<b:navLink value="Consulter les produits sélectionnés" href="#"></b:navLink>
+      			<b:navLink></b:navLink>
+      			<b:navLink header="Nav header"></b:navLink>
+      			<b:navLink value="Consulter les produits d’une catégorie" href="#" iconAwesome="fa-tags" ></b:navLink>
+      			
+    			</b:dropMenu>
+  			</b:navbarLinks>
+  			
+  			<!-- ==================== BARRE DE RECHERCHE DES PDTS ================================================ -->
+  			<h:form class="navbar-form navbar-left hidden-md hidden-sm hidden-xs" role="search" style="width:50%;margin-left:8%">
+			  <div class="form-group" style="width:100%;" >  
+			  
+			    <b:inputText type="text" class="form-control"   value="#{produitBean.motCle}" placeholder="Rechercher un produit"  >
+				     <f:facet name="append">
+		      			<b:commandButton  type="submit"  ><p class="fa fa-search" style="margin:0 auto"></p></b:commandButton>
+				    </f:facet>
+			    </b:inputText>
+			   </div>
+			
+			  <!--
+			  <b:commandButton type="submit" iconAwesome="fa-search"   class="btn btn-default">
+			   	<f:ajax execute = "motcle" render = "pdtsShow" /> 
+			  </b:commandButton> -->
+			
+			
+			</h:form>
+  			<!-- ================================================================================================== -->
+  			
+  			<!--  
+			<b:navbarLinks pull="right"><b:navLink value="    " href="#"></b:navLink></b:navbarLinks>
+			-->
+			<h:form>
+				
+	  			<b:navbarLinks pull="right" >
+	    			<b:navLink value="Panier" icon-awesome="fa-shopping-basket" outcome="panier.xhtml"  ></b:navLink>
+	    			<b:dropMenu value="Mon compte" iconAwesome="fa-user" iconAlign="top" >
+					    <b:navLink value="Se connecter" outcome="authentification.xhtml"></b:navLink>
+				     	<b:navLink value="Se déconnecter" action="#{authentificationBean.deconnecterUtilisateur()}"></b:navLink>
+			     	</b:dropMenu>
+			     	
+			  	</b:navbarLinks>
+		  	
+		  	</h:form>
+		
+		</b:navBar>
+	</ui:composition>
+</html>
