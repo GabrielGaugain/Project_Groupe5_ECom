@@ -2,65 +2,72 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:h="http://java.sun.com/jsf/html">
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:b="http://bootsfaces.net/ui">
 
 
 <h:head>
 	<title> Page d'authentification</title>
 
-	<!--  lient vers la feuille de style bibliotheque.css -->
+	<!--  lien vers la feuille de style bibliotheque.css -->
+	<!--  
 	<h:outputStylesheet library="style" name="accueil.css"></h:outputStylesheet>
+	-->
+    <style type="text/css">
+
+    </style>	
 	
 </h:head>
 
 
-<body>
-
-	<!-- ============================================================================== -->
-	<!-- ============ Affichage des message de AuthentificationBEan =================== -->
-	<!-- ============================================================================== -->
-	<h:messages globalOnly="true" layout="table" showDetail="true" styleClass="error" fatalStyle="font-style:bold"/>
+<h:body style="padding-top: 60px; background-color: #add;">
 
 
 	<!-- ============================================================================== -->
 	<!-- ========== Formulaire de connexion =========================================== -->
 	<!-- ============================================================================== -->
 	
-	<h:form>
-		
-		<h:panelGrid columns="3" cellpadding="5" width="40%">
-			
-			<f:facet name="header">
-					Formulaire d'authentification
-			</f:facet>
-			
-			<h:outputLabel for="idStatut" value="Se connecter en tant que : " /> 
-		
-			<h:selectOneMenu id="idStatut" layout="lineDirection" value="#{authentificationBean.userStatut}"> 
+	
+	<h:form >
+	     <b:container style=" max-width: 400px;">
+ 
+            <h:form styleClass="form-signin" prependId="false" horizontal="true">
+            
+            <h:outputLabel for="idStatut" value="Se connecter en tant que : " /> 
+	     	<h:selectOneMenu id="idStatut" layout="lineDirection" value="#{authentificationBean.userStatut}"> 
 				<f:selectItem itemLabel="client" caption="selectClient" itemValue="client"/> 
 				<f:selectItem itemLabel="admin" caption="selectadmin" itemValue="admin" /> 
 			</h:selectOneMenu>
 			
-			<h:message for="idLogin" styleClass="error"/>
-			
-			<h:outputLabel for="idLogin" value="Identifiant : " />
-			<h:inputText id="idLogin" required="true" requiredMessage="Identifiant obligatoire" 
-						 value="#{authentificationBean.userIdentifiant}"	/>
-			<h:message for="idLogin" styleClass="error"/>
-			
-			<h:outputLabel for="idMdp" value="Mot de passe : " />
-			<h:inputSecret id="idMdp" required="true" requiredMessage="Mot de passe obligatoire"
-						   value="#{authentificationBean.userMotDePasse}"/>	
-			<h:message for="idMdp" styleClass="error"/>
-			
-			
-			<f:facet name="footer">
-				<h:commandButton  value="Se Connecter" action="#{authentificationBean.connecterUtilisateur()}" />
-			</f:facet>
-			
-					
-		</h:panelGrid>
-	</h:form>	
+			<br/><br/>
+            
+            
+                <h2 class="form-signin-heading">Veuillez vous connecter</h2>
+                
+                <b:inputText id="email" placeholder="Addresse email" 
+                		     required="true" requiredMessage="Identifiant obligatoire" 
+                		     value="#{authentificationBean.userIdentifiant}" >
+                    <f:facet name="prepend">
+                        <b:icon name="user" />
+                    </f:facet>
+                </b:inputText>
+                <h:message for="email" styleClass="error"/>
+              
+                <b:inputSecret id="password" placeholder="Password" type="Mot de Passe"  
+                		     required="true" requiredMessage="Identifiant obligatoire"
+                		     value="#{authentificationBean.userMotDePasse}" >
+                    <f:facet name="prepend">
+                        <b:iconAwesome name="key" />
+                    </f:facet>
+                </b:inputSecret>
+                <h:message for="password" styleClass="error"/>
+                <br/>
+                <b:selectBooleanCheckbox value="true" caption="Se souvenir de moi"/>
+                <b:commandButton look="primary btn-block" value="Sign In" icon="log-in" size="lg" action="#{authentificationBean.connecterUtilisateur()}" />
+            
+            </h:form>
+        </b:container>
+	</h:form>
 	
-</body>
+</h:body>
 </html>

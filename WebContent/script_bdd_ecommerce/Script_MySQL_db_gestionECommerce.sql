@@ -93,15 +93,20 @@ ALTER TABLE db_gestionECommerce.utilisateurs ADD constraint fk_utilisateurs_role
 
 -- inserts :
 INSERT INTO photos (url_photo, nom_photo) VALUE ('test.jpg','test');
+INSERT INTO photos (url_photo, nom_photo) VALUE ('asus_rog.jpg','asus');
+INSERT INTO photos (url_photo, nom_photo) VALUE ('macbook.jpg','macbook');
 INSERT INTO photos (url_photo, nom_photo) VALUE ('testbleu.jpg','testbleu');
 
 INSERT INTO categories (nom_categorie,description_categorie,url_photo) VALUES ('Categorie_Test','Cette catégorie a été inventée pour réaliser des tests sur la bdd','testbleu.jpg') ;
 INSERT INTO categories (nom_categorie,description_categorie,url_photo) VALUES ('Categorie_Test2','Cette catégorie a été inventée ','testbleu.jpg') ;
+insert into categories (nom_categorie,description_categorie,url_photo) VALUES ('Ordinateurs portables','Categorie regroupant les laptops ','testbleu.jpg') ;
+
 
 INSERT INTO produits (nom_produit,description_produit,prix_produit,url_photo,id_categorie) VALUES ('Produit_Test','Ce produit a été inventé pour réaliser des tests sur la base de données',3.50,'test.jpg',1);
 INSERT INTO produits (nom_produit,description_produit,prix_produit,url_photo,id_categorie) VALUES ('Produit_test','Ce produit a été inventé ',3.50,'test.jpg',2);
 INSERT INTO produits (nom_produit,description_produit,prix_produit,url_photo,id_categorie) VALUES ('BLABLA','blablaZZZ',3.50,'test.jpg',1);
-
+INSERT INTO produits (nom_produit,description_produit,prix_produit,url_photo,id_categorie) VALUES ('Laptop Asus','Laptot asus de gaming ',899.99,'asus_rog.jpg',3);
+INSERT INTO produits (nom_produit,description_produit,prix_produit,url_photo,id_categorie) VALUES ('Macbook pro','Laptot apple de la game pro ',1499.99,'macbook.jpg',3);
 insert into roles (id_role,nom_role) values (1,'admin');
 insert into roles (id_role,nom_role) values (2,'client');
 
@@ -110,6 +115,8 @@ insert into paniers () values ();
 
 INSERT into utilisateurs (nom_utilisateur , mdp_utilisateur, id_role, active) values ('Gabydu14','123',1,true); 
 INSERT into utilisateurs (nom_utilisateur , mdp_utilisateur, id_role, active) values ('admin','admin',1,true);
+INSERT into utilisateurs (nom_utilisateur , mdp_utilisateur, id_role, active) values ('Gabydu14','123',2,true); 
+
 
 INSERT INTO clients (nom_client, adresse_client, email_client, telephone_client) values  ("Michelle","12 rue du bout perdu","mich@gmail.com","0202020202");
 INSERT INTO commandes (date_commande ,id_client) values ('10.01.2020',1);
@@ -137,12 +144,15 @@ select * from categories;
 select * from produits;
 select * from commandes;
 select * from lignescommandes;
+select * from photos;
 -- TEST DAO CLIENTS
+
+update produits set 
 
 -- test commande
 update produits set nom_produit = 'macbook pro', description_produit= 'ordi trop cher avec une ^pomme' , prix_produit=1500.00, id_categorie=2
 			    where id_produit = 6;
 
-
+update photos set url_photo= 'C:\Users\gabri\Desktop\JEE - Formation\07_JSF\Project_Groupe5_ECom\WebContent\resources\images' where id_photo=1;
 -- TEST DAO UTILSATEUR
 
