@@ -3,14 +3,28 @@
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:b="http://bootsfaces.net/ui">
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:c="http://java.sun.com/jsp/jstl/core">
 
 <h:head>
 <title>	Accueil </title>
 
     <!-- Lien vers font awesome 4.7.0-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css"/>
-
+	
+	<style>
+	.card-pdt{
+		cursor: pointer;
+		height:30rem
+		
+	}
+	.card-pdt:hover{
+	
+		transform:scale(1.06);
+		border: ridge 1.5px;
+		transition: all 0.3s ease;
+	}
+	</style>
 
 
 </h:head>
@@ -37,47 +51,53 @@
          </b:container>
           
           
-          	
+   
           	<b:container>
           	<ui:repeat var="pdt" value="#{produitBean.listeProdMC}" varStatus="status" >
-          	
+			
           		
 				  	<b:column col-xs="6" col-md="3">
-						<b:thumbnail>
-				      		<img src="images/#{pdt.urlImageProduit}" alt="Generic placeholder thumbnail" style="max-height:40%;max-width:80%"/>
+						<b:thumbnail class="card-pdt">
+				      		<img src="resources/images/#{pdt.urlImageProduit}" alt="failed to read picture" style="max-height:40%;max-width:70%"/>
 				      		<f:facet name="caption">
 						        <h3>#{pdt.nomProduit}</h3>
-						        <p>images/#{pdt.urlImageProduit}</p>
 						        <p><i>prix : </i>  #{pdt.prixProduit}</p>
-						        <p>#{pdt.descriptionProduit}</p>
+						        <!--  <p>#{pdt.descriptionProduit}</p>-->
 
 						        <p>
-						        	<b:button value="Ajouter au panier" iconAwesome="fa-shopping-basket" iconAlign="right"/>
+						        	<b:button value="Ajouter au panier" iconAwesome="fa-shopping-basket" iconAlign="right"
+						        			  onclick="$('.modalPseudoClass#{status.index}').modal()"  />						        	
 					       		</p>
 					       		
 					      </f:facet>
 				    	</b:thumbnail>       		
     				</b:column>
-          		
-          	
+          			
+          			<b:modal id="amodal#{status.index}" title="#{pdt.nomProduit}" styleClass="modalPseudoClass#{status.index}">
+          			
+						<b:thumbnail>
+				      		<img src="resources/images/#{pdt.urlImageProduit}" alt="failed to read picture" style="max-height:40%;max-width:70%"/>
+				      		<f:facet name="caption">
+					
+						        <p><i>prix : </i>  #{pdt.prixProduit}</p>
+						        <p>#{pdt.descriptionProduit}</p>
+	
+					       		
+					      </f:facet>
+				    	</b:thumbnail>
+					 
+					  <f:facet name="footer">
+					    <b:button value="Ajouter au panier" iconAwesome="fa-shopping-basket" iconAlign="right"/>
+					    <!-- <b:button value="Ok" look="primary" dismiss="modal" /> -->
+					  </f:facet>
+					</b:modal>
+
+                	
           	
           	</ui:repeat>
           	
           	
-          	<b:row>
-	        <b:dataTable id="displaypdts" value="#{produitBean.listeProdMC}"
-	               var="prod">
-	               
-			    <b:dataTableColumn value="#{prod.idCategorie}" />
-			    <b:dataTableColumn value="#{prod.idProduit}" />
-			    <b:dataTableColumn value="#{prod.nomProduit}" />
-			    <b:dataTableColumn value="#{prod.prixProduit}"  order="asc"/>
-			    <b:dataTableColumn value="#{prod.descriptionProduit}" />
-			    <b:dataTableColumn value="#{prod.selectionne}" label="Dans le panier" />
-			    
-			</b:dataTable>
-        	
-        	</b:row>
+   
        </b:container>
        </h:form>
 
@@ -85,7 +105,7 @@
 		<b:container style="width : 100% ;padding-top: 50px; padding-left: 50px; padding-right: 50px; padding-bottom: 20px;">
   
             <hr/>
-            <footer style="width : 100% ;">
+            <footer style="width : 100% ; text-align:center">
             <p>© Gab&#x26;Cam 2020</p>
             </footer>
         </b:container>

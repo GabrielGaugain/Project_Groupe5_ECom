@@ -22,6 +22,12 @@
 	
 		width:100%;
 	}
+	
+	.search-button{
+		min-height:100%;
+		height:100%;
+		
+	}
 
 </style>
 	
@@ -46,8 +52,8 @@
 			  <div class="form-group" style="width:100%;" >  
 			  
 			    <b:inputText type="text" class="form-control"   value="#{produitBean.motCle}" placeholder="Rechercher un produit"  >
-				     <f:facet name="append">
-		      			<b:commandButton  type="submit"  ><p class="fa fa-search" style="margin:0 auto"></p></b:commandButton>
+				     <f:facet name="append" style="min-height:100%">
+		      			<b:commandButton  type="submit" class="search-button" ><p class="fa fa-search" style="margin:0 auto;min-height:100%"></p></b:commandButton>
 				    </f:facet>
 			    </b:inputText>
 			   </div>
