@@ -24,34 +24,47 @@
         
         
         
-        <h:form>
-		<b:container style="width : 100% ;padding-top: 50px; padding-left: 50px; padding-right: 50px; padding-bottom: 20px;">
+        <h:form style="margin-top:0">
+		<b:container style="width : 100% ;height:6rem; background:#405e35; margin-bottom:20px;margin-top:0; color:#d4d6d3;">
 	    	<b:row>
 				<b:column span="12">
-					<b:row>
-			                <h1>Bienvenue chez Ecolovie </h1>
-			                <p>  Lorem ipsum dolor sit amet consectetur adipisicing elit. Perferendis, dolore nostrum dicta corrupti illum placeat. 
-			                Impedit quae, recusandae quia reprehenderit, quam repellendus consequatur et,
-			                accusantium fugiat laudantium voluptatem ea ut.
-			                </p>
-			        </b:row>
+				
+			                <h2 style="margin-top:1rem; margin-left: 10rem ">Bienvenue chez Ecolovie : une nouvelle vie pour l'électroménager</h2>
+			       
 	       		</b:column>
 	        </b:row>
-	        <br/><br/>
-	        
-        	<b:row>
-        	<!--  
-        	<h:outputText id = "pdtsShow" 
-            			  value = "#{produitBean.listeProdMC}"  	/>
-          	-->
+
+         </b:container>
+          
+          
           	
+          	<b:container>
           	<ui:repeat var="pdt" value="#{produitBean.listeProdMC}" varStatus="status" >
           	
+          		
+				  	<b:column col-xs="6" col-md="3">
+						<b:thumbnail>
+				      		<img src="images/#{pdt.urlImageProduit}" alt="Generic placeholder thumbnail" style="max-height:40%;max-width:80%"/>
+				      		<f:facet name="caption">
+						        <h3>#{pdt.nomProduit}</h3>
+						        <p>images/#{pdt.urlImageProduit}</p>
+						        <p><i>prix : </i>  #{pdt.prixProduit}</p>
+						        <p>#{pdt.descriptionProduit}</p>
+
+						        <p>
+						        	<b:button value="Ajouter au panier" iconAwesome="fa-shopping-basket" iconAlign="right"/>
+					       		</p>
+					       		
+					      </f:facet>
+				    	</b:thumbnail>       		
+    				</b:column>
           		
           	
           	
           	</ui:repeat>
           	
+          	
+          	<b:row>
 	        <b:dataTable id="displaypdts" value="#{produitBean.listeProdMC}"
 	               var="prod">
 	               
