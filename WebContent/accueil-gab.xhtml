@@ -57,20 +57,26 @@
 			
           		
 				  	<b:column col-xs="6" col-md="3">
-						<b:thumbnail class="card-pdt">
+				  	
+				  	<a href=".modalPseudoClass#{status.index}" data-toggle="modal" style="text-decoration: none;">
+						<b:thumbnail class="card-pdt" >
+						
 				      		<img src="resources/images/#{pdt.urlImageProduit}" alt="failed to read picture" style="max-height:40%;max-width:70%"/>
 				      		<f:facet name="caption">
 						        <h3>#{pdt.nomProduit}</h3>
 						        <p><i>prix : </i>  #{pdt.prixProduit}</p>
 						        <!--  <p>#{pdt.descriptionProduit}</p>-->
 
-						        <p>
+						        <form>
 						        	<b:button value="Ajouter au panier" iconAwesome="fa-shopping-basket" iconAlign="right"
-						        			  onclick="$('.modalPseudoClass#{status.index}').modal()"  />						        	
-					       		</p>
+						        			   onclick="$('.modalPseudoClass#{status.index}').modal()" />						        	
+					       		</form>
 					       		
 					      </f:facet>
-				    	</b:thumbnail>       		
+					      
+				    	</b:thumbnail>  
+				    </a> 
+				        		
     				</b:column>
           			
           			<b:modal id="amodal#{status.index}" title="#{pdt.nomProduit}" styleClass="modalPseudoClass#{status.index}">

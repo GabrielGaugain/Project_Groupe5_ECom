@@ -4,6 +4,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import com.intiformation.ECommerce.modele.LigneCommande;
@@ -12,13 +13,13 @@ public class LigneCommandeDAOImpl implements ILigneCommandeDAO{
 
 	@Override
 	public boolean add(LigneCommande pLigneCommande) {
-PreparedStatement ps = null;
+		PreparedStatement ps = null;
 		
 		try {
 			
 			String Req ="INSERT INTO lignescommandes (quantite_commande, montant_commande, id_produit, id_commande, id_panier) VALUES (?,?,?,?,?)";
 			
-			ps = ICategorieDAO.connection.prepareStatement(Req);
+			ps = this.connection.prepareStatement(Req);
 			
 			ps.setInt(1, pLigneCommande.getQuantiteCommande());
 			ps.setDouble(2, pLigneCommande.getMontantCommande());
@@ -52,7 +53,7 @@ PreparedStatement ps = null;
 			
 			String Req ="UPDATE lignescommandes SET quantite_commande=?,montant_commande=?,id_produit=?,id_commande=?, id_panier=? WHERE id_lignecommande=?";
 			
-			ps = ICategorieDAO.connection.prepareStatement(Req);
+			ps = this.connection.prepareStatement(Req);
 			
 			ps.setInt(1, pLigneCommande.getQuantiteCommande());
 			ps.setDouble(2, pLigneCommande.getMontantCommande());
@@ -88,7 +89,7 @@ PreparedStatement ps = null;
 			
 			String Req ="DELETE FROM lignescommandes WHERE id_lignecommande=?";
 			
-			ps = ICategorieDAO.connection.prepareStatement(Req);
+			ps = this.connection.prepareStatement(Req);
 			
 			ps.setLong(1, pIdLignecommande);
 			
@@ -118,7 +119,7 @@ PreparedStatement ps = null;
 
 		try {
 
-			rs = ICategorieDAO.connection.prepareStatement("SELECT * FROM lignescommandes").executeQuery();
+			rs = this.connection.prepareStatement("SELECT * FROM lignescommandes").executeQuery();
 			
 			while (rs.next()) {
 
@@ -155,14 +156,15 @@ PreparedStatement ps = null;
 		try {
 		
 		String Req ="SELECT * FROM lignescommandes WHERE id_lignecommande=?";	
-		ps = ICategorieDAO.connection.prepareStatement(Req);
+		ps = this.connection.prepareStatement(Req);
 		ps.setLong(1, pIdLigneCommande);
 		rs = ps.executeQuery();
 
 		rs.next();
 		// ctor : ligneCommande(long idLigneCommande, int quantiteCommande, double montantCommande, long idProduit, long idCommande, long idPanier)
 		ligneCommande = new LigneCommande(rs.getLong(1), rs.getInt(2), rs.getDouble(3), rs.getLong(4),rs.getLong(5),rs.getLong(6));
-
+		
+		
 		return ligneCommande;
 
 	} catch (SQLException e) {
@@ -180,5 +182,48 @@ PreparedStatement ps = null;
 	return null;
 
 	}//end getById
+
+	@Override
+	public Collection<LigneCommande> getByPanierId(long pIdPanier) {
+		ResultSet rs = null;
+		PreparedStatement ps = null;
+		LigneCommande ligneCommande = null;
+		List<LigneCommande> listeLigneCommandes = new ArrayList<>();
+
+		try {
+		
+		String Req ="SELECT * FROM lignescommandes WHERE id_panier=?";	
+		ps = this.connection.prepareStatement(Req);
+		
+		ps.setLong(1, pIdPanier);
+		rs = ps.executeQuery();
+
+		while (rs.next()) {
+
+			// ctor : ligneCommande(long idLigneCommande, int quantiteCommande, double montantCommande, long idProduit, long idCommande, long idPanier)
+			ligneCommande = new LigneCommande(rs.getLong(1), rs.getInt(2), rs.getDouble(3), rs.getLong(4),rs.getLong(5),rs.getLong(6));
+
+			listeLigneCommandes.add(ligneCommande);
+
+		} // end while		
+		
+		return listeLigneCommandes;
+
+	} catch (SQLException e) {
+		e.printStackTrace();
+	} finally {
+		try {
+			if (rs != null)
+				rs.close();
+		} catch (Exception e) {
+			System.out.println("erreur -dao");
+			e.printStackTrace();
+		}
+	}
+
+	return null;
+
+	}//end getByPanierId
+
 
 }//end class

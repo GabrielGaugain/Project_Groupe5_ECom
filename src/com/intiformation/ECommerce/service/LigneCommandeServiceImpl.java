@@ -1,5 +1,6 @@
 package com.intiformation.ECommerce.service;
 
+import java.util.Collection;
 import java.util.List;
 
 import com.intiformation.ECommerce.dao.LigneCommandeDAOImpl;
@@ -36,6 +37,11 @@ private LigneCommandeDAOImpl ligneCommandeDAO;
 	@Override
 	public LigneCommande trouverLigneCommandeParId(int pIdLigneCommande) {
 		return ligneCommandeDAO.getById(pIdLigneCommande);
+	}
+
+	@Override
+	public Collection<LigneCommande> trouverLigneCommandeParPanierID(long pIdPanier) {
+		return  ligneCommandeDAO.getByPanierId(pIdPanier);
 	}
 
 }

@@ -39,4 +39,9 @@ private IPanierDAO panierDAO;
 		return panierDAO.getById(pIdPanier);
 	}
 
+	@Override
+	public Panier getLastBasket() {
+		return panierDAO.getLastBasket();
+	}
+
 }

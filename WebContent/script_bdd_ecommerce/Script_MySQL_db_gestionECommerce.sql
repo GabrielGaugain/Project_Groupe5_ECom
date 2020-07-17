@@ -110,10 +110,10 @@ INSERT INTO produits (nom_produit,description_produit,prix_produit,url_photo,id_
 insert into roles (id_role,nom_role) values (1,'admin');
 insert into roles (id_role,nom_role) values (2,'client');
 
-insert into paniers () values ();
+insert into paniers (id_panier) values (1);
 
 
-INSERT into utilisateurs (nom_utilisateur , mdp_utilisateur, id_role, active) values ('Gabydu14','123',1,true); 
+
 INSERT into utilisateurs (nom_utilisateur , mdp_utilisateur, id_role, active) values ('admin','admin',1,true);
 INSERT into utilisateurs (nom_utilisateur , mdp_utilisateur, id_role, active) values ('Gabydu14','123',2,true); 
 
@@ -123,7 +123,7 @@ INSERT INTO commandes (date_commande ,id_client) values ('10.01.2020',1);
 INSERT INTO lignescommandes (quantite_commande ,montant_commande,id_produit ,id_commande ,id_panier ) values (3,300.22, 1, 1, 1);
 
 
-delete from produits where id_produit =6;
+delete from produits where id_produit =5;
 -- tests
 
 SELECT * FROM photos ;
@@ -146,8 +146,10 @@ select * from commandes;
 select * from lignescommandes;
 select * from photos;
 -- TEST DAO CLIENTS
+insert into paniers () values ();
 
-update produits set 
+
+select * from paniers order by id_panier DESC limit 1 ;
 
 -- test commande
 update produits set nom_produit = 'macbook pro', description_produit= 'ordi trop cher avec une ^pomme' , prix_produit=1500.00, id_categorie=2

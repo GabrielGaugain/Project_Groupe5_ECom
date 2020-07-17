@@ -11,5 +11,6 @@ public interface IPanierService {
 	public boolean supprimerPanier (long pIdPanier);
 	public List<Panier> afficherTousLesPaniers();	
 	public Panier trouverPanierParId(int pIdPanier);
-	
+	public Panier getLastBasket();
+
 }

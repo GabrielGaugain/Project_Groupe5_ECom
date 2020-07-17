@@ -151,4 +151,39 @@ public class PanierDAOImpl implements IPanierDAO {
 	return null;
 	}//end getById
 
-}
+	@Override
+	public Panier getLastBasket() {
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		Panier panier = null;
+		
+
+		try {
+		
+		String Req ="SELECT * FROM paniers ORDER BY id_panier DESC LIMIT 1";	
+		ps = ICategorieDAO.connection.prepareStatement(Req);
+		
+		rs = ps.executeQuery();
+
+		rs.next();
+		// ctor : Panier (long idPanier)
+		panier = new Panier(rs.getLong(1));
+
+		return panier;
+
+	} catch (SQLException e) {
+		e.printStackTrace();
+	} finally {
+		try {
+			if (rs != null)
+				rs.close();
+		} catch (Exception e) {
+			System.out.println("erreur -dao");
+			e.printStackTrace();
+		}
+	}
+
+	return null;
+	}//end getLastBasket
+
+}// end class
