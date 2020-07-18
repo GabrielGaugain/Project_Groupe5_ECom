@@ -5,9 +5,13 @@ import java.util.Collection;
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.component.UIParameter;
+import javax.faces.context.FacesContext;
+import javax.faces.event.ActionEvent;
 
 import org.apache.catalina.ha.backend.CollectedInfo;
 
+import com.intiformation.ECommerce.dao.IProduitDAO;
 import com.intiformation.ECommerce.dao.ProduitDAOImpl;
 import com.intiformation.ECommerce.modele.LigneCommande;
 import com.intiformation.ECommerce.modele.Panier;
@@ -22,6 +26,7 @@ import com.intiformation.ECommerce.service.PanierServiceImpl;
 public class GestionPanierBean implements Serializable {
 	
 	/* _____________________________props_______________________________ */
+	IProduitDAO prodDAO;
 	private Collection<LigneCommande> lignesDeCommande;
 	private LigneCommande ligneDeCmd;
 	private Panier panierTemp;
@@ -31,6 +36,7 @@ public class GestionPanierBean implements Serializable {
 	private Produit prod;
 	/* _____________________________ctors_______________________________ */
 	public GestionPanierBean() {
+		prodDAO = new ProduitDAOImpl();
 		ligneCmdService = new LigneCommandeServiceImpl();
 		panierService = new PanierServiceImpl();
 		panierTemp = null;
@@ -51,16 +57,35 @@ public class GestionPanierBean implements Serializable {
 	}//end getCurrentPanierLignes
 
 
-	public void ajouterArticleAuPanier(Produit pdt) {
+	public void ajouterArticleAuPanier(ActionEvent event) {
+		
+		/**
+		 * Normalement lors du click sur ajouter au panier on devrait avoir ça d'afficher dans la console 
+		 * mais pas là => ça veut pas lancer la méthode je sais pas pk
+		 */
 		System.out.println("Dans ajouterArticleAuPanier ....");
 		
-		// init du panier au premier ajout d'un article
+		// 1. recup context
+		FacesContext contextJSF = FacesContext.getCurrentInstance();
+		
+		// 2.recup param id du produit
+		UIParameter uip = (UIParameter) event.getComponent().findComponent("pdtID");
+		
+		System.out.println("Dans ajouterArticleAuPanier ....");
+		
+		
+		
+		// 3. init du panier au premier ajout d'un article
 		if (panierTemp ==null) {
 			panierService.ajouterPanier(null);
 			panierTemp = panierService.getLastBasket();
 		}		
 		
-		//création de la ligne de cmde a partir de l'article
+		// 4. recup du produit via DAO
+		prod = prodDAO.getById((long) uip.getValue() );
+		
+		
+		// 5.création de la ligne de cmde a partir de l'article
 		
 		
 		

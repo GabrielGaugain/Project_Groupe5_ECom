@@ -66,4 +66,21 @@
     TARGET="rules:#acces_admin#accueil-admin.xhtml" TITLE="listeCate" model-entity="JSFProcessItemOutput"/>
   </PROCESS-ITEM>
  </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:#accueil-gab.xhtml" PATH="/accueil-gab.xhtml"
+  SHAPE="32,129,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:#accueil-gab.xhtml:0" NAME="item"
+   PATH="/accueil-gab.xhtml" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT ID="login::#authentification.xhtml"
+    NAME="output" PATH="/authentification.xhtml"
+    TARGET="rules:#authentification.xhtml" TITLE="login" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="gotopanier::#panier.xhtml" NAME="output1"
+    PATH="/panier.xhtml" TARGET="rules:#panier.xhtml" TITLE="gotopanier" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="listaccueil::#accueil-gab.xhtml"
+    NAME="output2" PATH="/accueil-gab.xhtml"
+    TARGET="rules:#accueil-gab.xhtml" TITLE="listaccueil" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="gotocommande::#acces_client#commande.xhtml"
+    NAME="output3" PATH="/acces_client/commande.xhtml"
+    TARGET="rules:#acces_client#commande.xhtml" TITLE="gotocommande" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
 </PROCESS>
