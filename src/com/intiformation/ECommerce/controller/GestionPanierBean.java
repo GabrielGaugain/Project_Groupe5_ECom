@@ -70,7 +70,6 @@ public class GestionPanierBean implements Serializable {
 		
 		// 2.recup param id du produit
 		UIParameter uip = (UIParameter) event.getComponent().findComponent("pdtID");
-		
 		System.out.println("Dans ajouterArticleAuPanier ....");
 		
 		
@@ -83,10 +82,11 @@ public class GestionPanierBean implements Serializable {
 		
 		// 4. recup du produit via DAO
 		prod = prodDAO.getById((long) uip.getValue() );
-		
+		double montant = (double) quantite * prod.getPrixProduit();
 		
 		// 5.création de la ligne de cmde a partir de l'article
-		
+		// ====> pb idCommande on peut ajouter des lignes de cmde au panier sans etre log donc ça va pas
+		ligneDeCmd = new LigneCommande(quantite, montant, prod.getIdProduit(), idCommande, panierTemp.getIdPanier());
 		
 		
 		// ajout de la ligne dans la bdd
