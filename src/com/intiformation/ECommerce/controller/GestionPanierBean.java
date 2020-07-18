@@ -11,6 +11,7 @@ import org.apache.catalina.ha.backend.CollectedInfo;
 import com.intiformation.ECommerce.dao.ProduitDAOImpl;
 import com.intiformation.ECommerce.modele.LigneCommande;
 import com.intiformation.ECommerce.modele.Panier;
+import com.intiformation.ECommerce.modele.Produit;
 import com.intiformation.ECommerce.service.ILigneCommandeService;
 import com.intiformation.ECommerce.service.IPanierService;
 import com.intiformation.ECommerce.service.LigneCommandeServiceImpl;
@@ -22,15 +23,19 @@ public class GestionPanierBean implements Serializable {
 	
 	/* _____________________________props_______________________________ */
 	private Collection<LigneCommande> lignesDeCommande;
+	private LigneCommande ligneDeCmd;
 	private Panier panierTemp;
 	private ILigneCommandeService ligneCmdService;
 	private IPanierService panierService;
-	
+	private int quantite;
+	private Produit prod;
 	/* _____________________________ctors_______________________________ */
 	public GestionPanierBean() {
 		ligneCmdService = new LigneCommandeServiceImpl();
 		panierService = new PanierServiceImpl();
 		panierTemp = null;
+		
+		
 	}// end ctor vide
 
 	
@@ -45,19 +50,26 @@ public class GestionPanierBean implements Serializable {
 		return this.getLignesCommandeByPanier(panierTemp.getIdPanier());
 	}//end getCurrentPanierLignes
 
-	public void addLigneCommandeToPanier(LigneCommande pLigne) {
+
+	public void ajouterArticleAuPanier(Produit pdt) {
+		System.out.println("Dans ajouterArticleAuPanier ....");
 		
 		// init du panier au premier ajout d'un article
 		if (panierTemp ==null) {
 			panierService.ajouterPanier(null);
 			panierTemp = panierService.getLastBasket();
-		}
+		}		
+		
+		//création de la ligne de cmde a partir de l'article
+		
+		
+		
 		// ajout de la ligne dans la bdd
-		ligneCmdService.ajouterLigneCommande(pLigne);
+		ligneCmdService.ajouterLigneCommande(ligneDeCmd);
 		// rechargement de la liste des lignes dans le panier
 		lignesDeCommande =  this.getLignesCommandeByPanier(panierTemp.getIdPanier());
-				
-	}//end addLigneCommandeToPanier
+		
+	}//end ajouterArticleAuPanier
 
 	/* _____________________________Getter/setters_______________________________ */	
 	
@@ -78,6 +90,38 @@ public class GestionPanierBean implements Serializable {
 
 	public void setPanierTemp(Panier panierTemp) {
 		this.panierTemp = panierTemp;
+	}
+
+
+	public LigneCommande getLigneDeCmd() {
+		return ligneDeCmd;
+	}
+
+
+	public void setLigneDeCmd(LigneCommande ligneDeCmd) {
+		this.ligneDeCmd = ligneDeCmd;
+	}
+
+
+	public int getQuantite() {
+		return quantite;
+	}
+
+
+	public void setQuantite(int quantite) {
+		System.out.println("quantité entrée : "+quantite);
+		this.quantite = quantite;
+	}
+
+
+	public Produit getProd() {
+		return prod;
+	}
+
+
+	public void setProd(Produit prod) {
+		
+		this.prod = prod;
 	}
 	
 	
