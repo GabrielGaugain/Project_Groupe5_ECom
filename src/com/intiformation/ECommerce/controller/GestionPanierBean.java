@@ -86,7 +86,7 @@ public class GestionPanierBean implements Serializable {
 		
 		// 5.création de la ligne de cmde a partir de l'article
 		// ====> pb idCommande on peut ajouter des lignes de cmde au panier sans etre log donc ça va pas
-		ligneDeCmd = new LigneCommande(quantite, montant, prod.getIdProduit(), idCommande, panierTemp.getIdPanier());
+		//ligneDeCmd = new LigneCommande(quantite, montant, prod.getIdProduit(), idCommande, panierTemp.getIdPanier());
 		
 		
 		// ajout de la ligne dans la bdd

@@ -100,16 +100,17 @@
 	<!-- 2. règle de navigation pour la page 'authentification.xhtml' ******************************************************** -->
 	<navigation-rule>
 		<from-view-id>/authentification.xhtml</from-view-id>
-		<!-- redirection vers la page d'accueil pour un client lambda -->
+
+		<!-- redirection vers la page d'accueil pour client si login d'client ok -->
 		<navigation-case>
-			<from-outcome>gotoaccueil</from-outcome>
-			<to-view-id>/accueil.xhtml</to-view-id>
+			<from-outcome>client</from-outcome>
+			<to-view-id>/acces_client/accueil-client.xhtml</to-view-id>
 			<redirect />
 		</navigation-case>
 		<!-- redirection vers la page d'accueil pour admin si login d'admin -->
 		<navigation-case>
 			<from-outcome>admin</from-outcome>
-			<to-view-id>/acces_admin/accueil-admin.xhtml</to-view-id>
+			<to-view-id>/acces_admin/accueil-client.xhtml</to-view-id>
 			<redirect />
 		</navigation-case>
 		<!-- redirection vers la page d'authentification si login incorrect -->
@@ -153,6 +154,34 @@
 
 	</navigation-rule>
 	
+	<navigation-rule>
+
+		<!-- 1.1. page de départ -->
+		<from-view-id>/acces_admin/accueil-client.xhtml</from-view-id>
+
+		<!-- 1.2. cas de navigation : de index.xhtml vers index.xhtml -->
+		<navigation-case>
+			<!-- 1.2.1. clé d'outcom -->
+			<from-outcome>logout</from-outcome>
+			<!-- 1.2.2. page de destination -->
+			<to-view-id>/authentification.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>	
+	
+	<navigation-rule>
+
+		<!-- 1.1. page de départ -->
+		<from-view-id>/acces_client/accueil-client.xhtml</from-view-id>
+
+		<!-- 1.2. cas de navigation : de index.xhtml vers index.xhtml -->
+		<navigation-case>
+			<!-- 1.2.1. clé d'outcom -->
+			<from-outcome>logout</from-outcome>
+			<!-- 1.2.2. page de destination -->
+			<to-view-id>/authentification.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>	
+		
 	<navigation-rule>
 
 		<!-- 1.1. page de départ -->

@@ -4,12 +4,12 @@
   PATH="/authentification.xhtml" SHAPE="496,193,0,0" model-entity="JSFProcessGroup">
   <PROCESS-ITEM ID="rules:#authentification.xhtml:0" NAME="item"
    PATH="/authentification.xhtml" model-entity="JSFProcessItem">
-   <PROCESS-ITEM-OUTPUT ID="gotoaccueil::#accueil.xhtml" NAME="output"
-    PATH="/accueil.xhtml" TARGET="rules:#accueil.xhtml"
-    TITLE="gotoaccueil" model-entity="JSFProcessItemOutput"/>
-   <PROCESS-ITEM-OUTPUT ID="admin::#acces_admin#accueil-admin.xhtml"
-    NAME="output1" PATH="/acces_admin/accueil-admin.xhtml"
-    TARGET="rules:#acces_admin#accueil-admin.xhtml" TITLE="admin" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="client::#acces_client#accueil-client.xhtml"
+    NAME="output" PATH="/acces_client/accueil-client.xhtml"
+    TARGET="rules:#acces_client#accueil-client.xhtml" TITLE="client" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="admin::#acces_admin#accueil-client.xhtml"
+    NAME="output1" PATH="/acces_admin/accueil-client.xhtml"
+    TARGET="rules:#acces_admin#accueil-client.xhtml" TITLE="admin" model-entity="JSFProcessItemOutput"/>
    <PROCESS-ITEM-OUTPUT ID="tryagain::#authentification.xhtml"
     NAME="output2" PATH="/authentification.xhtml"
     TARGET="rules:#authentification.xhtml" TITLE="tryagain" model-entity="JSFProcessItemOutput"/>
@@ -81,6 +81,24 @@
    <PROCESS-ITEM-OUTPUT ID="gotocommande::#acces_client#commande.xhtml"
     NAME="output3" PATH="/acces_client/commande.xhtml"
     TARGET="rules:#acces_client#commande.xhtml" TITLE="gotocommande" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:#acces_admin#accueil-client.xhtml"
+  PATH="/acces_admin/accueil-client.xhtml" SHAPE="784,353,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:#acces_admin#accueil-client.xhtml:0"
+   NAME="item" PATH="/acces_admin/accueil-client.xhtml" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT ID="logout::#authentification.xhtml"
+    NAME="output" PATH="/authentification.xhtml"
+    TARGET="rules:#authentification.xhtml" TITLE="logout" model-entity="JSFProcessItemOutput"/>
+  </PROCESS-ITEM>
+ </PROCESS-ITEM>
+ <PROCESS-ITEM NAME="rules:#acces_client#accueil-client.xhtml"
+  PATH="/acces_client/accueil-client.xhtml" SHAPE="784,353,0,0" model-entity="JSFProcessGroup">
+  <PROCESS-ITEM ID="rules:#acces_client#accueil-client.xhtml:0"
+   NAME="item" PATH="/acces_client/accueil-client.xhtml" model-entity="JSFProcessItem">
+   <PROCESS-ITEM-OUTPUT ID="logout::#authentification.xhtml"
+    NAME="output" PATH="/authentification.xhtml"
+    TARGET="rules:#authentification.xhtml" TITLE="logout" model-entity="JSFProcessItemOutput"/>
   </PROCESS-ITEM>
  </PROCESS-ITEM>
 </PROCESS>

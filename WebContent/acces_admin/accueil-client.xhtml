@@ -1,0 +1,199 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:c="http://java.sun.com/jsp/jstl/core">
+
+<h:head>
+<title>	Accueil </title>
+
+    <!-- Lien vers font awesome 4.7.0-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css"/>
+	
+	<style>
+	.card-pdt{
+		cursor: pointer;
+		height:30rem
+		
+	}
+	.card-pdt:hover{
+	
+		transform:scale(1.06);
+		border: ridge 1.5px;
+		transition: all 0.3s ease;
+	}
+
+	.form-group {
+		width:100%;
+	
+	}
+	
+	.input-group{
+	
+		width:100%;
+	}
+	
+	.search-button{
+		min-height:100%;
+		height:100%;
+		
+	}	
+	
+	</style>
+
+
+</h:head>
+
+    <h:body style="padding-top: 50px; padding-bottom: 20px;">
+	        <b:navBar brand="Ecolovie" brandHref="#" fluid="true" fixed="top" sticky="true" inverse="true">
+  			<b:navbarLinks >
+    			<b:navLink value="Link" href="#"></b:navLink>
+    			
+    			<b:dropMenu value="Catégories" iconAwesome="fa-tags">   
+      			<b:navLink value="Afficher tous les produits" href="#"></b:navLink>
+     			<b:navLink value="Consulter les produits d’une catégorie" href="#"></b:navLink>
+      			<b:navLink value="Consulter les produits sélectionnés" href="#"></b:navLink>
+      			<b:navLink></b:navLink>
+      			<b:navLink header="Nav header"></b:navLink>
+      			<b:navLink value="Consulter les produits d’une catégorie" href="#" iconAwesome="fa-tags" ></b:navLink>
+      			
+    			</b:dropMenu>
+  			</b:navbarLinks>
+  			
+  			<!-- ==================== BARRE DE RECHERCHE DES PDTS ================================================ -->
+  			<h:form class="navbar-form navbar-left hidden-md hidden-sm hidden-xs" role="search" style="width:50%;margin-left:8%">
+			  <div class="form-group" style="width:100%;" >  
+			  
+			    <b:inputText type="text" class="form-control"   value="#{produitBean.motCle}" placeholder="Rechercher un produit"  >
+				     <f:facet name="append" style="min-height:100%">
+		      			<b:commandButton  type="submit" class="search-button" ><p class="fa fa-search" style="margin:0 auto;min-height:100%"></p></b:commandButton>
+				    </f:facet>
+			    </b:inputText>
+			   </div>
+			
+			  <!--
+			  <b:commandButton type="submit" iconAwesome="fa-search"   class="btn btn-default">
+			   	<f:ajax execute = "motcle" render = "pdtsShow" /> 
+			  </b:commandButton> -->
+			
+			
+			</h:form>
+  			<!-- ================================================================================================== -->
+  			
+  			<!--  
+			<b:navbarLinks pull="right"><b:navLink value="    " href="#"></b:navLink></b:navbarLinks>
+			-->
+			<h:form>
+				
+	  			<b:navbarLinks pull="right" >
+	    			<b:navLink value="Panier" icon-awesome="fa-shopping-basket" outcome="panier.xhtml"  ></b:navLink>
+	    			<b:dropMenu value="Mon compte" iconAwesome="fa-user" iconAlign="top" >
+					    <b:navLink value="Se deconnecter" action="#{authentificationBean.deconnecterUtilisateur()}"></b:navLink>
+					    <b:navLink value="Gestion catégories/produits " outcome="accueil-admin.xhtml"></b:navLink>
+			     	</b:dropMenu>
+			     	
+			  	</b:navbarLinks>
+		  	
+		  	</h:form>
+		
+		</b:navBar>
+        
+        
+        <h:form style="margin-top:0">
+		<b:container style="width : 100% ;height:6rem; background:#405e35; margin-bottom:20px;margin-top:0; color:#d4d6d3;">
+	    	<b:row>
+				<b:column span="12">
+				
+			                <h2 style="margin-top:1rem; margin-left: 10rem ">Bienvenue chez Ecolovie : une nouvelle vie pour l'électroménager</h2>
+			       
+	       		</b:column>
+	        </b:row>
+
+         </b:container>
+          
+          
+   
+          	<b:container>
+          	<ui:repeat var="pdt" value="#{produitBean.listeProdMC}" varStatus="status" >
+			
+          		
+				  	<b:column col-xs="6" col-md="3">
+				  	
+				  	<a href=".modalPseudoClass#{status.index}" data-toggle="modal" style="text-decoration: none;">
+						<b:thumbnail class="card-pdt" >
+						
+				      		<img src="../resources/images/#{pdt.urlImageProduit}" alt="failed to read picture" style="max-height:40%;max-width:70%"/>
+				      		<f:facet name="caption">
+						        <h3>#{pdt.nomProduit}</h3>
+						        <p><b>prix : </b>  #{pdt.prixProduit}</p>
+						        <!--  <p>#{pdt.descriptionProduit}</p>-->
+					       		
+					      </f:facet>
+					      
+				    	</b:thumbnail>  
+				    </a> 
+				        		
+    				</b:column>
+          			
+          			<b:modal id="amodal#{status.index}" title="#{pdt.nomProduit}" styleClass="modalPseudoClass#{status.index}">
+          				
+          				<b:form>
+          				
+						<b:thumbnail>
+				      		<img src="../resources/images/#{pdt.urlImageProduit}" alt="failed to read picture" style="max-height:40%;max-width:70%"/>
+				      		<f:facet name="caption">
+					
+						        <p><b>prix : </b>  #{pdt.prixProduit}</p>
+						        <p>#{pdt.descriptionProduit}</p>
+	
+					       		<input type="hidden" value="#{panierBean.prod = pdt}"></input>
+					      </f:facet>
+				    	</b:thumbnail>
+				    
+					 <b:formGroup>
+					  <b:row name="footer">
+					  
+					  	<b:selectOneMenu value="#{panierBean.quantite}" colMd="3" required="true" label="quantité" labelColMd="3"  style="float:left;margin-left:5%" >
+					      <f:selectItem itemLabel="1" itemValue="1" />
+					      <f:selectItem itemLabel="2" itemValue="2" />
+					      <f:selectItem itemLabel="3" itemValue="3" />
+					      <f:selectItem itemLabel="4" itemValue="4" />
+					      <f:selectItem itemLabel="5" itemValue="5" />
+					    </b:selectOneMenu>
+					    
+					    <b:commandButton value="Ajouter au panier" iconAwesome="fa-cart-plus" iconAlign="left"  style="float:right;margin-right:5%" 
+					    		  		action ="listaccueil" actionListener="#{panierBean.ajouterArticleAuPanier}">
+					    
+					    	<f:param id="pdtID" name="id" value="#{pdt.idProduit}"/>
+
+					    </b:commandButton>
+					    <!-- <b:button value="Ok" look="primary" dismiss="modal" /> -->
+					    
+					  </b:row>
+					 </b:formGroup>
+					  </b:form>
+					</b:modal>
+
+                	
+          	
+          	</ui:repeat>
+          	
+          	
+   
+       </b:container>
+       </h:form>
+
+		
+		<b:container style="width : 100% ;padding-top: 50px; padding-left: 50px; padding-right: 50px; padding-bottom: 20px;">
+  
+            <hr/>
+            <footer style="width : 100% ; text-align:center">
+            <p>© Gab&#x26;Cam 2020</p>
+            </footer>
+        </b:container>
+
+    </h:body> 
+
+</html>

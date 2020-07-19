@@ -65,10 +65,13 @@ public class AuthentificationBean implements Serializable{
 				session.setAttribute("user_statut", userStatut);
 				if(("admin").equals(userStatut)) {
 					//-> navigation vers la page 'accueil-admin.xhtml'
-					return "acces_admin/accueil-admin.xhtml";
+					return "acces_admin/accueil-client.xhtml";
+				}
+				else if(("client").equals(userStatut)) {
+					return "acces_client/accueil-client.xhtml";
 				}
 				//-> navigation vers la page 'accueil.xhtml'
-				return "accueil.xhtml";
+				return "accueil-gab.xhtml";
 				
 			}else{
 				//----------------- l'utilisateur essaie de se connecter avec le mauvais statut ----------------------//
@@ -118,7 +121,7 @@ public class AuthentificationBean implements Serializable{
 		contextJSF.addMessage(null, facesMessages);
 		
 		// 4. redirection vers 'authentification.xhtml'
-		return "authentification.xhtml";
+		return "logout";
 		
 	}//end deconnecterUtilisateur
 	
