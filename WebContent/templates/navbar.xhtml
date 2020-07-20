@@ -32,7 +32,7 @@
 </style>
 	
 	
-	        <b:navBar brand="Ecolovie" brandHref="#" fluid="true" fixed="top" sticky="true" inverse="true">
+	        <b:navBar brand="Ecolovie" brandHref="accueil-gab.xhtml" fluid="true" fixed="top" sticky="true" inverse="true">
   			<b:navbarLinks >
     		
     		 
@@ -54,7 +54,7 @@
 			  
 			    <b:inputText type="text" class="form-control"   value="#{produitBean.motCle}" placeholder="Rechercher un produit"  >
 				     <f:facet name="append" style="min-height:100%">
-		      			<b:commandButton  type="submit" class="search-button" ><p class="fa fa-search" style="margin:0 auto;min-height:100%"></p></b:commandButton>
+		      			<b:commandButton  type="submit" class="search-button" outcome="accueil-gab.xhtml"><p class="fa fa-search" style="margin:0 auto;min-height:100%"></p></b:commandButton>
 				    </f:facet>
 			    </b:inputText>
 			   </div>

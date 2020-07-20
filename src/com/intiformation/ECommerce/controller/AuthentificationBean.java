@@ -121,7 +121,7 @@ public class AuthentificationBean implements Serializable{
 		contextJSF.addMessage(null, facesMessages);
 		
 		// 4. redirection vers 'authentification.xhtml'
-		return "logout";
+		return "authentification.xhtml";
 		
 	}//end deconnecterUtilisateur
 	

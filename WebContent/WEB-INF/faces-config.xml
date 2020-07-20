@@ -120,6 +120,7 @@
 			<redirect />
 		</navigation-case>
 	</navigation-rule>
+	
 	<!-- 3. règle de navigation pour la page 'panier.xhtml' ******************************************************** -->
 	<navigation-rule>
 		<from-view-id>/panier.xhtml</from-view-id>
@@ -151,6 +152,14 @@
 			<!-- 1.2.2. page de destination -->
 			<to-view-id>/acces_admin/edit.xhtml</to-view-id>
 		</navigation-case>
+		
+				
+		<navigation-case>
+			<!-- 1.2.1. clé d'outcom -->
+			<from-outcome>logout</from-outcome>
+			<!-- 1.2.2. page de destination -->
+			<to-view-id>/authentification.xhtml</to-view-id>
+		</navigation-case>
 
 	</navigation-rule>
 	
@@ -162,7 +171,7 @@
 		<!-- 1.2. cas de navigation : de index.xhtml vers index.xhtml -->
 		<navigation-case>
 			<!-- 1.2.1. clé d'outcom -->
-			<from-outcome>logout</from-outcome>
+			<from-outcome>logoutAdmin</from-outcome>
 			<!-- 1.2.2. page de destination -->
 			<to-view-id>/authentification.xhtml</to-view-id>
 		</navigation-case>

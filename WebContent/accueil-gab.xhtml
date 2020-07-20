@@ -99,7 +99,7 @@
 				    	
 				    <b:form horizontal="true">
 					  <b:row name="footer">
-					  
+					  <!--  
 					  	<b:formGroup>
 						  	<b:selectOneMenu value="#{panierBean.quantite}" colMd="3" required="true" label="quantité" labelColMd="3"  style="float:left;margin-left:5%" >
 						  	  <f:selectItem itemLabel="Select quantité" itemValue="" />	  
@@ -110,14 +110,14 @@
 						      <f:selectItem itemLabel="5" itemValue="5" />
 						    </b:selectOneMenu>
 					    </b:formGroup>
-					    
+					    -->
 					    <b:commandButton value="Ajouter au panier" iconAwesome="fa-cart-plus" iconAlign="left"  style="float:right;margin-right:5%" 
-					    		  		action ="#" actionListener="#{panierBean.ajouterArticleAuPanier}">
+					    		  		 actionListener="#{panierBean.ajouterArticleAuPanier}">
 					    
 					    	<f:param id="pdtID" name="id" value="#{pdt.idProduit}"/>
 
 					    </b:commandButton>
-					    <!-- <b:button value="Ok" look="primary" dismiss="modal" /> -->
+					    <!--  -->
 					    
 					    
 					    

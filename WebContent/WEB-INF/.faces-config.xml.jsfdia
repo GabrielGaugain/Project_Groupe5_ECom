@@ -36,6 +36,9 @@
    <PROCESS-ITEM-OUTPUT ID="edit::#acces_admin#edit.xhtml" NAME="output"
     PATH="/acces_admin/edit.xhtml"
     TARGET="rules:#acces_admin#edit.xhtml" TITLE="edit" model-entity="JSFProcessItemOutput"/>
+   <PROCESS-ITEM-OUTPUT ID="logout::#authentification.xhtml"
+    NAME="output1" PATH="/authentification.xhtml"
+    TARGET="rules:#authentification.xhtml" TITLE="logout" model-entity="JSFProcessItemOutput"/>
   </PROCESS-ITEM>
  </PROCESS-ITEM>
  <PROCESS-ITEM NAME="rules:#accueil.xhtml" PATH="/accueil.xhtml"
@@ -87,9 +90,9 @@
   PATH="/acces_admin/accueil-client.xhtml" SHAPE="784,353,0,0" model-entity="JSFProcessGroup">
   <PROCESS-ITEM ID="rules:#acces_admin#accueil-client.xhtml:0"
    NAME="item" PATH="/acces_admin/accueil-client.xhtml" model-entity="JSFProcessItem">
-   <PROCESS-ITEM-OUTPUT ID="logout::#authentification.xhtml"
+   <PROCESS-ITEM-OUTPUT ID="logoutAdmin::#authentification.xhtml"
     NAME="output" PATH="/authentification.xhtml"
-    TARGET="rules:#authentification.xhtml" TITLE="logout" model-entity="JSFProcessItemOutput"/>
+    TARGET="rules:#authentification.xhtml" TITLE="logoutAdmin" model-entity="JSFProcessItemOutput"/>
   </PROCESS-ITEM>
  </PROCESS-ITEM>
  <PROCESS-ITEM NAME="rules:#acces_client#accueil-client.xhtml"

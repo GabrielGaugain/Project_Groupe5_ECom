@@ -72,7 +72,7 @@ public class GestionPanierBean implements Serializable {
 		 * mais pas là => ça veut pas lancer la méthode je sais pas pk
 		 */
 		System.out.println("Dans ajouterArticleAuPanier ....");
-		
+		quantite=1;
 		// 1. recup context
 		FacesContext contextJSF = FacesContext.getCurrentInstance();
 		
@@ -106,6 +106,10 @@ public class GestionPanierBean implements Serializable {
 		lignesDeCommande =  this.getLignesCommandeByPanier(panierTemp.getIdPanier());
 		
 	}//end ajouterArticleAuPanier
+	
+	public void recupArticle(ActionEvent event) {
+		
+	}//end recupArticle
 
 	/* _____________________________Getter/setters_______________________________ */	
 	
