@@ -25,21 +25,6 @@
 		transition: all 0.3s ease;
 	}
 
-	.form-group {
-		width:100%;
-	
-	}
-	
-	.input-group{
-	
-		width:100%;
-	}
-	
-	.search-button{
-		min-height:100%;
-		height:100%;
-		
-	}	
 	
 	</style>
 
@@ -47,57 +32,11 @@
 </h:head>
 
     <h:body style="padding-top: 50px; padding-bottom: 20px;">
-	        <b:navBar brand="Ecolovie" brandHref="#" fluid="true" fixed="top" sticky="true" inverse="true">
-  			<b:navbarLinks >
-    			<b:navLink value="Link" href="#"></b:navLink>
-    			
-    			<b:dropMenu value="Catégories" iconAwesome="fa-tags">   
-      			<b:navLink value="Afficher tous les produits" href="#"></b:navLink>
-     			<b:navLink value="Consulter les produits d’une catégorie" href="#"></b:navLink>
-      			<b:navLink value="Consulter les produits sélectionnés" href="#"></b:navLink>
-      			<b:navLink></b:navLink>
-      			<b:navLink header="Nav header"></b:navLink>
-      			<b:navLink value="Consulter les produits d’une catégorie" href="#" iconAwesome="fa-tags" ></b:navLink>
-      			
-    			</b:dropMenu>
-  			</b:navbarLinks>
-  			
-  			<!-- ==================== BARRE DE RECHERCHE DES PDTS ================================================ -->
-  			<h:form class="navbar-form navbar-left hidden-md hidden-sm hidden-xs" role="search" style="width:50%;margin-left:8%">
-			  <div class="form-group" style="width:100%;" >  
-			  
-			    <b:inputText type="text" class="form-control"   value="#{produitBean.motCle}" placeholder="Rechercher un produit"  >
-				     <f:facet name="append" style="min-height:100%">
-		      			<b:commandButton  type="submit" class="search-button" ><p class="fa fa-search" style="margin:0 auto;min-height:100%"></p></b:commandButton>
-				    </f:facet>
-			    </b:inputText>
-			   </div>
-			
-			  <!--
-			  <b:commandButton type="submit" iconAwesome="fa-search"   class="btn btn-default">
-			   	<f:ajax execute = "motcle" render = "pdtsShow" /> 
-			  </b:commandButton> -->
-			
-			
-			</h:form>
-  			<!-- ================================================================================================== -->
-  			
-  			<!--  
-			<b:navbarLinks pull="right"><b:navLink value="    " href="#"></b:navLink></b:navbarLinks>
-			-->
-			<h:form>
-				
-	  			<b:navbarLinks pull="right" >
-	    			<b:navLink value="Panier" icon-awesome="fa-shopping-basket" outcome="panier.xhtml"  ></b:navLink>
-	    			<b:dropMenu value="Mon compte" iconAwesome="fa-user" iconAlign="top" >
-					    <b:navLink value="Se deconnecter" action="#{authentificationBean.deconnecterUtilisateur()}"></b:navLink>
-			     	</b:dropMenu>
-			     	
-			  	</b:navbarLinks>
-		  	
-		  	</h:form>
-		
-		</b:navBar>
+	    
+	    <!-- ======== NAVBAR ============ -->
+        <ui:insert name="header">
+			<ui:include src="/templates/navbar-client.xhtml" />
+		</ui:insert>
         
         
         <h:form style="margin-top:0">

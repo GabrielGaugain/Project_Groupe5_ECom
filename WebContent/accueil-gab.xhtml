@@ -37,7 +37,7 @@
 		</ui:insert>
         
         
-        
+        <!-- Petit message du site (bienvenue) -->
         <h:form style="margin-top:0">
 		<b:container style="width : 100% ;height:6rem; background:#405e35; margin-bottom:20px;margin-top:0; color:#d4d6d3;">
 	    	<b:row>
@@ -51,11 +51,14 @@
          </b:container>
           
           
-   
+   	<!-- Container montrant les produits demandés -->
           	<b:container>
           	<ui:repeat var="pdt" value="#{produitBean.listeProdMC}" varStatus="status" >
 			
           		
+          			<!-- ============================================== -->
+          			<!-- ==========Vignettes des prods ================ -->
+          			<!-- ============================================== -->
 				  	<b:column col-xs="6" col-md="3">
 				  	
 				  	<a href=".modalPseudoClass#{status.index}" data-toggle="modal" style="text-decoration: none;">
@@ -74,9 +77,14 @@
 				        		
     				</b:column>
           			
+          			
+          			
+          			<!-- ====================================================================================== -->
+          			<!-- ====== Modal qui affiche description et permet de select qté et ajout au panier ====== -->
+          			<!-- ====================================================================================== -->
           			<b:modal id="amodal#{status.index}" title="#{pdt.nomProduit}" styleClass="modalPseudoClass#{status.index}">
           				
-          				<b:form>
+          				
           				
 						<b:thumbnail>
 				      		<img src="resources/images/#{pdt.urlImageProduit}" alt="failed to read picture" style="max-height:40%;max-width:70%"/>
@@ -85,34 +93,40 @@
 						        <p><b>prix : </b>  #{pdt.prixProduit}</p>
 						        <p>#{pdt.descriptionProduit}</p>
 	
-					       		<input type="hidden" value="#{panierBean.prod = pdt}"></input>
+					       		<!-- <input type="hidden" value="#{panierBean.prod = pdt}"></input> -->
 					      </f:facet>
 				    	</b:thumbnail>
-				    
-					 <b:formGroup>
+				    	
+				    <b:form horizontal="true">
 					  <b:row name="footer">
 					  
-					  	<b:selectOneMenu value="#{panierBean.quantite}" colMd="3" required="true" label="quantité" labelColMd="3"  style="float:left;margin-left:5%" >
-					      <f:selectItem itemLabel="1" itemValue="1" />
-					      <f:selectItem itemLabel="2" itemValue="2" />
-					      <f:selectItem itemLabel="3" itemValue="3" />
-					      <f:selectItem itemLabel="4" itemValue="4" />
-					      <f:selectItem itemLabel="5" itemValue="5" />
-					    </b:selectOneMenu>
+					  	<b:formGroup>
+						  	<b:selectOneMenu value="#{panierBean.quantite}" colMd="3" required="true" label="quantité" labelColMd="3"  style="float:left;margin-left:5%" >
+						  	  <f:selectItem itemLabel="Select quantité" itemValue="" />	  
+						      <f:selectItem itemLabel="1" itemValue="1" />
+						      <f:selectItem itemLabel="2" itemValue="2" />
+						      <f:selectItem itemLabel="3" itemValue="3" />
+						      <f:selectItem itemLabel="4" itemValue="4" />
+						      <f:selectItem itemLabel="5" itemValue="5" />
+						    </b:selectOneMenu>
+					    </b:formGroup>
 					    
 					    <b:commandButton value="Ajouter au panier" iconAwesome="fa-cart-plus" iconAlign="left"  style="float:right;margin-right:5%" 
-					    		  		action ="listaccueil" actionListener="#{panierBean.ajouterArticleAuPanier}">
+					    		  		action ="#" actionListener="#{panierBean.ajouterArticleAuPanier}">
 					    
 					    	<f:param id="pdtID" name="id" value="#{pdt.idProduit}"/>
 
 					    </b:commandButton>
 					    <!-- <b:button value="Ok" look="primary" dismiss="modal" /> -->
 					    
+					    
+					    
 					  </b:row>
-					 </b:formGroup>
-					  </b:form>
+					 
+					 </b:form>
 					</b:modal>
-
+					
+					
                 	
           	
           	</ui:repeat>
@@ -122,7 +136,7 @@
        </b:container>
        </h:form>
 
-		
+		<!-- ==== Footer ====== -->
 		<b:container style="width : 100% ;padding-top: 50px; padding-left: 50px; padding-right: 50px; padding-bottom: 20px;">
   
             <hr/>

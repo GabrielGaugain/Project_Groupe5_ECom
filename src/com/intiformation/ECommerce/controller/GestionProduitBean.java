@@ -37,7 +37,8 @@ public class GestionProduitBean implements Serializable {
 	public GestionProduitBean() {
 		prodDAO = new ProduitDAOImpl();
 		listeProdMCBDD = prodDAO.getAll();
-
+		motCle = "";
+		
 	}// end ctor vide
 
 	

@@ -13,9 +13,12 @@ import org.apache.catalina.ha.backend.CollectedInfo;
 
 import com.intiformation.ECommerce.dao.IProduitDAO;
 import com.intiformation.ECommerce.dao.ProduitDAOImpl;
+
 import com.intiformation.ECommerce.modele.LigneCommande;
 import com.intiformation.ECommerce.modele.Panier;
 import com.intiformation.ECommerce.modele.Produit;
+
+import com.intiformation.ECommerce.service.ICommandeService;
 import com.intiformation.ECommerce.service.ILigneCommandeService;
 import com.intiformation.ECommerce.service.IPanierService;
 import com.intiformation.ECommerce.service.LigneCommandeServiceImpl;
@@ -26,22 +29,27 @@ import com.intiformation.ECommerce.service.PanierServiceImpl;
 public class GestionPanierBean implements Serializable {
 	
 	/* _____________________________props_______________________________ */
-	IProduitDAO prodDAO;
+	// ====> Var
 	private Collection<LigneCommande> lignesDeCommande;
 	private LigneCommande ligneDeCmd;
 	private Panier panierTemp;
-	private ILigneCommandeService ligneCmdService;
-	private IPanierService panierService;
+
 	private int quantite;
 	private Produit prod;
+	
+	// ====> service/dao
+	IProduitDAO prodDAO;
+	private ILigneCommandeService ligneCmdService;
+	private IPanierService panierService;
+	
+	
 	/* _____________________________ctors_______________________________ */
 	public GestionPanierBean() {
 		prodDAO = new ProduitDAOImpl();
 		ligneCmdService = new LigneCommandeServiceImpl();
 		panierService = new PanierServiceImpl();
+	
 		panierTemp = null;
-		
-		
 	}// end ctor vide
 
 	
@@ -78,6 +86,7 @@ public class GestionPanierBean implements Serializable {
 		if (panierTemp ==null) {
 			panierService.ajouterPanier(null);
 			panierTemp = panierService.getLastBasket();
+			
 		}		
 		
 		// 4. recup du produit via DAO
@@ -86,7 +95,9 @@ public class GestionPanierBean implements Serializable {
 		
 		// 5.création de la ligne de cmde a partir de l'article
 		// ====> pb idCommande on peut ajouter des lignes de cmde au panier sans etre log donc ça va pas
-		//ligneDeCmd = new LigneCommande(quantite, montant, prod.getIdProduit(), idCommande, panierTemp.getIdPanier());
+		Long cmd = null;
+		System.out.println("commande : "+cmd);
+		ligneDeCmd = new LigneCommande(quantite, montant, prod.getIdProduit(), cmd, panierTemp.getIdPanier());
 		
 		
 		// ajout de la ligne dans la bdd

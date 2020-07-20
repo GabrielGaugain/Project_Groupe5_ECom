@@ -116,14 +116,16 @@ insert into paniers (id_panier) values (1);
 
 INSERT into utilisateurs (nom_utilisateur , mdp_utilisateur, id_role, active) values ('admin','admin',1,true);
 INSERT into utilisateurs (nom_utilisateur , mdp_utilisateur, id_role, active) values ('Gabydu14','123',2,true); 
-
+INSERT into clients (id_client) values (0);
 
 INSERT INTO clients (nom_client, adresse_client, email_client, telephone_client) values  ("Michelle","12 rue du bout perdu","mich@gmail.com","0202020202");
 INSERT INTO commandes (date_commande ,id_client) values ('10.01.2020',1);
 INSERT INTO lignescommandes (quantite_commande ,montant_commande,id_produit ,id_commande ,id_panier ) values (3,300.22, 1, 1, 1);
 
+insert into lignescommandes (quantite_commande ,montant_commande,id_produit ,id_commande ,id_panier) values (3,300.00, 5 ,null,2);
 
 delete from produits where id_produit =5;
+
 -- tests
 
 SELECT * FROM photos ;
@@ -152,9 +154,8 @@ insert into paniers () values ();
 select * from paniers order by id_panier DESC limit 1 ;
 
 -- test commande
-update produits set nom_produit = 'macbook pro', description_produit= 'ordi trop cher avec une ^pomme' , prix_produit=1500.00, id_categorie=2
-			    where id_produit = 6;
+update produits set nom_produit = 'macbook pro', description_produit= 'ordi trop cher avec une pomme' , prix_produit=1500.00, id_categorie=3
+			    where id_produit = 5;
 
-update photos set url_photo= 'C:\Users\gabri\Desktop\JEE - Formation\07_JSF\Project_Groupe5_ECom\WebContent\resources\images' where id_photo=1;
 -- TEST DAO UTILSATEUR
 
