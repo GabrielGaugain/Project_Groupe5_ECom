@@ -7,7 +7,9 @@ import java.util.List;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.component.UIParameter;
 import javax.faces.context.FacesContext;
+import javax.faces.event.ActionEvent;
 
 import com.intiformation.ECommerce.dao.CategorieDAOImpl;
 import com.intiformation.ECommerce.dao.ICategorieDAO;
@@ -64,6 +66,20 @@ public class GestionProduitBean implements Serializable {
         String summary = coche ? "Produit ajouté à la sélection" : "Produit retiré de la sélection";
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(summary));
     }
+	
+	public void VisuFicheProd(ActionEvent event) {
+		
+		// 1. recup context
+		FacesContext contextJSF = FacesContext.getCurrentInstance();
+				
+		// 2.recup param id du produit
+		UIParameter uProd = (UIParameter) event.getComponent().findComponent("idProdSelected");
+		long idProduit = (long) uProd.getValue();
+		
+		this.produit = prodDAO.getById(idProduit);
+
+		
+	}
 	
 	/* _______________________ GETTERS/SETTERS ________________________________ */
 

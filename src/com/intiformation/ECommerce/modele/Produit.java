@@ -11,15 +11,16 @@ public class Produit {
 	private boolean selectionne;
 	private String urlImageProduit;
 	private Long idCategorie;
-	
+	private int quantite;
 
 	
 	/* __________________ ctors __________________________ */
 	
 	
-	public Produit(long idProduit, String nomProduit, String descriptionProduit, double prixProduit,
+	public Produit(long idProduit, String nomProduit, String descriptionProduit, double prixProduit, int quantite,
 			boolean selectionne, String urlImageProduit, Long idCategorie) {
 		super();
+		this.quantite = quantite;
 		this.idProduit = idProduit;
 		this.nomProduit = nomProduit;
 		this.descriptionProduit = descriptionProduit;
@@ -31,7 +32,7 @@ public class Produit {
 
 
 
-	public Produit(String nomProduit, String descriptionProduit, double prixProduit, boolean selectionne,
+	public Produit(String nomProduit, String descriptionProduit, double prixProduit,int quantite, boolean selectionne,
 			String urlImageProduit, Long idCategorie) {
 		super();
 		this.nomProduit = nomProduit;
@@ -40,6 +41,7 @@ public class Produit {
 		this.selectionne = selectionne;
 		this.urlImageProduit = urlImageProduit;
 		this.idCategorie = idCategorie;
+		this.quantite = quantite;
 	}//end ctor sans id
 
 	/* __________________ getters/setters ________________ */
@@ -112,6 +114,18 @@ public class Produit {
 
 	public void setUrlImageProduit(String urlImageProduit) {
 		this.urlImageProduit = urlImageProduit;
+	}
+
+
+
+	public int getQuantite() {
+		return quantite;
+	}
+
+
+
+	public void setQuantite(int quantite) {
+		this.quantite = quantite;
 	}
 
 

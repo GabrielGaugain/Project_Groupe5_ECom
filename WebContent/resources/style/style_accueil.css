@@ -1,0 +1,22 @@
+@charset "ISO-8859-1";
+
+.body{
+	background:#f8efe6;
+}
+
+.card-pdt{
+	cursor: pointer;
+	height:30rem
+		
+}
+
+.card-pdt:hover{
+	
+	transform:scale(1.06);
+	border: ridge 1.5px;
+	transition: all 0.3s ease;
+}
+
+a:link{
+	text-decoration: none;
+}

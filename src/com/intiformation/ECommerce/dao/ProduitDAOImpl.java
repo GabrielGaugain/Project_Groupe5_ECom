@@ -16,15 +16,16 @@ public class ProduitDAOImpl implements IProduitDAO {
 		
 		try {
 			
-			String Req ="INSERT INTO produits (nom_produit,description_produit,prix_produit,url_photo,id_categorie) VALUES (?,?,?,?,?)";
+			String Req ="INSERT INTO produits (nom_produit,description_produit,prix_produit,quantite,url_photo,id_categorie) VALUES (?,?,?,?,?,?)";
 			
 			ps = IProduitDAO.connection.prepareStatement(Req);
 			
 			ps.setString(1, pProduit.getNomProduit());
 			ps.setString(2,pProduit.getDescriptionProduit());
 			ps.setDouble(3, pProduit.getPrixProduit());
-			ps.setString(4, pProduit.getUrlImageProduit());
-			ps.setLong(5, pProduit.getIdCategorie());
+			ps.setInt(4, pProduit.getQuantite());
+			ps.setString(5, pProduit.getUrlImageProduit());
+			ps.setLong(6, pProduit.getIdCategorie());
 			
 			
 			int verif = ps.executeUpdate();
@@ -51,7 +52,7 @@ public class ProduitDAOImpl implements IProduitDAO {
 
 	try {
 		
-		String Req ="UPDATE produits SET nom_produit=?,description_produit=?,prix_produit=?, selectionne=?, url_photo=?,id_categorie=? WHERE id_produit=?";
+		String Req ="UPDATE produits SET nom_produit=?,description_produit=?,prix_produit=?, selectionne=?, url_photo=?,id_categorie=?, quantite=? WHERE id_produit=?";
 		
 		ps = IProduitDAO.connection.prepareStatement(Req);
 		
@@ -61,7 +62,8 @@ public class ProduitDAOImpl implements IProduitDAO {
 		ps.setBoolean(4, false);
 		ps.setString(5, pProduit.getUrlImageProduit());
 		ps.setLong(6, pProduit.getIdCategorie());
-		ps.setLong(7, pProduit.getIdProduit());
+		ps.setInt(7, pProduit.getQuantite());
+		ps.setLong(8, pProduit.getIdProduit());
 
 		
 		int verif = ps.executeUpdate();
@@ -128,7 +130,7 @@ public class ProduitDAOImpl implements IProduitDAO {
 			while (rs.next()) {
 
 				// ctor :Produit(long idProduit, String nomProduit, String descriptionProduit, double prixProduit,boolean selectionne, String urlImageProduit, Long idCategorie)
-				produit = new Produit(rs.getLong(1), rs.getString(2), rs.getString(3), rs.getDouble(4),rs.getBoolean(5),rs.getString(6),rs.getLong(7));
+				produit = new Produit(rs.getLong(1), rs.getString(2), rs.getString(3), rs.getDouble(4),rs.getInt(5),rs.getBoolean(6),rs.getString(7),rs.getLong(8));
 
 				listeProduits.add(produit);
 
@@ -166,7 +168,7 @@ public class ProduitDAOImpl implements IProduitDAO {
 
 		rs.next();
 		// ctor :Produit(long idProduit, String nomProduit, String descriptionProduit, double prixProduit,boolean selectionne, String urlImageProduit, Long idCategorie)
-		produit = new Produit(rs.getLong(1), rs.getString(2), rs.getString(3), rs.getDouble(4),rs.getBoolean(5),rs.getString(6),rs.getLong(7));
+		produit = new Produit(rs.getLong(1), rs.getString(2), rs.getString(3), rs.getDouble(4),rs.getInt(5),rs.getBoolean(6),rs.getString(7),rs.getLong(8));
 
 		return produit;
 
@@ -201,7 +203,7 @@ public class ProduitDAOImpl implements IProduitDAO {
 			while (rs.next()) {
 
 				// ctor :Produit(long idProduit, String nomProduit, String descriptionProduit, double prixProduit,boolean selectionne, String urlImageProduit, Long idCategorie)
-				produit = new Produit(rs.getLong(1), rs.getString(2), rs.getString(3), rs.getDouble(4),rs.getBoolean(5),rs.getString(6),rs.getLong(7));
+				produit = new Produit(rs.getLong(1), rs.getString(2), rs.getString(3), rs.getDouble(4),rs.getInt(5),rs.getBoolean(6),rs.getString(7),rs.getLong(8));
 
 				listeProduits.add(produit);
 
@@ -241,7 +243,7 @@ public class ProduitDAOImpl implements IProduitDAO {
 			while (rs.next()) {
 
 				// ctor :Produit(long idProduit, String nomProduit, String descriptionProduit, double prixProduit,boolean selectionne, String urlImageProduit, Long idCategorie)
-				produit = new Produit(rs.getLong(1), rs.getString(2), rs.getString(3), rs.getDouble(4),rs.getBoolean(5),rs.getString(6),rs.getLong(7));
+				produit = new Produit(rs.getLong(1), rs.getString(2), rs.getString(3), rs.getDouble(4),rs.getInt(5),rs.getBoolean(6),rs.getString(7),rs.getLong(8));
 
 				listeProduits.add(produit);
 
@@ -277,7 +279,7 @@ public class ProduitDAOImpl implements IProduitDAO {
 			while (rs.next()) {
 
 				// ctor :Produit(long idProduit, String nomProduit, String descriptionProduit, double prixProduit,boolean selectionne, String urlImageProduit, Long idCategorie)
-				produit = new Produit(rs.getLong(1), rs.getString(2), rs.getString(3), rs.getDouble(4),rs.getBoolean(5),rs.getString(6),rs.getLong(7));
+				produit = new Produit(rs.getLong(1), rs.getString(2), rs.getString(3), rs.getDouble(4),rs.getInt(5),rs.getBoolean(6),rs.getString(7),rs.getLong(8));
 
 				listeProduits.add(produit);
 

@@ -72,15 +72,15 @@ public class GestionPanierBean implements Serializable {
 		 * mais pas là => ça veut pas lancer la méthode je sais pas pk
 		 */
 		System.out.println("Dans ajouterArticleAuPanier ....");
-		quantite=1;
+		
 		// 1. recup context
 		FacesContext contextJSF = FacesContext.getCurrentInstance();
 		
 		// 2.recup param id du produit
 		UIParameter uip = (UIParameter) event.getComponent().findComponent("pdtID");
-		System.out.println("Dans ajouterArticleAuPanier ....");
-		
-		
+		UIParameter uqte = (UIParameter) event.getComponent().findComponent("pdtQte");
+		quantite = (int) uqte.getValue();
+		System.out.println("quantite dans ajouterPanier : "+quantite);	
 		
 		// 3. init du panier au premier ajout d'un article
 		if (panierTemp ==null) {
@@ -95,15 +95,15 @@ public class GestionPanierBean implements Serializable {
 		
 		// 5.création de la ligne de cmde a partir de l'article
 		// ====> pb idCommande on peut ajouter des lignes de cmde au panier sans etre log donc ça va pas
-		Long cmd = null;
+		Long cmd = 0L;
 		System.out.println("commande : "+cmd);
-		ligneDeCmd = new LigneCommande(quantite, montant, prod.getIdProduit(), cmd, panierTemp.getIdPanier());
+		//ligneDeCmd = new LigneCommande(quantite, montant, prod.getIdProduit(), cmd, panierTemp.getIdPanier());
 		
 		
 		// ajout de la ligne dans la bdd
-		ligneCmdService.ajouterLigneCommande(ligneDeCmd);
+		//ligneCmdService.ajouterLigneCommande(ligneDeCmd);
 		// rechargement de la liste des lignes dans le panier
-		lignesDeCommande =  this.getLignesCommandeByPanier(panierTemp.getIdPanier());
+		//lignesDeCommande =  this.getLignesCommandeByPanier(panierTemp.getIdPanier());
 		
 	}//end ajouterArticleAuPanier
 	

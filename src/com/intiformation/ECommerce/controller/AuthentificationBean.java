@@ -106,7 +106,7 @@ public class AuthentificationBean implements Serializable{
 	
 	
 	public String deconnecterUtilisateur() {
-		
+		System.out.println("dans deconnexion...");
 		// 1. recup du context JSF
 		FacesContext contextJSF = FacesContext.getCurrentInstance();
 		
@@ -121,7 +121,7 @@ public class AuthentificationBean implements Serializable{
 		contextJSF.addMessage(null, facesMessages);
 		
 		// 4. redirection vers 'authentification.xhtml'
-		return "authentification.xhtml";
+		return "authentification.xhtml?faces-redirect=true";
 		
 	}//end deconnecterUtilisateur
 	

@@ -17,6 +17,7 @@ id_produit INT auto_increment,
 nom_produit VARCHAR (100),
 description_produit VARCHAR (200),
 prix_produit DECIMAL (10,2),
+quantite INT,
 selectionne BOOLEAN,
 url_photo VARCHAR (200),
 id_categorie INT,
@@ -102,11 +103,11 @@ INSERT INTO categories (nom_categorie,description_categorie,url_photo) VALUES ('
 insert into categories (nom_categorie,description_categorie,url_photo) VALUES ('Ordinateurs portables','Categorie regroupant les laptops ','testbleu.jpg') ;
 
 
-INSERT INTO produits (nom_produit,description_produit,prix_produit,url_photo,id_categorie) VALUES ('Produit_Test','Ce produit a été inventé pour réaliser des tests sur la base de données',3.50,'test.jpg',1);
-INSERT INTO produits (nom_produit,description_produit,prix_produit,url_photo,id_categorie) VALUES ('Produit_test','Ce produit a été inventé ',3.50,'test.jpg',2);
-INSERT INTO produits (nom_produit,description_produit,prix_produit,url_photo,id_categorie) VALUES ('BLABLA','blablaZZZ',3.50,'test.jpg',1);
-INSERT INTO produits (nom_produit,description_produit,prix_produit,url_photo,id_categorie) VALUES ('Laptop Asus','Laptot asus de gaming ',899.99,'asus_rog.jpg',3);
-INSERT INTO produits (nom_produit,description_produit,prix_produit,url_photo,id_categorie) VALUES ('Macbook pro','Laptot apple de la game pro ',1499.99,'macbook.jpg',3);
+INSERT INTO produits (nom_produit,description_produit,prix_produit,quantite,url_photo,id_categorie) VALUES ('Produit_Test','Ce produit a été inventé pour réaliser des tests sur la base de données',3.50,2,'test.jpg',1);
+INSERT INTO produits (nom_produit,description_produit,prix_produit,quantite,url_photo,id_categorie) VALUES ('Produit_test','Ce produit a été inventé ',3.50,2,'test.jpg',2);
+INSERT INTO produits (nom_produit,description_produit,prix_produit,quantite,url_photo,id_categorie) VALUES ('BLABLA','blablaZZZ',3.50,4,'test.jpg',1);
+INSERT INTO produits (nom_produit,description_produit,prix_produit,quantite,url_photo,id_categorie) VALUES ('Laptop Asus','Laptot asus de gaming ',899.99,4,'asus_rog.jpg',3);
+INSERT INTO produits (nom_produit,description_produit,prix_produit,quantite,url_photo,id_categorie) VALUES ('Macbook pro','Laptot apple de la game pro ',1499.99,8,'macbook.jpg',3);
 insert into roles (id_role,nom_role) values (1,'admin');
 insert into roles (id_role,nom_role) values (2,'client');
 

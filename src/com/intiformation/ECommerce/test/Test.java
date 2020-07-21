@@ -84,7 +84,7 @@ public class Test {
 		System.out.println("=========> creation d'un nouveau ligneCommande REUSSI ");
 		
 		System.out.println("creation d'un nouveau Produit ");
-		prodService.ajouterProduit(	new Produit("laptot Asus","Ordinateur portabkle pas trop mal mais cher ", 799.99,false, null,(long)1 )	);	
+		prodService.ajouterProduit(	new Produit("laptot Asus","Ordinateur portabkle pas trop mal mais cher ", 799.99,4,false, null,(long)1 )	);	
 		System.out.println("=========> creation d'un nouveau ligneCommande REUSSI ");		
 		
 		
@@ -118,7 +118,7 @@ public class Test {
 		System.out.println("=========> modif d'une lignecommande reussie");
 		
 		System.out.println("modif d'un produit ");
-		prodService.modifierProduit(new Produit(1,"laptot Asus MODIF","Ordinateur portabkle pas trop mal mais cher ", 799.99,false, null,(long)1 ));	
+		prodService.modifierProduit(new Produit(1,"laptot Asus MODIF","Ordinateur portabkle pas trop mal mais cher ", 799.99,10,false, null,(long)1 ));	
 		System.out.println("=========> modif d'un produit  reussie");
 		
 		System.out.println("modif d'un role ");
