@@ -32,12 +32,20 @@
 	     <b:container style=" max-width: 400px;">
  
             <h:form styleClass="form-signin" prependId="false" horizontal="true">
+ 
+         <!-- affichage des faces messages -->
+         <b:growl id="growlSpecific" placementFrom="top" show-detail="true"
+			      global-only="true"
+			      show-summary="true" allow-dismiss="true"
+			      animation-enter="animated bounceInDown"
+			      animation-exit="animated flipOutX"
+			      escape="true" />
             
             <h:outputLabel for="idStatut" value="Se connecter en tant que : " /> 
-	     	<h:selectOneMenu id="idStatut" layout="lineDirection" value="#{authentificationBean.userStatut}"> 
+	     	<b:selectOneMenu id="idStatut" layout="lineDirection" value="#{authentificationBean.userStatut}"> 
 				<f:selectItem itemLabel="client" caption="selectClient" itemValue="client"/> 
 				<f:selectItem itemLabel="admin" caption="selectadmin" itemValue="admin" /> 
-			</h:selectOneMenu>
+			</b:selectOneMenu>
 			
 			<br/><br/>
             
@@ -63,7 +71,7 @@
                 <h:message for="password" styleClass="error"/>
                 <br/>
                 <b:selectBooleanCheckbox value="true" caption="Se souvenir de moi"/>
-                <b:commandButton look="primary btn-block" value="Se connecter" icon="log-in" size="lg" action="#{authentificationBean.connecterUtilisateur()}" />
+                <b:commandButton look="primary btn-block" value="Se connecter" icon="log-in" size="lg" action="#{authentificationBean.connecterUtilisateur}" />
             
             </h:form>
         </b:container>

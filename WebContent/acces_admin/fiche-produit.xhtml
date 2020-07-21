@@ -19,8 +19,7 @@
 		</ui:insert>
 
 		<h:form>
-
-			         
+			
 			<b:row>
 			
 				<!-- une colonne de marge -->
@@ -53,8 +52,7 @@
 						    </b:selectOneMenu>
 					    	
 					    
-					    <b:commandButton id= "ajoutPanier" value="Ajouter au panier" iconAwesome="fa-cart-plus" iconAlign="left"  
-					    				 style="float:right;margin-right:5%" 
+					    <b:commandButton value="Ajouter au panier" iconAwesome="fa-cart-plus" iconAlign="left"  style="float:right;margin-right:5%" 
 					    		  		 action="accueil-gab.xhtml" actionListener="#{panierBean.ajouterArticleAuPanier}">
 					    
 					    	<f:param id="pdtID" name="id" value="#{produitBean.produit.idProduit}"/>

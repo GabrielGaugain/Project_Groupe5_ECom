@@ -58,20 +58,26 @@ public class AuthentificationBean implements Serializable{
 				//-> création de la session
 				HttpSession session = (HttpSession) contextJSF.getExternalContext().getSession(true);
 				
+				System.out.println("status dans connecterUser : " +userStatut);
+				
 				//->sauvegarde du login de l'utilisatuer dans la session
 				session.setAttribute("user_login", userIdentifiant);
 				
 				//->sauvegarde du statut de l'utilisatuer dans la session
 				session.setAttribute("user_statut", userStatut);
+				
 				if(("admin").equals(userStatut)) {
 					//-> navigation vers la page 'accueil-admin.xhtml'
 					return "acces_admin/accueil-client.xhtml";
 				}
+				
 				else if(("client").equals(userStatut)) {
+					System.out.println("acces_client/accueil-client.xhtml");
 					return "acces_client/accueil-client.xhtml";
 				}
+				System.out.println("authentification.xhtml");
 				//-> navigation vers la page 'accueil.xhtml'
-				return "accueil-gab.xhtml";
+				return "authentification.xhtml";
 				
 			}else{
 				//----------------- l'utilisateur essaie de se connecter avec le mauvais statut ----------------------//

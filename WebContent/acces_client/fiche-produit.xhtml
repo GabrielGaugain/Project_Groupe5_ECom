@@ -15,12 +15,11 @@
 
     	<!-- ======== NAVBAR ============ -->
         <ui:insert name="header">
-			<ui:include src="/templates/navbar.xhtml" />
+			<ui:include src="/templates/navbar-client.xhtml" />
 		</ui:insert>
 
 		<h:form>
-
-			         
+			
 			<b:row>
 			
 				<!-- une colonne de marge -->
@@ -28,7 +27,7 @@
 				
 				<!-- image du produit -->
 				<b:column col-xs="4" col-md="5">
-					<img src="resources/images/#{produitBean.produit.urlImageProduit}" alt="failed to read picture" style="max-height:80%;max-width:90%"/>
+					<img src="../resources/images/#{produitBean.produit.urlImageProduit}" alt="failed to read picture" style="max-height:80%;max-width:90%"/>
 				</b:column>
 				
 				<!-- fiche descriptive et interaction -->
@@ -53,9 +52,8 @@
 						    </b:selectOneMenu>
 					    	
 					    
-					    <b:commandButton id= "ajoutPanier" value="Ajouter au panier" iconAwesome="fa-cart-plus" iconAlign="left"  
-					    				 style="float:right;margin-right:5%" 
-					    		  		 action="accueil-gab.xhtml" actionListener="#{panierBean.ajouterArticleAuPanier}">
+					    <b:commandButton value="Ajouter au panier" iconAwesome="fa-cart-plus" iconAlign="left"  style="float:right;margin-right:5%" 
+					    		  		 action="accueil-client.xhtml" actionListener="#{panierBean.ajouterArticleAuPanier}">
 					    
 					    	<f:param id="pdtID" name="id" value="#{produitBean.produit.idProduit}"/>
 

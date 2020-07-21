@@ -1,13 +1,14 @@
 @charset "ISO-8859-1";
 
-.body{
-	background:#f8efe6;
+body{
+	
 }
+
 
 .card-pdt{
 	cursor: pointer;
 	height:30rem
-		
+	
 }
 
 .card-pdt:hover{
@@ -18,5 +19,6 @@
 }
 
 a:link{
+	
 	text-decoration: none;
 }

@@ -35,6 +35,14 @@ public class LigneCommande {
 		this.idPanier = idPanier;
 	}//end ctor sans id
 
+	public LigneCommande(int quantiteCommande, double montantCommande, long idProduit, long idPanier) {
+		super();
+		this.quantiteCommande = quantiteCommande;
+		this.montantCommande = montantCommande;
+		this.idProduit = idProduit;
+		this.idCommande = idCommande;
+		this.idPanier = idPanier;
+	}//end ctor sans id
 	
 	/* __________________ getters/setters ________________ */
 

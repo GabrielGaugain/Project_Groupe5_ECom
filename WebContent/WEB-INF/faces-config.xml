@@ -6,7 +6,7 @@
 		============== Configuration de la navigation ====================================== 
 		==================================================================================== 
 		1. règle de navigation pour la page 'accueil.xhtml' ******************************************************** -->
-	<navigation-rule>
+		<navigation-rule>
 		<!-- 1.1. page de départ -->
 		<from-view-id>/accueil.xhtml</from-view-id>
 		
@@ -49,6 +49,8 @@
 			<redirect />
 		</navigation-case>
 	</navigation-rule>
+	
+	
 	
 	<navigation-rule>
 		<!-- 1.1. page de départ -->

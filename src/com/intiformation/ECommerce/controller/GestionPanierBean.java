@@ -3,6 +3,7 @@ package com.intiformation.ECommerce.controller;
 import java.io.Serializable;
 import java.util.Collection;
 
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.component.UIParameter;
@@ -35,7 +36,7 @@ public class GestionPanierBean implements Serializable {
 	private Panier panierTemp;
 
 	private int quantite;
-	private Produit prod;
+	private Produit prodLigne;
 	
 	// ====> service/dao
 	IProduitDAO prodDAO;
@@ -60,17 +61,22 @@ public class GestionPanierBean implements Serializable {
 		return lignesDeCommande;
 	}//end getLignesCommandeByPanier 
 	
+	
+	/**
+	 * recuperation des lignes de commandes associé au panier courant 
+	 * @return
+	 */
 	public Collection<LigneCommande> getCurrentPanierLignes(){
 		return this.getLignesCommandeByPanier(panierTemp.getIdPanier());
 	}//end getCurrentPanierLignes
 
-
+	
+	/**
+	 * Ajout d'une ligne de commande via le button ajouter pannier de 'fiche-produit.xhtml'
+	 * @param event
+	 */
 	public void ajouterArticleAuPanier(ActionEvent event) {
-		
-		/**
-		 * Normalement lors du click sur ajouter au panier on devrait avoir ça d'afficher dans la console 
-		 * mais pas là => ça veut pas lancer la méthode je sais pas pk
-		 */
+	
 		System.out.println("Dans ajouterArticleAuPanier ....");
 		
 		// 1. recup context
@@ -78,8 +84,6 @@ public class GestionPanierBean implements Serializable {
 		
 		// 2.recup param id du produit
 		UIParameter uip = (UIParameter) event.getComponent().findComponent("pdtID");
-		UIParameter uqte = (UIParameter) event.getComponent().findComponent("pdtQte");
-		quantite = (int) uqte.getValue();
 		System.out.println("quantite dans ajouterPanier : "+quantite);	
 		
 		// 3. init du panier au premier ajout d'un article
@@ -90,23 +94,48 @@ public class GestionPanierBean implements Serializable {
 		}		
 		
 		// 4. recup du produit via DAO
-		prod = prodDAO.getById((long) uip.getValue() );
-		double montant = (double) quantite * prod.getPrixProduit();
+		prodLigne = prodDAO.getById((long) uip.getValue() );
+		double montant = (double) quantite * prodLigne.getPrixProduit();
+		System.out.println("Montant ajouté au panier : "+montant);
 		
 		// 5.création de la ligne de cmde a partir de l'article
-		// ====> pb idCommande on peut ajouter des lignes de cmde au panier sans etre log donc ça va pas
-		Long cmd = 0L;
-		System.out.println("commande : "+cmd);
-		//ligneDeCmd = new LigneCommande(quantite, montant, prod.getIdProduit(), cmd, panierTemp.getIdPanier());
+		ligneDeCmd = new LigneCommande(quantite, montant, prodLigne.getIdProduit(), panierTemp.getIdPanier());
 		
 		
-		// ajout de la ligne dans la bdd
-		//ligneCmdService.ajouterLigneCommande(ligneDeCmd);
-		// rechargement de la liste des lignes dans le panier
-		//lignesDeCommande =  this.getLignesCommandeByPanier(panierTemp.getIdPanier());
+		// 6. ajout de la ligne dans la bdd
+		if (ligneCmdService.ajouterLigneCommande(ligneDeCmd)) {
+			
+			// 7. rechargement de la liste des lignes dans le panier
+			lignesDeCommande =  this.getLignesCommandeByPanier(panierTemp.getIdPanier());
+			
+			prodLigne =null;
+			
+			// 8. ajout d'un message 'article ajouté au panier'
+			contextJSF.addMessage(null,
+					  new FacesMessage(FacesMessage.SEVERITY_INFO,
+							  	       "ajout panier",
+							  		   " - l'article a été ajouté au panier")
+					  );
+
+		}else {
+			contextJSF.addMessage(null,
+					  			  new FacesMessage(FacesMessage.SEVERITY_FATAL,
+							  	       "ajout panier",
+							  		   " - l'ajout de l'article au panier a échouée")
+					  );
+			//=> redirection vers 'accueil-gab.xhtml' (ref cle outcom dans 'faces-config.xml' )
+			
+		}//end else		
+		
+		
 		
 	}//end ajouterArticleAuPanier
 	
+	
+	/**
+	 * 
+	 * @param event
+	 */
 	public void recupArticle(ActionEvent event) {
 		
 	}//end recupArticle
@@ -154,19 +183,17 @@ public class GestionPanierBean implements Serializable {
 	}
 
 
-	public Produit getProd() {
-		return prod;
+	public Produit getProdLigne() {
+		return prodLigne;
 	}
 
 
-	public void setProd(Produit prod) {
-		
-		this.prod = prod;
+	public void setProdLigne(Produit prodLigne) {
+		this.prodLigne = prodLigne;
 	}
-	
-	
-	
-	
+
+
+
 	
 
 }//end class

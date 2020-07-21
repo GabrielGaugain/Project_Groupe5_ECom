@@ -17,15 +17,14 @@ public class LigneCommandeDAOImpl implements ILigneCommandeDAO{
 		
 		try {
 			
-			String Req ="INSERT INTO lignescommandes (quantite_commande, montant_commande, id_produit, id_commande, id_panier) VALUES (?,?,?,?,?)";
+			String Req ="INSERT INTO lignescommandes (quantite_commande, montant_commande, id_produit, id_panier) VALUES (?,?,?,?)";
 			
 			ps = this.connection.prepareStatement(Req);
 			
 			ps.setInt(1, pLigneCommande.getQuantiteCommande());
 			ps.setDouble(2, pLigneCommande.getMontantCommande());
 			ps.setLong(3,pLigneCommande.getIdProduit());
-			ps.setLong(4,pLigneCommande.getIdCommande());
-			ps.setLong(5,pLigneCommande.getIdPanier());
+			ps.setLong(4,pLigneCommande.getIdPanier());
 			
 			int verif = ps.executeUpdate();
 
