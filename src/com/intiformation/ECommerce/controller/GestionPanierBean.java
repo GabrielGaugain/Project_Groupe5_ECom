@@ -3,6 +3,7 @@ package com.intiformation.ECommerce.controller;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.faces.application.FacesMessage;
@@ -33,7 +34,7 @@ public class GestionPanierBean implements Serializable {
 	
 	/* _____________________________props_______________________________ */
 	// ====> Var
-	private Collection<LigneCommande> lignesDeCommande;
+	private ArrayList<LigneCommande> lignesDeCommande;
 	private ArrayList<Produit> produitLignesDeCmd;
 	private LigneCommande ligneDeCmd;
 	private Panier panierTemp;
@@ -56,6 +57,8 @@ public class GestionPanierBean implements Serializable {
 		ligneCmdService = new LigneCommandeServiceImpl();
 		panierService = new PanierServiceImpl();
 		produitLignesDeCmd = new ArrayList<Produit>();
+		
+		lignesDeCommande = new ArrayList<>();
 		
 		panierTemp = null;
 	}// end ctor vide
@@ -118,7 +121,7 @@ public class GestionPanierBean implements Serializable {
 		if (ligneCmdService.ajouterLigneCommande(ligneDeCmd)) {
 			
 			// 7. rechargement de la liste des lignes dans le panier
-			lignesDeCommande =  this.getLignesCommandeByPanier(panierTemp.getIdPanier());
+			lignesDeCommande =  (ArrayList<LigneCommande>) this.getLignesCommandeByPanier(panierTemp.getIdPanier());
 			
 			prodLigne =null;
 			
@@ -154,12 +157,12 @@ public class GestionPanierBean implements Serializable {
 
 	/* _____________________________Getter/setters_______________________________ */	
 	
-	public Collection<LigneCommande> getLignesDeCommande() {
+	public ArrayList<LigneCommande> getLignesDeCommande() {
 		return lignesDeCommande;
 	}
 
 
-	public void setLignesDeCommande(Collection<LigneCommande> lignesDeCommande) {
+	public void setLignesDeCommande(ArrayList<LigneCommande> lignesDeCommande) {
 		this.lignesDeCommande = lignesDeCommande;
 	}
 
@@ -215,7 +218,13 @@ public class GestionPanierBean implements Serializable {
 	}
 
 	public Double getMontantTotal() {
-		montantTotal = lignesDeCommande.stream().map(ligne -> ligne.getMontantCommande()).mapToDouble(montant -> (Double) montant).sum();
+		
+		if ( (!lignesDeCommande.isEmpty())&(lignesDeCommande!=null) ) {
+			montantTotal = (double)Math.round( lignesDeCommande.stream().map(ligne -> ligne.getMontantCommande()).mapToDouble(montant -> (Double) montant).sum()*100) / 100;
+		}else {
+			montantTotal = 0.0;
+		}
+		
 		return montantTotal;
 	}
 

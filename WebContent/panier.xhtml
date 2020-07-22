@@ -58,12 +58,21 @@
 	
 	<h:form >	
 	
+		<!-- ============================================================== -->
+		<!-- ===========Recap et bouton de cmd ============================ -->
+		<!-- ============================================================== -->
+		
 		<b:container class="detail-cmd" style="">
-			<h4>Sous-total : <b>montantTot</b></h4>
+			<h4>Sous-total : <b>#{panierBean.montantTotal} €</b></h4>
 			<br/>
 			<b:button value="Passer la commande" look="success" style="color:#282828"></b:button>
 		</b:container>
 
+
+		<!-- ============================================================== -->
+		<!-- ===========container des lignes de cmd ======================= -->
+		<!-- ============================================================== -->
+		
 	<b:container style="float:left;margin-left:3%;width:73%;">
 	
 	<ui:repeat var="lignesCmd" value="#{panierBean.lignesDeCommande}" varStatus="status" >
@@ -114,7 +123,7 @@
 			<b:column col-xs="1" col-md="1">
 					<p style="margin:0;font-weight:300;color:grey "> Prix :</p>
 					<hr style="margin:0" />
-					<p style="margin-top:5px;font-weight:bold;" > #{lignesCmd.montantCommande} </p>			
+					<p style="margin-top:5px;font-weight:bold;" > #{lignesCmd.montantCommande} € </p>			
 			</b:column>
 			
 			

@@ -3,11 +3,38 @@
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:b="http://bootsfaces.net/ui">
+      xmlns:b="http://bootsfaces.net/ui"
+      xmlns:fmt="http://java.sun.com/jsp/jstl/fmt"
+      xmlns:c="http://java.sun.com/jstl/core">
 
 
 <h:head>
 	<title> Pannier </title>	
+	
+	<style>
+		.ligne-cmd{
+			
+			border: 1px solid lightgrey;
+			border-radius: 20px;
+			padding : 5px 3px 5px 3px;
+			margin-bottom: 2px;
+		}
+		
+		
+		.detail-cmd{
+			float:right;
+			width:20%;
+			height:30vh;
+			margin-right:1%;
+			
+			text-align:center;
+			background:#eeeeee;
+			border: solid 1px lightgrey;
+			border-radius: 10px;
+			
+		}
+	</style>	
+	
 </h:head>
 
 
@@ -26,27 +53,73 @@
 		</ui:insert>
 	
 
-	<h3 style="margin-left:10%">Votre panier</h3>
+	<h3 style="margin-left:5%">Votre panier : </h3>
+	<br/>
 	
 	<h:form >	
-	<b:container style="float:right;width:15%;">
-		<p>Passer la commande</p>
-	</b:container>
+	
+		<b:container class="detail-cmd" style="">
+			<h4>Sous-total : <b>#{panierBean.montantTotal} €</b></h4>
+			<br/>
+			<b:button value="Passer la commande" look="success" style="color:#282828"></b:button>
+		</b:container>
 
-	<b:container style="float:left;width:85%;background:lightgreen">
+	<b:container style="float:left;margin-left:3%;width:73%;">
 	
-	<ui:repeat var="pdt" value="#{panierBean.lignesDeCommande}" varStatus="status" >
-	
-		<b:row>
-			<b:column col-xs="6" col-md="3">
-				<img src="resources/images/" alt="image du produit" style="float:left; max-width:100% "/>
+	<ui:repeat var="lignesCmd" value="#{panierBean.lignesDeCommande}" varStatus="status" >
+		<ui:param name="prod" value="#{panierBean.produitLignesDeCmd.get( status.index)}"/>
+		
+		
+		<b:row class = "ligne-cmd">
+			
+			<!-- Image du produit associé à la ligne de cmde -->
+				<b:column col-xs="4" col-md="3">
+					<img src="../resources/images/#{prod.urlImageProduit}" alt="image du produit" style="float:left; max-width:100% "/>
+				</b:column>
+		
+			<!-- Info du produit et de la ligne de commande  -->
+			<b:column col-xs="7" col-md="8">
+			
+					<h:commandLink action="fiche-produit.xhtml" actionListener="#{produitBean.VisuFicheProd}" style="width:80%;font-size:2em">
+						#{prod.nomProduit}
+						<f:param id = "idProdSelected" name="idProdSelected" value="#{prod.idProduit}" />
+					</h:commandLink>
+
+					
+					<p>#{prod.quantite}</p>
+					<b:row>
+							<b:selectOneMenu value="#{lignesCmd.quantiteCommande}" colMd="2" required="true" label="quantité :" labelColMd="3"   
+										     style="float:left;margin-left:5%" > 
+						      <f:selectItem itemLabel="Select quantity" itemValue=""/>
+						      <f:selectItem itemLabel="1" itemValue="1"/>
+						      <f:selectItem itemLabel="2" itemValue="2"/>
+						      <f:selectItem itemLabel="3" itemValue="3"/>
+						      <f:selectItem itemLabel="4" itemValue="4"/>
+						      <f:selectItem itemLabel="5" itemValue="5"/>
+			
+						      <!--  
+						      <c:forEach var = "i" begin = "1" end = "5">
+						         <f:selectItem itemLabel="#{i}" itemValue="#{i}"/>
+						      </c:forEach>
+								-->				     
+						      
+						    </b:selectOneMenu>
+						    <i style="margin-right:5%;margin-left:5%;color:lightgrey">|</i>
+						    <h:link >Supprimer</h:link>
+						    
+					</b:row>
+					
+			<!-- prix de la ligne de commande -->		
 			</b:column>
-			<b:column col-xs="6" col-md="9">
-				
+			<b:column col-xs="1" col-md="1">
+					<p style="margin:0;font-weight:300;color:grey "> Prix :</p>
+					<hr style="margin:0" />
+					<p style="margin-top:5px;font-weight:bold;" > #{lignesCmd.montantCommande} € </p>			
 			</b:column>
 			
+			
 		</b:row>
-	
+		
 	
 	</ui:repeat>
 	
@@ -55,6 +128,8 @@
 
 
 </h:form>
+
+      
 
 </h:body>
 </html>
