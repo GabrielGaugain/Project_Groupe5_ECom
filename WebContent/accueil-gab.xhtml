@@ -26,17 +26,17 @@
 			<ui:include src="/templates/navbar.xhtml" />
 		</ui:insert>
         
-   			<b:growl id="growlSpecific" placementFrom="top" show-detail="true"
+   			<b:growl id="growlSpecific" placementFrom="bottom" show-detail="true"
 			         global-only="true"
 			         show-summary="true" allow-dismiss="true"
-			         animation-enter="animated bounceInDown"
+			         animation-enter="animated bounceInUp"
 			         animation-exit="animated flipOutX"
 			         escape="true" />
 			         
 			              
         <!-- Petit message du site (bienvenue) -->
         <b:form style="margin-top:0">
-		<b:container style="width : 100% ;height:6rem; background:#405e35; margin-bottom:20px;margin-top:0; color:#d4d6d3;">
+		<b:container class="bienvenue" style="width : 100% ;height:6rem; background:#405e35; margin-bottom:20px;margin-top:0; color:#d4d6d3;">
 	    	<b:row>
 				<b:column col="12">
 				
@@ -50,7 +50,7 @@
           
    	<!-- Container montrant les produits demandés -->
           	<b:container>
-          	<ui:repeat var="pdt" value="#{produitBean.listeProdMC}" varStatus="status" >
+          	<ui:repeat var="pdt" value="#{produitBean.listeProdDisplayed}" varStatus="status" >
 			
           		
           			<!-- ============================================== -->

@@ -1,7 +1,6 @@
 package com.intiformation.ECommerce.controller;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
@@ -19,31 +18,26 @@ import com.intiformation.ECommerce.dao.ProduitDAOImpl;
 import com.intiformation.ECommerce.modele.Categorie;
 import com.intiformation.ECommerce.modele.Produit;
 
-@ManagedBean(name = "produitBean")
+@ManagedBean(name = "produitBeanBis")
 @SessionScoped
-public class GestionProduitBean implements Serializable {
-
+public class GestionProduitsBis {
 	/* _____________________________props_______________________________ */
-	
-	/*____ Services/DAO ____*/
+
 	IProduitDAO prodDAO;
-	private Collection<Produit> listeProdDisplayed;
 	private Collection<Categorie> listeCateBDD;
-	
+	private Collection<Produit> listeProdBDD;
+	private Collection<Produit> listeProdCateBDD;
 	private Collection<Produit> listeProdMCBDD;
-	
-	
-	/*_______VARS_____*/
 	private Produit produit;
 	private Produit SelectedProd;
 	private long idCategorie ;
 	private String motCle ;
-
+	private boolean coche;
 	
 	/* _____________________________ctors_______________________________ */
-	public GestionProduitBean() {
+	public GestionProduitsBis() {
 		prodDAO = new ProduitDAOImpl();
-		listeProdDisplayed =  prodDAO.getAll();
+		listeProdMCBDD = prodDAO.getAll();
 		motCle = "";
 		
 	}// end ctor vide
@@ -53,21 +47,25 @@ public class GestionProduitBean implements Serializable {
 
 	public Collection<Categorie> getListeCate() {
 		ICategorieDAO catDAO = new CategorieDAOImpl();
-		return listeCateBDD =  catDAO.getAll();
+		return listeCateBDD = catDAO.getAll();
 	}
 	
-
-	/**
-	 * retourn les produits par les mots clés entrés dans la barre de recherche
-	 * @return
-	 */
-	public Collection<Produit> getListeProdByMC() {
-		 return listeProdDisplayed = prodDAO.getByMotCle(motCle) ;
+	public Collection<Produit> getListeProd() {
+		return listeProdBDD = prodDAO.getAll();
 	}
 	
-	public void getAllProd() {
-		listeProdDisplayed = prodDAO.getAll();
+	public Collection<Produit> getListeProdCate() {
+		return listeProdCateBDD = prodDAO.getAllProduitByCategorie(idCategorie);
 	}
+	
+	public Collection<Produit> getListeProdMC() {
+		 return listeProdMCBDD = prodDAO.getByMotCle(motCle) ;
+	}
+	
+	public void addMessage() {
+        String summary = coche ? "Produit ajouté à la sélection" : "Produit retiré de la sélection";
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(summary));
+    }
 	
 	
 	/**
@@ -81,7 +79,7 @@ public class GestionProduitBean implements Serializable {
 		UIParameter uCat = (UIParameter) event.getComponent().findComponent("idCat");
 		long idCategorie = (long) uCat.getValue();
 		
-		listeProdDisplayed = prodDAO.getAllProduitByCategorie(idCategorie);
+		listeProdMCBDD = prodDAO.getAllProduitByCategorie(idCategorie);
 	} 	
 	
 	public void VisuFicheProd(ActionEvent event) {
@@ -100,6 +98,22 @@ public class GestionProduitBean implements Serializable {
 	
 	/* _______________________ GETTERS/SETTERS ________________________________ */
 
+	public IProduitDAO getProdDAO() {
+		return prodDAO;
+	}
+
+	public void setProdDAO(IProduitDAO prodDAO) {
+		this.prodDAO = prodDAO;
+	}
+
+	public Collection<Produit> getListeProdBDD() {
+		return listeProdBDD;
+	}
+
+	public void setListeProdBDD(Collection<Produit> listeProdBDD) {
+		this.listeProdBDD = listeProdBDD;
+	}
+
 	public Produit getProduit() {
 		return produit;
 	}
@@ -107,8 +121,13 @@ public class GestionProduitBean implements Serializable {
 	public void setProduit(Produit produit) {
 		this.produit = produit;
 	}
-
+	public Collection<Produit> getListeProdCateBDD() {
+		return listeProdCateBDD;
+	}
 	
+	public void setListeProdCateBDD(Collection<Produit> listeProdCateBDD) {
+		this.listeProdCateBDD = listeProdCateBDD;
+	}
 
 	public long getIdCategorie() {
 		return idCategorie;
@@ -136,7 +155,6 @@ public class GestionProduitBean implements Serializable {
 
 
 	public void setMotCle(String motCle) {
-		listeProdDisplayed = prodDAO.getByMotCle(motCle) ;
 		this.motCle = motCle;
 	}
 
@@ -151,16 +169,13 @@ public class GestionProduitBean implements Serializable {
 	}
 
 
-	public Collection<Produit> getListeProdDisplayed() {
-		return listeProdDisplayed;
+	public boolean isCoche() {
+		return coche;
 	}
 
 
-	public void setListeProdDisplayed(Collection<Produit> listeProdDisplayed) {
-		this.listeProdDisplayed = listeProdDisplayed;
+	public void setCoche(boolean coche) {
+		this.coche = coche;
 	}
-
-
-
 
 }// end class

@@ -33,23 +33,24 @@
 	
 	
 	        <b:navBar brand="Ecolovie" brandHref="accueil-gab.xhtml" fluid="true" fixed="top" sticky="true" inverse="true">
+	        <b:form>
   			<b:navbarLinks >
-    		
     		 
     			<b:dropMenu value="Catégories" iconAwesome="fa-tags"> 
-    				<b:navLink value="Afficher tous les produits" href="#"></b:navLink>
+    				<b:navCommandLink value="Afficher tous les produits" action="accueil-gab.xhtml" actionListener="#{produitBean.getAllProd()}"></b:navCommandLink>
     				<b:navLink></b:navLink>
-	      			<b:navLink header="Nav header"></b:navLink>
+	      			
 	      			
     				<ui:repeat var="cat" value="#{categorieBean.categories}">
-    					<b:navLink value="#{cat.nomCategorie}"  actionListener="#{produitBean.listeProdMCCate}">
+    					<b:navCommandLink value="#{cat.nomCategorie}" action="accueil-gab.xhtml" actionListener="#{produitBean.getListeProdMCCate}">
     						<f:param id="idCat" value="#{cat.idCategorie}"/>
-    					</b:navLink>
+    					</b:navCommandLink>
     				</ui:repeat>  
       			
     			</b:dropMenu>
     		
   			</b:navbarLinks>
+  			</b:form>
   			
   			<!-- ==================== BARRE DE RECHERCHE DES PDTS ================================================ -->
   			<h:form class="navbar-form navbar-left hidden-md hidden-sm hidden-xs" role="search" style="width:50%;margin-left:8%">

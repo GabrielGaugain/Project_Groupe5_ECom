@@ -41,7 +41,7 @@
 	    	<b:row>
 				<b:column span="12">
 				
-			                <h2 style="margin-top:1rem; margin-left: 10rem ">Bienvenue chez Ecolovie : une nouvelle vie pour l'électroménager</h2>
+			                <h2 style="margin-top:1rem; margin-left: 10rem ">Bienvenue chez Ecolovie </h2>
 			       
 	       		</b:column>
 	        </b:row>
@@ -49,9 +49,9 @@
          </b:container>
           
           
-   	<!-- Container montrant les produits demandés -->
+   		<!-- Container montrant les produits demandés -->
           	<b:container>
-          	<ui:repeat var="pdt" value="#{produitBean.listeProdMC}" varStatus="status" >
+          	<ui:repeat var="pdt" value="#{produitBean.listeProdDisplayed}" varStatus="status" >
 			
           		
 				  	<b:column col-xs="6" col-md="3">
@@ -70,9 +70,9 @@
 				    	</b:thumbnail>  
 				    	
 				    	<f:param id = "idProdSelected" name="idProdSelected" value="#{pdt.idProduit}" />
+				    	
 				    </h:commandLink>
 				     
-				    
 				        		
     				</b:column>
           			

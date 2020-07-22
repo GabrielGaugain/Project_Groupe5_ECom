@@ -32,18 +32,24 @@
 	
 	
 	        <b:navBar brand="Ecolovie" brandHref="accueil-client.xhtml" fluid="true" fixed="top" sticky="true" inverse="true">
+	        <b:form>
   			<b:navbarLinks >
-    			
-    			<b:dropMenu value="Catégories" iconAwesome="fa-tags">   
-      			<b:navLink value="Afficher tous les produits" href="#"></b:navLink>
-     			<b:navLink value="Consulter les produits d’une catégorie" href="#"></b:navLink>
-      			<b:navLink value="Consulter les produits sélectionnés" href="#"></b:navLink>
-      			<b:navLink></b:navLink>
-      			<b:navLink header="Nav header"></b:navLink>
-      			<b:navLink value="Consulter les produits d’une catégorie" href="#" iconAwesome="fa-tags" ></b:navLink>
+    		 
+    			<b:dropMenu value="Catégories" iconAwesome="fa-tags"> 
+    				<b:navCommandLink value="Afficher tous les produits" action="accueil-client.xhtml" actionListener="#{produitBean.getAllProd()}"></b:navCommandLink>
+    				<b:navLink></b:navLink>
+	      			
+	      			
+    				<ui:repeat var="cat" value="#{categorieBean.categories}">
+    					<b:navCommandLink value="#{cat.nomCategorie}"  action="accueil-client.xhtml" actionListener="#{produitBean.getListeProdMCCate}">
+    						<f:param id="idCat" value="#{cat.idCategorie}"/>
+    					</b:navCommandLink>
+    				</ui:repeat>  
       			
     			</b:dropMenu>
+    		
   			</b:navbarLinks>
+  			</b:form>
   			
   			<!-- ==================== BARRE DE RECHERCHE DES PDTS ================================================ -->
   			<h:form class="navbar-form navbar-left hidden-md hidden-sm hidden-xs" role="search" style="width:50%;margin-left:8%">
@@ -73,7 +79,7 @@
 	  			<b:navbarLinks pull="right" >
 	    			<b:navLink value="Panier" icon-awesome="fa-shopping-basket" outcome="panier.xhtml"  ></b:navLink>
 	    			<b:dropMenu value="Mon compte" iconAwesome="fa-user" iconAlign="top" >
-					    <b:navLink value="Se deconnecter" action="#{authentificationBean.deconnecterUtilisateur()}"></b:navLink>
+					    <b:navCommandLink value="Se deconnecter" action="#{authentificationBean.deconnecterUtilisateur()}"></b:navCommandLink>
 					    <b:navLink value="Gestion catégories/produits " outcome="accueil-admin.xhtml"></b:navLink>
 			     	</b:dropMenu>
 			     	

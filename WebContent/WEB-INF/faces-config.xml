@@ -6,56 +6,12 @@
 		============== Configuration de la navigation ====================================== 
 		==================================================================================== 
 		1. règle de navigation pour la page 'accueil.xhtml' ******************************************************** -->
-		<navigation-rule>
-		<!-- 1.1. page de départ -->
-		<from-view-id>/accueil.xhtml</from-view-id>
-		
-		
-		<!-- 1.2. cas de nav : de 'accueil.xhtml' vers 'authentification.xhtml' -->
-		<navigation-case>
-		
-			<!-- redirection vers la page de panier au click sur signin 1.2.1 clé 
-				d'outcom -->
-			<from-outcome>login</from-outcome>
-			<to-view-id>/authentification.xhtml</to-view-id>
-			
-			
-		</navigation-case>
-		<!-- 1.3. cas de nav : de 'accueil.xhtml' vers 'panier.xhtml' -->
-		<navigation-case>
-			<!-- redirection vers la page de panier au click sur pannier 1.3.1 clé 
-				d'outcom -->
-			<from-outcome>gotopanier</from-outcome>
-			<!-- 1.3.2. destination -->
-			<to-view-id>/panier.xhtml</to-view-id>
-			<redirect />
-		</navigation-case>
-		
-		
-		<!-- 1.4. cas de nav : de 'accueil.xhtml' vers 'accueil.xhtml' -->
-		<navigation-case>
-			<!-- redirection vers la page de panier au click sur pannier 1.4.1 clé 
-				d'outcom -->
-			<from-outcome>listaccueil</from-outcome>
-			<!-- 1.4.2. destination -->
-			<to-view-id>/accueil.xhtml</to-view-id>
-			<redirect />
-		</navigation-case>
-		
-		
-		<navigation-case>
-			<from-outcome>gotocommande</from-outcome>
-			<to-view-id>/acces_client/commande.xhtml</to-view-id>
-			<redirect />
-		</navigation-case>
-	</navigation-rule>
-	
-	
-	
+
 	<navigation-rule>
+	
 		<!-- 1.1. page de départ -->
 		<from-view-id>/accueil-gab.xhtml</from-view-id>
-		
+		<!-- <from-view-id>/accueil.xhtml</from-view-id> -->
 		
 		<!-- 1.2. cas de nav : de 'accueil.xhtml' vers 'authentification.xhtml' -->
 		<navigation-case>
@@ -88,18 +44,15 @@
 			<redirect />
 		</navigation-case>
 		
-		
-		<navigation-case>
-			<from-outcome>gotocommande</from-outcome>
-			<to-view-id>/acces_client/commande.xhtml</to-view-id>
-			<redirect />
-		</navigation-case>
+	
 	</navigation-rule>	
 	
 	
 	
+	<!-- **************************************************************************************************** -->
+	<!-- ******** 2. règle de navigation pour la page 'authentification.xhtml' ****************************** -->
+	<!-- **************************************************************************************************** -->
 	
-	<!-- 2. règle de navigation pour la page 'authentification.xhtml' ******************************************************** -->
 	<navigation-rule>
 		<from-view-id>/authentification.xhtml</from-view-id>
 
@@ -109,92 +62,88 @@
 			<to-view-id>/acces_client/accueil-client.xhtml</to-view-id>
 			<redirect />
 		</navigation-case>
+		
 		<!-- redirection vers la page d'accueil pour admin si login d'admin -->
 		<navigation-case>
 			<from-outcome>admin</from-outcome>
 			<to-view-id>/acces_admin/accueil-client.xhtml</to-view-id>
 			<redirect />
 		</navigation-case>
+		
 		<!-- redirection vers la page d'authentification si login incorrect -->
 		<navigation-case>
 			<from-outcome>tryagain</from-outcome>
 			<to-view-id>/authentification.xhtml</to-view-id>
 			<redirect />
 		</navigation-case>
+		
 	</navigation-rule>
 	
-	<!-- 3. règle de navigation pour la page 'panier.xhtml' ******************************************************** -->
+	
+	
+	<!-- **************************************************************************************************** -->
+	<!-- ******* 3. règle de navigation pour la page 'panier.xhtml' ***************************************** -->
+	<!-- **************************************************************************************************** -->
+	
 	<navigation-rule>
 		<from-view-id>/panier.xhtml</from-view-id>
+		
 		<!-- redirection vers l'authentification si le client n'est pas id -->
 		<navigation-case>
 			<from-outcome>commande</from-outcome>
 			<to-view-id>/authentification.xhtml</to-view-id>
 			<redirect />
 		</navigation-case>
+		
 		<!-- redirection vers la page de commande si le client est deja identifié -->
 		<navigation-case>
 			<from-outcome>gotocommande</from-outcome>
 			<to-view-id>/commande.xhtml</to-view-id>
 			<redirect />
 		</navigation-case>
+		
 	</navigation-rule>
-	<application />
-
-	<!--1. règle de navigation pour la page 'accueil.xhtml' ******************************************************** -->
+	
+	
+	
+	<!-- **************************************************************************************************** -->
+	<!-- ****** 4. règle de navigation pour les pages dans access_admin ************************************* -->
+	<!-- **************************************************************************************************** -->
+	
+	<!-- 4.0. règle de nav pour toutes les pages de 'acces_admin' => logout -->
+	<navigation-rule>
+		
+		<from-view-id>/acces_admin/*</from-view-id>
+	
+		<navigation-case>
+			<!-- 4.0.1. clé d'outcom -->
+			<from-outcome>logout</from-outcome>
+			<!-- 4.0.2. page de destination -->
+			<to-view-id>/authentification.xhtml</to-view-id>
+			
+		</navigation-case>
+	</navigation-rule>
+	
+	<!-- 4.1. règle de navigation pour 'access_admin/accueil-admin' -->
 	<navigation-rule>
 
-		<!-- 1.1. page de départ -->
+		<!-- 4.1.1. page de départ -->
 		<from-view-id>/acces_admin/accueil-admin.xhtml</from-view-id>
 
-		<!-- 1.2. cas de navigation : de index.xhtml vers index.xhtml -->
+		<!-- 4.1.2. cas de navigation : de accueil-admin vers edit -->
 		<navigation-case>
-			<!-- 1.2.1. clé d'outcom -->
+			<!-- 4.1.2.1. clé d'outcom -->
 			<from-outcome>edit</from-outcome>
-			<!-- 1.2.2. page de destination -->
+			<!-- 4.1.2.2. page de destination -->
 			<to-view-id>/acces_admin/edit.xhtml</to-view-id>
-		</navigation-case>
-		
-				
-		<navigation-case>
-			<!-- 1.2.1. clé d'outcom -->
-			<from-outcome>logout</from-outcome>
-			<!-- 1.2.2. page de destination -->
-			<to-view-id>/authentification.xhtml</to-view-id>
 		</navigation-case>
 
 	</navigation-rule>
 	
-	<navigation-rule>
 
-		<!-- 1.1. page de départ -->
-		<from-view-id>/acces_admin/accueil-client.xhtml</from-view-id>
-
-		<!-- 1.2. cas de navigation : de index.xhtml vers index.xhtml -->
-		<navigation-case>
-			<!-- 1.2.1. clé d'outcom -->
-			<from-outcome>logoutAdmin</from-outcome>
-			<!-- 1.2.2. page de destination -->
-			<to-view-id>/authentification.xhtml</to-view-id>
-		</navigation-case>
-	</navigation-rule>	
 	
+	<!-- 4.3. règle de navigation pour  'access_admin/edit' -->
 	<navigation-rule>
-
-		<!-- 1.1. page de départ -->
-		<from-view-id>/acces_client/accueil-client.xhtml</from-view-id>
-
-		<!-- 1.2. cas de navigation : de index.xhtml vers index.xhtml -->
-		<navigation-case>
-			<!-- 1.2.1. clé d'outcom -->
-			<from-outcome>logout</from-outcome>
-			<!-- 1.2.2. page de destination -->
-			<to-view-id>/authentification.xhtml</to-view-id>
-		</navigation-case>
-	</navigation-rule>	
-		
-	<navigation-rule>
-
 		<!-- 1.1. page de départ -->
 		<from-view-id>/acces_admin/edit.xhtml</from-view-id>
 
@@ -207,4 +156,27 @@
 		</navigation-case>
 
 	</navigation-rule>
+	
+	
+	<!-- **************************************************************************************************** -->
+	<!-- ****** 5. règle de navigation pour les pages dans access_admin ************************************* -->
+	<!-- **************************************************************************************************** -->
+		
+	<navigation-rule>
+
+		<!-- 5.1. page de départ -->
+		<from-view-id>/acces_client/*</from-view-id>
+
+		<!-- 5.2. cas de navigation : de index.xhtml vers index.xhtml -->
+		<navigation-case>
+			<!-- 5.2.1. clé d'outcom -->
+			<from-outcome>logout</from-outcome>
+			<!-- 5.2.2. page de destination -->
+			<to-view-id>/authentification.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>	
+		
+	
+
+
 </faces-config>

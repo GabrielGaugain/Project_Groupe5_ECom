@@ -27,7 +27,7 @@
 				
 				<!-- image du produit -->
 				<b:column col-xs="4" col-md="5">
-					<img src="resources/images/#{produitBean.produit.urlImageProduit}" alt="failed to read picture" style="max-height:80%;max-width:90%"/>
+					<img src="../resources/images/#{produitBean.produit.urlImageProduit}" alt="failed to read picture" style="max-height:80%;max-width:90%"/>
 				</b:column>
 				
 				<!-- fiche descriptive et interaction -->
@@ -53,7 +53,7 @@
 					    	
 					    
 					    <b:commandButton value="Ajouter au panier" iconAwesome="fa-cart-plus" iconAlign="left"  style="float:right;margin-right:5%" 
-					    		  		 action="accueil-gab.xhtml" actionListener="#{panierBean.ajouterArticleAuPanier}">
+					    		  		 action="accueil-client.xhtml" actionListener="#{panierBean.ajouterArticleAuPanier}">
 					    
 					    	<f:param id="pdtID" name="id" value="#{produitBean.produit.idProduit}"/>
 

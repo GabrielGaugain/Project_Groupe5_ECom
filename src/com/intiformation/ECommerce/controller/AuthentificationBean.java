@@ -68,12 +68,14 @@ public class AuthentificationBean implements Serializable{
 				
 				if(("admin").equals(userStatut)) {
 					//-> navigation vers la page 'accueil-admin.xhtml'
-					return "acces_admin/accueil-client.xhtml";
+					//return "acces_admin/accueil-client.xhtml";
+					return "admin";
 				}
 				
 				else if(("client").equals(userStatut)) {
 					System.out.println("acces_client/accueil-client.xhtml");
-					return "acces_client/accueil-client.xhtml";
+					//return "acces_client/accueil-client.xhtml";
+					return "client";
 				}
 				System.out.println("authentification.xhtml");
 				//-> navigation vers la page 'accueil.xhtml'
@@ -112,6 +114,7 @@ public class AuthentificationBean implements Serializable{
 	
 	
 	public String deconnecterUtilisateur() {
+		
 		System.out.println("dans deconnexion...");
 		// 1. recup du context JSF
 		FacesContext contextJSF = FacesContext.getCurrentInstance();
@@ -127,7 +130,7 @@ public class AuthentificationBean implements Serializable{
 		contextJSF.addMessage(null, facesMessages);
 		
 		// 4. redirection vers 'authentification.xhtml'
-		return "authentification.xhtml?faces-redirect=true";
+		return "logout";
 		
 	}//end deconnecterUtilisateur
 	
