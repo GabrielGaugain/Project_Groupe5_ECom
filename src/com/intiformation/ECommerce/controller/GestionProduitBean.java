@@ -62,10 +62,26 @@ public class GestionProduitBean implements Serializable {
 	public Collection<Produit> getListeProdMC() {
 		 return listeProdMCBDD = prodDAO.getByMotCle(motCle) ;
 	}
+	
 	public void addMessage() {
         String summary = coche ? "Produit ajouté à la sélection" : "Produit retiré de la sélection";
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(summary));
     }
+	
+	
+	/**
+	 * Recup de la liste des prod par categorie 
+	 */
+	public void getListeProdMCCate(ActionEvent event) {
+		// 1. recup context
+		FacesContext contextJSF = FacesContext.getCurrentInstance();		
+		// 2.recup param id du produit
+		
+		UIParameter uCat = (UIParameter) event.getComponent().findComponent("idCat");
+		long idCategorie = (long) uCat.getValue();
+		
+		listeProdMCBDD = prodDAO.getAllProduitByCategorie(idCategorie);
+	} 	
 	
 	public void VisuFicheProd(ActionEvent event) {
 		

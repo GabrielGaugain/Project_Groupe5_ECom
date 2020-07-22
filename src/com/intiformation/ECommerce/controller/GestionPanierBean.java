@@ -1,7 +1,9 @@
 package com.intiformation.ECommerce.controller;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
@@ -32,12 +34,16 @@ public class GestionPanierBean implements Serializable {
 	/* _____________________________props_______________________________ */
 	// ====> Var
 	private Collection<LigneCommande> lignesDeCommande;
+	private ArrayList<Produit> produitLignesDeCmd;
 	private LigneCommande ligneDeCmd;
 	private Panier panierTemp;
 
 	private int quantite;
 	private Produit prodLigne;
-	
+	private Double montantTotal;
+
+
+
 	// ====> service/dao
 	IProduitDAO prodDAO;
 	private ILigneCommandeService ligneCmdService;
@@ -49,7 +55,8 @@ public class GestionPanierBean implements Serializable {
 		prodDAO = new ProduitDAOImpl();
 		ligneCmdService = new LigneCommandeServiceImpl();
 		panierService = new PanierServiceImpl();
-	
+		produitLignesDeCmd = new ArrayList<Produit>();
+		
 		panierTemp = null;
 	}// end ctor vide
 
@@ -71,6 +78,8 @@ public class GestionPanierBean implements Serializable {
 	}//end getCurrentPanierLignes
 
 	
+
+	
 	/**
 	 * Ajout d'une ligne de commande via le button ajouter pannier de 'fiche-produit.xhtml'
 	 * @param event
@@ -84,7 +93,7 @@ public class GestionPanierBean implements Serializable {
 		
 		// 2.recup param id du produit
 		UIParameter uip = (UIParameter) event.getComponent().findComponent("pdtID");
-		System.out.println("quantite dans ajouterPanier : "+quantite);	
+		//System.out.println("quantite dans ajouterPanier : "+quantite);	
 		
 		// 3. init du panier au premier ajout d'un article
 		if (panierTemp ==null) {
@@ -95,8 +104,11 @@ public class GestionPanierBean implements Serializable {
 		
 		// 4. recup du produit via DAO
 		prodLigne = prodDAO.getById((long) uip.getValue() );
+	
+		produitLignesDeCmd.add(prodLigne);
+		
 		double montant = (double) quantite * prodLigne.getPrixProduit();
-		System.out.println("Montant ajouté au panier : "+montant);
+		//System.out.println("Montant ajouté au panier : "+montant);
 		
 		// 5.création de la ligne de cmde a partir de l'article
 		ligneDeCmd = new LigneCommande(quantite, montant, prodLigne.getIdProduit(), panierTemp.getIdPanier());
@@ -193,6 +205,24 @@ public class GestionPanierBean implements Serializable {
 	}
 
 
+	public ArrayList<Produit> getProduitLignesDeCmd() {
+		return produitLignesDeCmd;
+	}
+
+
+	public void setProduitLignesDeCmd(ArrayList<Produit> produitLignesDeCmd) {
+		this.produitLignesDeCmd = produitLignesDeCmd;
+	}
+
+	public Double getMontantTotal() {
+		montantTotal = lignesDeCommande.stream().map(ligne -> ligne.getMontantCommande()).mapToDouble(montant -> (Double) montant).sum();
+		return montantTotal;
+	}
+
+
+	public void setMontantTotal(Double montantTotal) {
+		this.montantTotal = montantTotal;
+	}
 
 	
 

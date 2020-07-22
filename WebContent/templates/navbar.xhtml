@@ -36,13 +36,16 @@
   			<b:navbarLinks >
     		
     		 
-    			<b:dropMenu value="Catégories" iconAwesome="fa-tags">   
-	      			<b:navLink value="Afficher tous les produits" href="#"></b:navLink>
-	     			<b:navLink value="Consulter les produits d’une catégorie" href="#"></b:navLink>
-	      			<b:navLink value="Consulter les produits sélectionnés" href="#"></b:navLink>
-	      			<b:navLink></b:navLink>
+    			<b:dropMenu value="Catégories" iconAwesome="fa-tags"> 
+    				<b:navLink value="Afficher tous les produits" href="#"></b:navLink>
+    				<b:navLink></b:navLink>
 	      			<b:navLink header="Nav header"></b:navLink>
-	      			<b:navLink value="Consulter les produits d’une catégorie" href="#" iconAwesome="fa-tags" ></b:navLink>
+	      			
+    				<ui:repeat var="cat" value="#{categorieBean.categories}">
+    					<b:navLink value="#{cat.nomCategorie}"  actionListener="#{produitBean.listeProdMCCate}">
+    						<f:param id="idCat" value="#{cat.idCategorie}"/>
+    					</b:navLink>
+    				</ui:repeat>  
       			
     			</b:dropMenu>
     		
