@@ -56,7 +56,25 @@ public class GestionProduitBean implements Serializable {
 		return listeCateBDD =  catDAO.getAll();
 	}
 	
-
+	/**
+	 * pour la gestion des quantité dans les selectonemenu
+	 * @return
+	 */
+	public List<Integer> listMaxQte(){
+		
+		// init de la liste
+		List<Integer> listQte = new ArrayList<Integer>();
+		
+		// remplissage de la liste de 1 jusqu'à produit.quantite (stock dispo)
+		for(int qte=1; qte<=produit.getQuantite(); qte++) {
+			listQte.add(qte);
+			
+		}	
+		
+		return listQte;
+		
+	}	
+	
 	/**
 	 * retourn les produits par les mots clés entrés dans la barre de recherche
 	 * @return

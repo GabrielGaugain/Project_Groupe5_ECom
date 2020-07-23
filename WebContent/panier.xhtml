@@ -80,22 +80,19 @@
 					<b:row>
 						<b:selectOneMenu value="#{lignesCmd.quantiteCommande}" colMd="2" required="true" label="quantité :" labelColMd="3"   
 										 style="float:left;margin-left:5%" > 
-										     
+										    
 							<f:selectItem itemLabel="Select quantity" itemValue=""/>
-
 							<f:selectItems value="#{panierBean.listMaxQte()}" var="qute" itemValue="#{qute}" itemLabel="#{qute}" />	
-							
-
-						      <!--  
-		
-								-->				     
-						      
-						    </b:selectOneMenu>
+													      
+						</b:selectOneMenu>
 						    
-						    <!--  Séparateur -->
-						    <i style="margin-right:5%;margin-left:5%;color:lightgrey">|</i>
+						<!--  Séparateur -->
+						<i style="margin-right:5%;margin-left:5%;color:lightgrey">|</i>
 						    
-						    <h:commandLink >Supprimer</h:commandLink>
+						<h:commandLink action="#" actionListener="#{panierBean.supprimerArticleDuPanier}" >
+							Supprimer
+							<f:param id = "idligneToDel" name="idligneToDel" value="#{lignesCmd.idLigneCommande}" />
+						</h:commandLink>
 						    
 					</b:row>
 		

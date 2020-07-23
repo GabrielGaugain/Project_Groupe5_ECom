@@ -87,6 +87,10 @@ public class GestionPanierBean implements Serializable {
 		return prodLigne;
 	}
 	
+	/**
+	 * Création d'une liste des quantités possible en fonction des stocks
+	 * @return
+	 */
 	public List<Integer> listMaxQte(){
 		
 		// init de la liste
@@ -94,12 +98,9 @@ public class GestionPanierBean implements Serializable {
 		
 		// remplissage de la liste de 1 jusqu'à produit.quantite (stock dispo)
 		for(int qte=1; qte<=prodLigne.getQuantite(); qte++) {
-			listQte.add(qte);
-			
-		}	
-		
-		return listQte;
-		
+			listQte.add(qte);		
+		}			
+		return listQte;	
 	}
 
 	
@@ -169,6 +170,44 @@ public class GestionPanierBean implements Serializable {
 		
 	}//end ajouterArticleAuPanier
 	
+	/**
+	 * Méthode pour supprimer un article du panier = supprimer de la liste
+	 * 	des lignesDeCmde
+	 * @param event
+	 */
+	public void supprimerArticleDuPanier(ActionEvent event) {
+		
+		System.out.println("Dans supprimerArticleDuPanier ....");
+		
+		// 1. recup context
+		FacesContext contextJSF = FacesContext.getCurrentInstance();
+		
+		// 2.recup param id du produit
+		UIParameter uidLigne = (UIParameter) event.getComponent().findComponent("idligneToDel");
+		//System.out.println("quantite dans ajouterPanier : "+quantite);	
+		
+		// 3. suppression via le service
+		if ( ligneCmdService.supprimerLigneCommande((long) uidLigne.getValue()) ) {
+
+			// 4. rechargement de la liste des lignes dans le panier
+			lignesDeCommande =  (ArrayList<LigneCommande>) this.getLignesCommandeByPanier(panierTemp.getIdPanier());
+			
+			// 5. ajout d'un message 'article ajouté au panier'
+			contextJSF.addMessage(null,
+					  new FacesMessage(FacesMessage.SEVERITY_INFO,
+							  	       "suppression panier",
+							  		   " - l'article a été supprimé du panier")
+					  );			
+		}else {
+			// 5.bis ajout d'un message d'echec
+			contextJSF.addMessage(null,
+					  			  new FacesMessage(FacesMessage.SEVERITY_FATAL,
+							  	       "suppression panier",
+							  		   " - la suppression de l'article du panier a échouée")
+					  );			
+		}//end else
+		
+	}//supprimerArticleDuPanier
 	
 	/**
 	 * 

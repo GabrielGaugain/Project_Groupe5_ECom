@@ -76,24 +76,21 @@
 					
 					<p>#{prod.quantite}</p>
 					<b:row>
-							<b:selectOneMenu value="#{lignesCmd.quantiteCommande}" colMd="2" required="true" label="quantité :" labelColMd="3"   
-										     style="float:left;margin-left:5%" > 
-						      <f:selectItem itemLabel="Select quantity" itemValue=""/>
-						      <f:selectItem itemLabel="1" itemValue="1"/>
-						      <f:selectItem itemLabel="2" itemValue="2"/>
-						      <f:selectItem itemLabel="3" itemValue="3"/>
-						      <f:selectItem itemLabel="4" itemValue="4"/>
-						      <f:selectItem itemLabel="5" itemValue="5"/>
-			
-						      <!--  
-						      <c:forEach var = "i" begin = "1" end = "5">
-						         <f:selectItem itemLabel="#{i}" itemValue="#{i}"/>
-						      </c:forEach>
-								-->				     
-						      
-						    </b:selectOneMenu>
-						    <i style="margin-right:5%;margin-left:5%;color:lightgrey">|</i>
-						    <h:link >Supprimer</h:link>
+						<b:selectOneMenu value="#{lignesCmd.quantiteCommande}" colMd="2" required="true" label="quantité :" labelColMd="3"   
+										 style="float:left;margin-left:5%" > 
+										    
+							<f:selectItem itemLabel="Select quantity" itemValue=""/>
+							<f:selectItems value="#{panierBean.listMaxQte()}" var="qute" itemValue="#{qute}" itemLabel="#{qute}" />	
+													      
+						</b:selectOneMenu>
+						    
+						<!--  Séparateur -->
+						<i style="margin-right:5%;margin-left:5%;color:lightgrey">|</i>
+						    
+						<h:commandLink action="#" actionListener="#{panierBean.supprimerArticleDuPanier}" >
+							Supprimer
+							<f:param id = "idligneToDel" name="idligneToDel" value="#{lignesCmd.idLigneCommande}" />
+						</h:commandLink>
 						    
 					</b:row>
 					
@@ -117,6 +114,7 @@
 
 </h:form>
 
+<div class="clear" style="clear:both"></div>
 		<!-- ==== Footer ====== -->
         <ui:insert name="footer">
 			<ui:include src="/templates/footer.xhtml" />
