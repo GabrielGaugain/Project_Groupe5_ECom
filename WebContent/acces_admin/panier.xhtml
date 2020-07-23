@@ -41,14 +41,15 @@
 		<b:container class="detail-cmd" style="">
 			<h4>Sous-total : <b>#{panierBean.montantTotal} €</b></h4>
 			<br/>
-			<b:button value="Passer la commande" look="success" style="color:#282828"></b:button>
+			<b:commandButton value="Passer la commande" look="success" style="color:#282828" 
+							 action="gotocommande" actionListener="#{panierBean.passerLaCommande}" />
 		</b:container>
 
 	<b:container style="float:left;margin-left:3%;width:73%;">
 	
 	<ui:repeat var="lignesCmd" value="#{panierBean.lignesDeCommande}" varStatus="status" >
-		<ui:param name="prod" value="#{panierBean.produitLignesDeCmd.get( status.index)}"/>
 		
+		<ui:param name="prod" value="#{panierBean.getCurrentProd(lignesCmd) }"/>
 		
 		<b:row class = "ligne-cmd">
 			
@@ -79,7 +80,7 @@
 						<!--  Séparateur -->
 						<i style="margin-right:5%;margin-left:5%;color:lightgrey">|</i>
 						    
-						<h:commandLink action="#" actionListener="#{panierBean.supprimerArticleDuPanier}" >
+						<h:commandLink  actionListener="#{panierBean.supprimerArticleDuPanier}" >
 							Supprimer
 							<f:param id = "idligneToDel" name="idligneToDel" value="#{lignesCmd.idLigneCommande}" />
 						</h:commandLink>

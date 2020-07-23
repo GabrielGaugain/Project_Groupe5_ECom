@@ -44,7 +44,8 @@
 		<b:container class="detail-cmd" style="">
 			<h4>Sous-total : <b>#{panierBean.montantTotal} €</b></h4>
 			<br/>
-			<b:button value="Passer la commande" look="success" style="color:#282828"></b:button>
+			<b:button value="Passer la commande" look="success" style="color:#282828"  
+					  outcome="login"/>
 		</b:container>
 
 
@@ -57,7 +58,7 @@
 	<ui:repeat var="lignesCmd" value="#{panierBean.lignesDeCommande}" varStatus="status" >
 	
 	
-		<!--  <ui:param name="prod" value="#{panierBean.produitLignesDeCmd.get( status.index)}"/>-->
+	
 		<ui:param name="prod" value="#{panierBean.getCurrentProd(lignesCmd) }"/>
 		
 		<b:row class = "ligne-cmd">

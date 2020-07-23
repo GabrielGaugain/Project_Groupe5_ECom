@@ -3,9 +3,7 @@
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:b="http://bootsfaces.net/ui"
-      xmlns:fmt="http://java.sun.com/jsp/jstl/fmt"
-      xmlns:c="http://java.sun.com/jstl/core">
+      xmlns:b="http://bootsfaces.net/ui">
 
 
 <h:head>
@@ -37,6 +35,13 @@
 	
 	<h:form >	
 	
+   			<b:growl id="growlSpecific" placementFrom="top" show-detail="true"
+			         global-only="true"
+			         show-summary="true" allow-dismiss="true"
+			         animation-enter="animated bounceInUp"
+			         animation-exit="animated flipOutX"
+			         escape="true" />	
+	
 		<!-- ============================================================== -->
 		<!-- ===========Recap et bouton de cmd ============================ -->
 		<!-- ============================================================== -->
@@ -44,7 +49,8 @@
 		<b:container class="detail-cmd" style="">
 			<h4>Sous-total : <b>#{panierBean.montantTotal} €</b></h4>
 			<br/>
-			<b:button value="Passer la commande" look="success" style="color:#282828"></b:button>
+			<b:commandButton value="Passer la commande" look="success" style="color:#282828" 
+							 action="gotocommande" actionListener="#{panierBean.passerLaCommande}" />
 		</b:container>
 
 
@@ -55,7 +61,8 @@
 	<b:container style="float:left;margin-left:3%;width:73%;">
 	
 	<ui:repeat var="lignesCmd" value="#{panierBean.lignesDeCommande}" varStatus="status" >
-		<ui:param name="prod" value="#{panierBean.produitLignesDeCmd.get( status.index)}"/>
+		
+		<ui:param name="prod" value="#{panierBean.getCurrentProd(lignesCmd) }"/>
 		
 		
 		<b:row class = "ligne-cmd">
@@ -87,7 +94,7 @@
 						<!--  Séparateur -->
 						<i style="margin-right:5%;margin-left:5%;color:lightgrey">|</i>
 						    
-						<h:commandLink action="#" actionListener="#{panierBean.supprimerArticleDuPanier}" >
+						<h:commandLink  actionListener="#{panierBean.supprimerArticleDuPanier}" >
 							Supprimer
 							<f:param id = "idligneToDel" name="idligneToDel" value="#{lignesCmd.idLigneCommande}" />
 						</h:commandLink>

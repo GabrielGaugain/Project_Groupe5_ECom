@@ -47,6 +47,22 @@
 	
 	</navigation-rule>	
 	
+	<navigation-rule>
+		<!-- 0.1. page de départ -->
+		<from-view-id>/*</from-view-id>
+	
+		
+		<!-- 0.2. cas de nav : de 'accueil.xhtml' vers 'authentification.xhtml' -->
+		<navigation-case>
+		
+			<!-- redirection vers la page de panier au click sur signin 1.2.1 clé 
+				d'outcom -->
+			<from-outcome>login</from-outcome>
+			<to-view-id>/authentification.xhtml</to-view-id>
+			
+			
+		</navigation-case>	
+	</navigation-rule>
 	
 	
 	<!-- **************************************************************************************************** -->
@@ -86,24 +102,28 @@
 	<!-- **************************************************************************************************** -->
 	
 	<navigation-rule>
-		<from-view-id>/panier.xhtml</from-view-id>
-		
-		<!-- redirection vers l'authentification si le client n'est pas id -->
-		<navigation-case>
-			<from-outcome>commande</from-outcome>
-			<to-view-id>/authentification.xhtml</to-view-id>
-			<redirect />
-		</navigation-case>
-		
+		<from-view-id>/acces_client/panier.xhtml</from-view-id>
+			
 		<!-- redirection vers la page de commande si le client est deja identifié -->
 		<navigation-case>
 			<from-outcome>gotocommande</from-outcome>
-			<to-view-id>/commande.xhtml</to-view-id>
+			<to-view-id>/acces_client/commande.xhtml</to-view-id>
 			<redirect />
 		</navigation-case>
 		
 	</navigation-rule>
-	
+
+	<navigation-rule>
+		<from-view-id>/acces_admin/panier.xhtml</from-view-id>
+			
+		<!-- redirection vers la page de commande si le client est deja identifié -->
+		<navigation-case>
+			<from-outcome>gotocommande</from-outcome>
+			<to-view-id>/acces_client/commande.xhtml</to-view-id>
+			<redirect />
+		</navigation-case>
+		
+	</navigation-rule>	
 	
 	
 	<!-- **************************************************************************************************** -->
@@ -177,6 +197,6 @@
 	</navigation-rule>	
 		
 	
-
+	
 
 </faces-config>

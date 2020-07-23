@@ -209,13 +209,73 @@ public class GestionPanierBean implements Serializable {
 		
 	}//supprimerArticleDuPanier
 	
-	/**
-	 * 
-	 * @param event
-	 */
-	public void recupArticle(ActionEvent event) {
+	
+	public void passerLaCommande(ActionEvent event) {
 		
-	}//end recupArticle
+		System.out.println("Dans passerLaCommande ....");
+		
+		// 1. recup context
+		FacesContext contextJSF = FacesContext.getCurrentInstance();
+
+		/*
+		// 2. declaration d'un iterateur sur lignesDeCOmmande
+		Iterator<LigneCommande> it = lignesDeCommande.iterator();
+		
+		// 3. parcours de la liste avec l'itérateur
+		
+		while(it.hasNext()) {
+			ligneDeCmd = it.next();
+			
+			// 3.0. modification de la quantite du pd dans la bdd
+			Produit prodToUpdate = prodDAO.getById( ligneDeCmd.getIdProduit() );	
+			prodToUpdate.setQuantite( prodToUpdate.getQuantite() - ligneDeCmd.getQuantiteCommande() );
+			prodDAO.update(prodToUpdate);				
+			
+			// 3.1. suppression de la ligne dans la bdd
+			ligneCmdService.supprimerLigneCommande(ligneDeCmd.getIdLigneCommande());
+			
+			// 3.2. suppression de la ligne dans la var locale
+			it.remove();
+			
+		}//end while
+		*/
+		 
+		
+		// 4. suppression du panier vide
+		if( panierService.supprimerPanier(panierTemp.getIdPanier()) ) {
+			
+			System.out.println("Suppression panier reussie");
+			
+			lignesDeCommande.clear();
+			
+			// 5. remise a zero du panier
+			panierTemp = null;
+			
+			//6. affichage du message
+			contextJSF.addMessage(null,
+					  new FacesMessage(FacesMessage.SEVERITY_INFO,
+							  	       "Commande validée",
+							  		   " - la commande a bien été passée")
+					  );			
+			
+			
+		}else {
+			
+			System.out.println("Suppression panier echouée");
+			//6.bis affichage du message
+			contextJSF.addMessage(null,
+		  			  new FacesMessage(FacesMessage.SEVERITY_FATAL,
+				  	       "Commande invalidée",
+				  		   " - la suppression du panier a échouée")
+		  );		
+			
+		}//end else
+		
+		panierTemp = null;
+	}//end passerLaCommande
+	
+	
+
 
 	/* _____________________________Getter/setters_______________________________ */	
 	

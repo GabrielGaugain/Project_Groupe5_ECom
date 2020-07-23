@@ -123,9 +123,10 @@ INSERT INTO clients (nom_client, adresse_client, email_client, telephone_client)
 INSERT INTO commandes (date_commande ,id_client) values ('10.01.2020',1);
 INSERT INTO lignescommandes (quantite_commande ,montant_commande,id_produit ,id_commande ,id_panier ) values (3,300.22, 1, 1, 1);
 
-insert into lignescommandes (quantite_commande ,montant_commande,id_produit ,id_commande ,id_panier) values (3,300.00, 5 ,null,2);
+
 
 delete from produits where id_produit =5;
+
 
 -- tests
 

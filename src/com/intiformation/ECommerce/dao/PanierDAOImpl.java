@@ -64,7 +64,7 @@ public class PanierDAOImpl implements IPanierDAO {
 			int verif1 = ps1.executeUpdate();
 			int verif = ps.executeUpdate();
 
-			return verif == 0 ? false : true && verif1 == 0 ? false : true;
+			return (verif == 1)&&(verif1 == 1);
 
 		} catch (SQLException e) {
 			e.printStackTrace();
