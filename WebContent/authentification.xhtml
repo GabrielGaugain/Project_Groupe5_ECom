@@ -15,12 +15,33 @@
 	-->
     <style type="text/css">
 
+		.separator-text {
+		    display: flex;
+		    align-items: center;
+		    text-align: center;
+		    color:#bdbdbd;
+		    margin-bottom:15px;
+		}
+		.separator-text::before, .separator-text::after {
+		    content: '';
+		    flex: 1;
+		    border-bottom: 1px solid #bdbdbd;
+		    color:grey;
+		}
+		.separator-text::before {
+		    margin-right: .25em;
+		}
+		.separator-text::after {
+		    margin-left: .25em;
+		}
+
+
     </style>	
 	
 </h:head>
 
 
-<h:body style="padding-top: 60px; background-color: #d4d4d4;">
+<h:body style="padding: 60px 60px;">
 
 
 	<!-- ============================================================================== -->
@@ -29,7 +50,7 @@
 	
 	
 	<h:form >
-	     <b:container style=" max-width: 400px;">
+	     <b:container style=" max-width: 400px;border:1px solid lightgrey;border-radius:15px;padding-top: 40px;padding-bottom: 40px;">
  
             <h:form styleClass="form-signin" prependId="false" horizontal="true">
  
@@ -50,16 +71,16 @@
 			<br/><br/>
             
             
-                <h2 class="form-signin-heading">Veuillez vous connecter</h2>
+                <h2 class="form-signin-heading" style="text-align: center">Veuillez vous connecter</h2>
                 
-                <b:inputText id="email" placeholder="Addresse email" 
+                <b:inputText id="username" placeholder="Nom d'utilisateur" 
                 		     required="true" requiredMessage="Identifiant obligatoire" 
                 		     value="#{authentificationBean.userIdentifiant}" >
                     <f:facet name="prepend">
                         <b:icon name="user" />
                     </f:facet>
                 </b:inputText>
-                <h:message for="email" styleClass="error"/>
+                <h:message for="username" styleClass="error"/>
               
                 <b:inputSecret id="password" placeholder="Password" type="Mot de Passe"  
                 		     required="true" requiredMessage="Identifiant obligatoire"
@@ -75,7 +96,29 @@
             
             </h:form>
         </b:container>
+        <br/>
+        
+        <b:container style=" max-width: 400px;text-align:center">
+			<div class="separator-text">Nouveau chez Ecolovie ?</div>
+			
+			<b:button value="Créer votre compte" outcome="registration.xhtml" style="max-width:400px;" />
+	    </b:container>
+	    
 	</h:form>
+	
+
+	
+	
+	
+		
+		<!-- ==== Footer ====== -->
+		<b:container style="width : 100% ;padding-top: 50px; padding-left: 50px; padding-right: 50px; padding-bottom: 20px;">
+  
+            <hr/>
+            <footer style="width : 100% ; text-align:center">
+            <p>2020 Ecolovie Copyright © Gab&#x26;Cam </p>
+            </footer>
+        </b:container>
 	
 </h:body>
 </html>

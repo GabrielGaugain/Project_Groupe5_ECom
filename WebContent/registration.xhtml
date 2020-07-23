@@ -1,0 +1,96 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:b="http://bootsfaces.net/ui">
+
+<h:head>
+	<title> Registration </title>
+
+	<!--  lien vers la feuille de style bibliotheque.css -->
+	<!--  
+	<h:outputStylesheet library="style" name="accueil.css"></h:outputStylesheet>
+	-->
+    <style type="text/css">
+
+    </style>	
+	
+</h:head>
+
+<h:body style="padding: 60px 60px; ">
+
+	<b:form>
+
+         <!-- affichage des faces messages -->
+         <b:growl id="growlSpecific" placementFrom="top" show-detail="true"
+			      global-only="true"
+			      show-summary="true" allow-dismiss="true"
+			      animation-enter="animated bounceInDown"
+			      animation-exit="animated flipOutX"
+			      escape="true" />
+	
+		<b:container style=" max-width: 400px; border:1px solid lightgrey;border-radius:15px; ">
+		
+			<h2 class="form-signin-heading" style="text-align: center">Créer un compte</h2>
+		
+              <b:inputText id="username" placeholder="Nom d'utilisateur" 
+              				label="nom d'utilisateur : "
+                		     required="true" requiredMessage="Identifiant obligatoire" 
+                		     value="#{utilisateurBean.userIdentifiant}" >
+                    <f:facet name="prepend">
+                        <b:icon name="user" />
+                    </f:facet>
+                </b:inputText>
+                <h:message for="username" styleClass="error"/>
+              
+                <b:inputSecret id="password" placeholder="Password" type="Mot de Passe" 
+                			 label="mot de passe : " 
+                		     required="true" requiredMessage="Mot de passe obligatoire"
+                		     value="#{utilisateurBean.userMotDePasse}" >
+                    <f:facet name="prepend">
+                        <b:iconAwesome name="key" />
+                    </f:facet>
+                </b:inputSecret>
+                <h:message for="password" styleClass="error"/>
+  
+                <b:inputSecret id="passwordAgain" placeholder="Password" type="Mot de Passe" 
+                			 label="Entrer votre mot de passe à nouveau : " 
+                		     required="true" requiredMessage="Mot de passe obligatoire"
+                		     value="#{utilisateurBean.userMotDePasseAgain}" >
+                    <f:facet name="prepend">
+                        <b:iconAwesome name="key" />
+                    </f:facet>
+                </b:inputSecret>
+                <h:message for="passwordAgain" styleClass="error"/>                
+                
+                <br/>
+             
+                <b:commandButton look="success btn-block" value="Créer votre compte Ecolovie"  size="lg" 
+                				 action="#{utilisateurBean.creerCompte()}" 
+                				 style="margin-bottom:20px"/>		
+				
+				
+				<hr style="margin:20px 15px" />
+				
+				<p style="text-align: center" >Vous possèdez déjà un compte ? <h:link value=" connectez vous !" outcome="authentification.xhtml"></h:link></p>
+				
+		</b:container>
+	
+	</b:form>
+
+
+
+	
+		<!-- ==== Footer ====== -->
+		<b:container style="width : 100% ;padding-top: 50px; padding-left: 50px; padding-right: 50px; padding-bottom: 20px;">
+  
+            <hr/>
+            <footer style="width : 100% ; text-align:center">
+            <p>2020 Ecolovie Copyright © Gab&#x26;Cam </p>
+            </footer>
+        </b:container>
+        
+</h:body>
+
+</html>

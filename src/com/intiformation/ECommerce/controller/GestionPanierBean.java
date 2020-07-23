@@ -38,7 +38,8 @@ public class GestionPanierBean implements Serializable {
 	private ArrayList<Produit> produitLignesDeCmd;
 	private LigneCommande ligneDeCmd;
 	private Panier panierTemp;
-
+	//private ArrayList<Integer> listQuantite;
+	
 	private int quantite;
 	private Produit prodLigne;
 	private Double montantTotal;
@@ -53,11 +54,13 @@ public class GestionPanierBean implements Serializable {
 	
 	/* _____________________________ctors_______________________________ */
 	public GestionPanierBean() {
+		
 		prodDAO = new ProduitDAOImpl();
 		ligneCmdService = new LigneCommandeServiceImpl();
 		panierService = new PanierServiceImpl();
-		produitLignesDeCmd = new ArrayList<Produit>();
 		
+		produitLignesDeCmd = new ArrayList<Produit>();
+		//listQuantite = new ArrayList<>();
 		lignesDeCommande = new ArrayList<>();
 		
 		panierTemp = null;
@@ -232,6 +235,9 @@ public class GestionPanierBean implements Serializable {
 	public void setMontantTotal(Double montantTotal) {
 		this.montantTotal = montantTotal;
 	}
+
+
+
 
 	
 
