@@ -11,29 +11,10 @@
 <h:head>
 	<title> Pannier </title>	
 	
-	<style>
-		.ligne-cmd{
-			
-			border: 1px solid lightgrey;
-			border-radius: 20px;
-			padding : 5px 3px 5px 3px;
-			margin-bottom: 2px;
-		}
-		
-		
-		.detail-cmd{
-			float:right;
-			width:20%;
-			height:30vh;
-			margin-right:1%;
-			
-			text-align:center;
-			background:#eeeeee;
-			border: solid 1px lightgrey;
-			border-radius: 10px;
-			
-		}
-	</style>	
+    <!-- Style perso pour le panier -->
+	<link rel="stylesheet" href="resources/style/style_panier.css"/>	
+	
+	
 	
 </h:head>
 
@@ -73,7 +54,7 @@
 		<!-- ===========container des lignes de cmd ======================= -->
 		<!-- ============================================================== -->
 		
-	<b:container style="float:left;margin-left:3%;width:73%;">
+	<b:container style="float:left;margin-left:3%;width:73%;height:95%;">
 	
 	<ui:repeat var="lignesCmd" value="#{panierBean.lignesDeCommande}" varStatus="status" >
 	
@@ -113,10 +94,6 @@
 
 						      <!--  
 		
-						      
-						      <c:forEach var = "i" begin = "1" end = "5">
-						         <f:selectItem itemLabel="#{i}" itemValue="#{i}"/>
-						      </c:forEach>
 								-->				     
 						      
 						    </b:selectOneMenu>
@@ -145,7 +122,10 @@
 
 </h:form>
 
-      
+ 		<!-- ==== Footer ====== -->
+        <ui:insert name="footer">
+			<ui:include src="/templates/footer.xhtml" />
+		</ui:insert>   
 
 </h:body>
 </html>

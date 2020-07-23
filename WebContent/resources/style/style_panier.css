@@ -1,0 +1,29 @@
+@charset "ISO-8859-1";
+
+
+		.ligne-cmd{
+			
+			border: 1px solid lightgrey;
+			border-radius: 20px;
+			padding : 5px 3px 5px 3px;
+			margin-bottom: 2px;
+		}
+		
+		
+		.detail-cmd{
+			float:right;
+			width:20%;
+			height:30vh;
+			margin-right:1%;
+			
+			text-align:center;
+			background:#eeeeee;
+			border: solid 1px lightgrey;
+			border-radius: 10px;
+			
+		}
+		
+		.footer{
+			position:absolute;
+			bottom:0;
+		}

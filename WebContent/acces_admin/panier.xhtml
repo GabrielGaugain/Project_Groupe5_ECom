@@ -10,30 +10,10 @@
 
 <h:head>
 	<title> Pannier </title>	
+
+    <!-- Style perso pour le panier -->
+	<link rel="stylesheet" href="../resources/style/style_panier.css"/>
 	
-	<style>
-		.ligne-cmd{
-			
-			border: 1px solid lightgrey;
-			border-radius: 20px;
-			padding : 5px 3px 5px 3px;
-			margin-bottom: 2px;
-		}
-		
-		
-		.detail-cmd{
-			float:right;
-			width:20%;
-			height:30vh;
-			margin-right:1%;
-			
-			text-align:center;
-			background:#eeeeee;
-			border: solid 1px lightgrey;
-			border-radius: 10px;
-			
-		}
-	</style>	
 	
 </h:head>
 
@@ -129,7 +109,10 @@
 
 </h:form>
 
-      
+ 		<!-- ==== Footer ====== -->
+        <ui:insert name="footer">
+			<ui:include src="/templates/footer.xhtml" />
+		</ui:insert>     
 
 </h:body>
 </html>

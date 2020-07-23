@@ -37,7 +37,7 @@
 					<p><b>prix : </b>  #{produitBean.produit.prixProduit}</p>
 					<h4>Decription :</h4>
 					<p> #{produitBean.produit.descriptionProduit}</p>
-					
+					<p style="color:green">#{produitBean.produit.quantite} disponibles</p>
 					 <br/> <br/>
 					 
 					  	<b:row name="footer">
@@ -70,6 +70,10 @@
 			
 			</h:form>
 			
+		<!-- ==== Footer ====== -->
+        <ui:insert name="footer">
+			<ui:include src="/templates/footer.xhtml" />
+		</ui:insert>			
 			
 	</h:body>
 </html>

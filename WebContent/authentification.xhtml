@@ -41,7 +41,7 @@
 </h:head>
 
 
-<h:body style="padding: 60px 60px;">
+<h:body >
 
 
 	<!-- ============================================================================== -->
@@ -49,7 +49,7 @@
 	<!-- ============================================================================== -->
 	
 	
-	<h:form >
+	<h:form style="padding: 60px 60px;">
 	     <b:container style=" max-width: 400px;border:1px solid lightgrey;border-radius:15px;padding-top: 40px;padding-bottom: 40px;">
  
             <h:form styleClass="form-signin" prependId="false" horizontal="true">
@@ -112,13 +112,10 @@
 	
 		
 		<!-- ==== Footer ====== -->
-		<b:container style="width : 100% ;padding-top: 50px; padding-left: 50px; padding-right: 50px; padding-bottom: 20px;">
-  
-            <hr/>
-            <footer style="width : 100% ; text-align:center">
-            <p>2020 Ecolovie Copyright © Gab&#x26;Cam </p>
-            </footer>
-        </b:container>
+        <ui:insert name="footer">
+			<ui:include src="/templates/footer.xhtml" />
+		</ui:insert>
 	
 </h:body>
+
 </html>

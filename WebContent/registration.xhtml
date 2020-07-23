@@ -18,9 +18,9 @@
 	
 </h:head>
 
-<h:body style="padding: 60px 60px; ">
+<h:body >
 
-	<b:form>
+	<b:form style="padding: 60px 60px; ">
 
          <!-- affichage des faces messages -->
          <b:growl id="growlSpecific" placementFrom="top" show-detail="true"
@@ -83,13 +83,9 @@
 
 	
 		<!-- ==== Footer ====== -->
-		<b:container style="width : 100% ;padding-top: 50px; padding-left: 50px; padding-right: 50px; padding-bottom: 20px;">
-  
-            <hr/>
-            <footer style="width : 100% ; text-align:center">
-            <p>2020 Ecolovie Copyright © Gab&#x26;Cam </p>
-            </footer>
-        </b:container>
+        <ui:insert name="footer">
+			<ui:include src="/templates/footer.xhtml" />
+		</ui:insert>
         
 </h:body>
 
