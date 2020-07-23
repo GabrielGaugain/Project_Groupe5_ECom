@@ -97,6 +97,12 @@ INSERT INTO photos (url_photo, nom_photo) VALUE ('test.jpg','test');
 INSERT INTO photos (url_photo, nom_photo) VALUE ('asus_rog.jpg','asus');
 INSERT INTO photos (url_photo, nom_photo) VALUE ('macbook.jpg','macbook');
 INSERT INTO photos (url_photo, nom_photo) VALUE ('testbleu.jpg','testbleu');
+INSERT INTO photos (url_photo, nom_photo) VALUE ('machine_a_laver.jpg','machine_a_laver');
+INSERT INTO photos (url_photo, nom_photo) VALUE ('panda1.GIF','panda1');
+INSERT INTO photos (url_photo, nom_photo) VALUE ('panda2.GIF','panda2');
+INSERT INTO photos (url_photo, nom_photo) VALUE ('panda3.GIF','panda3');
+INSERT INTO photos (url_photo, nom_photo) VALUE ('panda4.GIF','panda4');
+INSERT INTO photos (url_photo, nom_photo) VALUE ('panda5.GIF','panda5');
 
 INSERT INTO categories (nom_categorie,description_categorie,url_photo) VALUES ('Categorie_Test','Cette catégorie a été inventée pour réaliser des tests sur la bdd','testbleu.jpg') ;
 INSERT INTO categories (nom_categorie,description_categorie,url_photo) VALUES ('Categorie_Test2','Cette catégorie a été inventée ','testbleu.jpg') ;

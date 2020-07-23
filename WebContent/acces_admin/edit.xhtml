@@ -16,53 +16,57 @@
 
 <h:body>
 
-<!-- déconnexion -->
-	<h:panelGroup styleClass="deconnect">
-		<h:form>
-			<h:commandLink action="#{authentificationBean.deconnecterUtilisateur()}"
-				value="Se Déconnecter" />
-		</h:form>
-	</h:panelGroup>
+	<h:form>
+		<p:growl id="messages" />
+
+		<p:menubar>
+
+			<p:menuitem value="Retour au menu gestion"
+				action="accueil-admin.xhtml" icon="pi pi-home" />
+			<p:menuitem type="button" value="Se déconnecter" icon="pi pi-times"
+				action="#{authentificationBean.deconnecterUtilisateur()}" />
+
+		</p:menubar>
+	</h:form>
 
 	<h:form enctype="multipart/form-data">
 
-												<p:tab title="Ajouter">
-							
+		<p:tab title="Ajouter">
 
-							<h:panelGrid columns="2" cellpadding="10">
-								<h:form enctype="multipart/form-data">
-									<h:inputHidden value="#{categorieBean.categorie.idCategorie}" />
-									<h:panelGrid columns="2" border="1">
-										<h:outputLabel value="Nom_Catégorie : " />
-										<h:inputText value="#{categorieBean.categorie.nomCategorie}" />
 
-										<h:outputLabel value="Description : " />
-										<h:inputText
-											value="#{categorieBean.categorie.descriptionCategorie}" />
+			<h:panelGrid columns="2" cellpadding="10">
+				<h:form enctype="multipart/form-data">
+					<h:inputHidden value="#{categorieBean.categorie.idCategorie}" />
+					<h:panelGrid columns="2" border="1">
+						<h:outputLabel value="Nom_Catégorie : " />
+						<h:inputText value="#{categorieBean.categorie.nomCategorie}" />
 
-										<h:outputLabel value="Image_Catégorie : " />
-										<h:panelGroup>
-											<h:graphicImage
-												value="images/#{categorieBean.categorie.urlImageCategorie}"
-												width="50" height="90"
-												rendered="#{categorieBean.categorie.idCategorie gt 0}" />
-											<h:inputFile id="file" value="#{categorieBean.uploadedFile}" />
-										</h:panelGroup>
+						<h:outputLabel value="Description : " />
+						<h:inputText
+							value="#{categorieBean.categorie.descriptionCategorie}" />
 
-										<f:facet name="footer">
-											<h:commandButton value="save" action="listeCate"
-												actionListener="#{categorieBean.saveCat}" />
-										</f:facet>
+						<h:outputLabel value="Image_Catégorie : " />
+						<h:panelGroup>
+							<h:graphicImage
+								value="images/#{categorieBean.categorie.urlImageCategorie}"
+								width="50" height="90"
+								rendered="#{categorieBean.categorie.idCategorie gt 0}" />
+							<h:inputFile id="file" value="#{categorieBean.uploadedFile}" />
+						</h:panelGroup>
 
-									</h:panelGrid>
+						<f:facet name="footer">
+							<h:commandButton value="save" action="listeCate"
+								actionListener="#{categorieBean.saveCat}" />
+						</f:facet>
 
-								</h:form>
+					</h:panelGrid>
 
-							</h:panelGrid>
-						</p:tab>
+				</h:form>
+
+			</h:panelGrid>
+		</p:tab>
 
 	</h:form>
-
 
 </h:body>
 </html>

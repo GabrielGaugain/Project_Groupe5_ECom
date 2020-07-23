@@ -1,0 +1,123 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+<h:head>
+	<title>page index</title>
+	<h:outputStylesheet library="styles" name="style.css" />
+</h:head>
+<h:body>
+	
+	<!-- déconnexion -->
+	<h:panelGroup styleClass="deconnect">
+		<h:form>
+		<h:commandLink action="#{authentificationBean.logOut()}"
+			value="Se Déconnecter" />
+	</h:form>
+	</h:panelGroup>
+	
+	<h:form>
+
+		<h:dataTable value="#{gestionLivreBean.livres}" var="livre" border="1">
+
+			<h:column>
+				<f:facet name="header">
+					<h:outputText value="Couverture" />
+				</f:facet>
+				<h:graphicImage library="images" name="#{livre.urlImageLivre}"
+					width="80" height="120" />
+			</h:column>
+
+			<h:column>
+				<f:facet name="header">
+					<h:outputText value="numéro ISBN" />
+				</f:facet>
+				<h:outputText value="#{livre.idLivre}" />
+			</h:column>
+
+			<h:column>
+				<f:facet name="header">
+					<h:outputText value="titre" />
+				</f:facet>
+				<h:outputText value="#{livre.titre}" />
+			</h:column>
+
+			<h:column>
+				<f:facet name="header">
+					<h:outputText value="auteur" />
+				</f:facet>
+				<h:outputText value="#{livre.auteur}" />
+			</h:column>
+
+			<h:column>
+				<f:facet name="header">
+					<h:outputText value="Disponible" />
+				</f:facet>
+				<!-- case à cocher -->
+				<h:selectBooleanCheckbox disabled="true" value="#{livre.disponible}" />
+			</h:column>
+
+			<!-- colonne pour supprimer un livre  -->
+			<h:column>
+				<f:facet name="header">
+					<h:outputText value="supprimer" />
+				</f:facet>
+				<!-- lien hypertext -->
+				<!--
+                        > action="listBook" : clé d'outcom pour la navigation 
+                    -->
+				<h:commandLink id="delete" action="listBook"
+					actionListener="#{gestionLivreBean.deleteBook}">
+
+					<!-- passage de param au composant -->
+					<f:param id="deleteID" name="id" value="#{livre.idLivre}" />
+
+					<!-- texte du lien -->
+					<h:outputText value="supprimer" />
+
+				</h:commandLink>
+
+			</h:column>
+
+			<!-- colonne pour modifier un livre  -->
+			<!--
+                    > clé d'outcom = editBook
+                    > méthode à invoquer = selectBook()
+                    > paramètre : editID
+                -->
+			<h:column>
+				<f:facet name="header">
+					<h:outputText value="modifier" />
+				</f:facet>
+
+				<h:commandLink id="update" action="editBook"
+					actionListener="#{gestionLivreBean.selectBook}">
+
+					<!-- passage de param au composant -->
+					<f:param id="editID" name="id" value="#{livre.idLivre}" />
+
+					<!-- texte du lien -->
+					<h:outputText value="éditer" />
+
+				</h:commandLink>
+
+			</h:column>
+
+		</h:dataTable>
+
+		<br />
+		<br />
+		<!-- bouton pour l'ajout d'un nouveau livre  -->
+		<!--
+               action="editBook" : clé d'outcom pour naviguer vers edit_book.xhtml
+            -->
+		<h:commandButton action="editBook"
+			actionListener="#{gestionLivreBean.initBook}"
+			value="Ajouter Un Nouveau Livre" />
+
+	</h:form>
+
+</h:body>
+</html>
+
