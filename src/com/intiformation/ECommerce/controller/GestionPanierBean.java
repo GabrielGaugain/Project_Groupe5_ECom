@@ -38,9 +38,8 @@ public class GestionPanierBean implements Serializable {
 	private ArrayList<Produit> produitLignesDeCmd;
 	private LigneCommande ligneDeCmd;
 	private Panier panierTemp;
-	//private ArrayList<Integer> listQuantite;
 	
-	private int quantite;
+	private int quantitePanier;
 	private Produit prodLigne;
 	private Double montantTotal;
 
@@ -60,7 +59,6 @@ public class GestionPanierBean implements Serializable {
 		panierService = new PanierServiceImpl();
 		
 		produitLignesDeCmd = new ArrayList<Produit>();
-		//listQuantite = new ArrayList<>();
 		lignesDeCommande = new ArrayList<>();
 		
 		panierTemp = null;
@@ -84,6 +82,25 @@ public class GestionPanierBean implements Serializable {
 	}//end getCurrentPanierLignes
 
 	
+	public Produit getCurrentProd(LigneCommande ligne) {	
+		prodLigne = prodDAO.getById(ligne.getIdProduit());
+		return prodLigne;
+	}
+	
+	public List<Integer> listMaxQte(){
+		
+		// init de la liste
+		List<Integer> listQte = new ArrayList<Integer>();
+		
+		// remplissage de la liste de 1 jusqu'à produit.quantite (stock dispo)
+		for(int qte=1; qte<=prodLigne.getQuantite(); qte++) {
+			listQte.add(qte);
+			
+		}	
+		
+		return listQte;
+		
+	}
 
 	
 	/**
@@ -113,11 +130,11 @@ public class GestionPanierBean implements Serializable {
 	
 		produitLignesDeCmd.add(prodLigne);
 		
-		double montant = (double) quantite * prodLigne.getPrixProduit();
+		double montant = (double) quantitePanier * prodLigne.getPrixProduit();
 		//System.out.println("Montant ajouté au panier : "+montant);
 		
 		// 5.création de la ligne de cmde a partir de l'article
-		ligneDeCmd = new LigneCommande(quantite, montant, prodLigne.getIdProduit(), panierTemp.getIdPanier());
+		ligneDeCmd = new LigneCommande(quantitePanier, montant, prodLigne.getIdProduit(), panierTemp.getIdPanier());
 		
 		
 		// 6. ajout de la ligne dans la bdd
@@ -126,9 +143,11 @@ public class GestionPanierBean implements Serializable {
 			// 7. rechargement de la liste des lignes dans le panier
 			lignesDeCommande =  (ArrayList<LigneCommande>) this.getLignesCommandeByPanier(panierTemp.getIdPanier());
 			
+			// 8. reset des vars 
 			prodLigne =null;
+			quantitePanier=0;
 			
-			// 8. ajout d'un message 'article ajouté au panier'
+			// 9. ajout d'un message 'article ajouté au panier'
 			contextJSF.addMessage(null,
 					  new FacesMessage(FacesMessage.SEVERITY_INFO,
 							  	       "ajout panier",
@@ -136,6 +155,7 @@ public class GestionPanierBean implements Serializable {
 					  );
 
 		}else {
+			// 9.bis ajout d'un message d'echec
 			contextJSF.addMessage(null,
 					  			  new FacesMessage(FacesMessage.SEVERITY_FATAL,
 							  	       "ajout panier",
@@ -190,14 +210,15 @@ public class GestionPanierBean implements Serializable {
 	}
 
 
-	public int getQuantite() {
-		return quantite;
+
+	public int getQuantitePanier() {
+		return quantitePanier;
 	}
 
 
-	public void setQuantite(int quantite) {
-		System.out.println("quantité entrée : "+quantite);
-		this.quantite = quantite;
+	public void setQuantitePanier(int quantitePanier) {
+		System.out.println("quantité entrée : "+quantitePanier);
+		this.quantitePanier = quantitePanier;
 	}
 
 
@@ -238,7 +259,5 @@ public class GestionPanierBean implements Serializable {
 
 
 
-
-	
 
 }//end class
