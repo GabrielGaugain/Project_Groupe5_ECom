@@ -42,38 +42,29 @@
 			
 				<h:form enctype="multipart/form-data">
 				
-					<h:inputHidden value="#{produitBeanBis.produit.idProduit}" />
+					<h:inputHidden value="#{utilisateurBean.user.idUtilisateur}" />
 					
 					<h:panelGrid columns="2" border="1">
 					
-						<h:outputLabel value="Nom du produit : " />
-						<h:inputText value="#{produitBeanBis.produit.nomProduit}" />
+						<h:outputLabel value="Identifiant de l'utilisateur : " />
+						<h:inputText value="#{utilisateurBean.user.nomUtilisateur}" />
 
-						<h:outputLabel value="Description du produit : " />
-						<h:inputText	value="#{produitBeanBis.produit.descriptionProduit}" />
+						<h:outputLabel value="Mot de passe de l'utilisateur : " />
+						<h:inputText	value="#{utilisateurBean.user.mdpUtilisateur}" />
 
-						<h:outputLabel value="Prix unitaire du produit : " />
-						<h:inputText	value="#{produitBeanBis.produit.prixProduit}" />
-							
-						<h:outputLabel value="Quantité en stock : " />
-						<h:inputText	value="#{produitBeanBis.produit.quantite}" />							
-							
-						<h:outputLabel value="Catégorie associée : " />
-						<h:inputText
-							value="#{produitBeanBis.produit.idCategorie}" />
-							
-						<h:outputLabel value="Image du produit : " />
-						<h:panelGroup>
-							<!--  <h:graphicImage
-								value="images/#{categorieBean.categorie.urlImageCategorie}"
-								width="50" height="90"
-								rendered="#{categorieBean.categorie.idCategorie gt 0}" />-->
-							<h:inputFile id="file" value="#{produitBeanBis.uploadedFile}" mode="simple" />
-						</h:panelGroup>
+						<h:outputLabel value="Role de l'utilisateur " />
+						<h:selectOneMenu value="#{utilisateurBean.user.idRole}" >
+							<f:selectItem itemValue = "1" itemLabel = "Admin" /> 
+  							<f:selectItem itemValue = "2" itemLabel = "Client" /> 
+						</h:selectOneMenu>
+						
+						<h:outputLabel value="Activé ? : " />
+						<h:selectBooleanCheckbox value="#{utilisateurBean.user.active}" />
+													
 
 						<f:facet name="footer">
-							<h:commandButton value="add" action="accueil-admin.xhtml"
-											actionListener="#{produitBeanBis.saveProd}" />
+							<h:commandButton value="save" action="accueil-admin.xhtml"
+											actionListener="#{utilisateurBean.saveUser}" />
 						</f:facet>
 
 					</h:panelGrid>

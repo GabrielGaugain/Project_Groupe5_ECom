@@ -131,14 +131,9 @@ public class GestionCategorieBean implements Serializable {
                 // affectation du nom ра la prop urlImage de la cate
                 categorie.setUrlImageCategorie(fileName);
                 
-                File f = new File(fileName);
-      
-                System.out.println("path : "+f.getPath());
-                System.out.println("name : "+f.getName());
-                
                 ///System.out.println("... nom de la photo" +nomPhoto);
                 
-                //Photo photoToAdd = new Photo(fileName, nomPhoto);
+                Photo photoToAdd = new Photo(fileName, fileName);
  
                 //----------------------------------------------
                 // ajout de la photo dans le dossier images du projet
@@ -167,14 +162,14 @@ public class GestionCategorieBean implements Serializable {
                 
                 outStream.close();                
                 
-                /*
+                
                 // ajout de l'image dans la bdd
                 photoDAO.add(photoToAdd);
                 
                 // ajout de la cate dans la bdd
                 categorieDAO.add(categorie);
 
-				*/
+				
             } catch (IOException ex) {
                 Logger.getLogger(GestionCategorieBean.class.getName()).log(Level.SEVERE, null, ex);
             }
