@@ -33,10 +33,17 @@
 
 		<p:growl id="msgs" showDetail="true" skipDetailIfEqualsSummary="true" />
 
-		<h3 style="margin-top: 0">Bienvenue Admin !</h3>
+		<h3 style="margin-top: 0">Bienvenue #{authentificationBean.userIdentifiant} !</h3>
+		
 		<p:tabView>
+		
+			<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
+			<!-- ++++++++++++	GESTION CATEGORIE	++++++++++++++++++++++++++++++++++++++++++-->
+			<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->		
+		
 			<p:tab title="Gestion Catégories">
 				<h:panelGrid columns="2" cellpadding="10">
+
 
 
 					<p:dataTable value="#{categorieBean.categories}" var="cate">
@@ -56,35 +63,39 @@
 						<p:column headerText="URL_Image_Catégorie">
 							<h:outputText value="#{cate.urlImageCategorie}" />
 						</p:column>
+						
 						<p:column headerText="Apperçu_Image_Catégorie">
 							<img src="../resources/images/#{cate.urlImageCategorie}"
 								alt="failed to read picture"
 								style="max-height: 20%; max-width: 35%" />
 						</p:column>
 
-						<p:column headerText="supprimer">		
-							<p:commandLink id="delete" action="listeCate"
-								actionListener="#{categorieBean.deleteCat()}">
 
-								<f:param id="deleteID" name="id" value="#{categorieBean.categorie.idCategorie}" />
+						<!--  ******* SUPPRESSION D'UNE CATEGORIE ********************** -->
+						<p:column headerText="supprimer">		
+							<h:commandLink id="delete" outcome="accueil-admin.xhtml"
+										   actionListener="#{categorieBean.deleteCat}">
+
+								<f:param id="deleteID" name="deleteID" value="#{cate.idCategorie}" />
 
 
 								<h:outputText value="supprimer" />
 
-							</p:commandLink>
+							</h:commandLink>
 
 						</p:column>
 
+						<!--  ******* MODIF D'UNE CATEGORIE ********************** -->
 						<p:column>
 							<f:facet name="header">
 								<h:outputText value="modifier" />
 							</f:facet>
 
-							<p:commandLink id="update" action="edit"
-								actionListener="#{categorieBean.selectCat()}">
+							<p:commandLink id="update" action="edit-categorie.xhtml"
+											actionListener="#{categorieBean.selectCat}">
 
 								<!-- passage de param au composant -->
-								<f:param id="editID" name="id" value="#{categorieBean.categorie.idCategorie}" />
+								<f:param id="editID" name="editID" value="#{cate.idCategorie}" />
 
 								<!-- texte du lien -->
 								<h:outputText value="modifier" />
@@ -98,12 +109,10 @@
 				</h:panelGrid>
 
 				<p:commandButton value="Rechercher" action="#" icon="pi pi-search" />
-				<p:commandButton value="Ajouter" icon="pi pi-plus" action="edit"
-					actionListener="#{categorieBean.initCat}" />
-
-
-
-
+				
+				<!--  ******* AJOUT D'UNE CATEGORIE ********************** -->
+				<p:commandButton value="Ajouter" icon="pi pi-plus" action="edit-categorie.xhtml"
+								 actionListener="#{categorieBean.initCat}" />
 
 
 
@@ -111,8 +120,10 @@
 
 
 
-
-			<!-- GESTION PRODUITS_____________________________________________________________________________________________________________ -->
+			<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
+			<!-- ++++++++++++	GESTION PRODUITS	++++++++++++++++++++++++++++++++++++++++++-->
+			<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
+			
 			<p:tab title="Gestion Produits">
 				<h:panelGrid columns="2" cellpadding="10">
 
@@ -140,9 +151,59 @@
 							<h:outputText value="#{pd.selectionne}" />
 						</p:column>
 
+			
+
+						<!--  ******* SUPPRESSION D'UN PRODUIT ********************** -->
+						<p:column headerText="supprimer">		
+							<h:commandLink id="deletePdt" outcome="accueil-admin.xhtml"
+										   actionListener="#{produitBeanBis.deleteProd}">
+
+								<f:param id="deleteIDpdt" name="deleteIDpdt" value="#{pd.idProduit}" />
+
+
+								<h:outputText value="supprimer" />
+
+							</h:commandLink>
+
+						</p:column>						
+						
+						<!--  ******* MODIF D'UN PRODUIT ********************** -->
+						<p:column>
+							<f:facet name="header">
+								<h:outputText value="modifier" />
+							</f:facet>
+
+							<p:commandLink id="update" action="edit-produit.xhtml"
+								actionListener="#{produitBeanBis.selectProd}">
+
+								<!-- passage de param au composant -->
+								<f:param id="editIDpdt" name="id" value="#{pd.idProduit}" />
+
+								<!-- texte du lien -->
+								<h:outputText value="modifier" />
+
+							</p:commandLink>
+
+						</p:column>
+
 					</p:dataTable>
+
 				</h:panelGrid>
+
+				<p:commandButton value="Rechercher" action="#" icon="pi pi-search" />
+				
+				<!--  ******* AJOUT D'UN PRODUIT ********************** -->
+				<p:commandButton value="Ajouter" icon="pi pi-plus" action="edit-produit.xhtml"
+								 actionListener="#{produitBeanBis.initProd}" />
+
 			</p:tab>
+			
+			
+			
+			<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->
+			<!-- ++++++++++++	GESTION USERS	++++++++++++++++++++++++++++++++++++++++++++++-->
+			<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++-->	
+					
 			<p:tab title="Gestion Utilisateurs">
 				<h:panelGrid columns="2" cellpadding="10">
 					<p:dataTable var="us" value="#{utilisateurBean.getListeUser()}">

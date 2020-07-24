@@ -1,0 +1,82 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+
+
+<h:head>
+	<title>Page pour admin</title>
+	<link href="resources/styles/accueil.css" rel="stylesheet" />
+	<link href="resources/styles/accueil-admin.css" rel="stylesheet" />
+	<h:outputStylesheet name="primeicons/primeicons.css"
+		library="primefaces" />
+</h:head>
+
+<h:body>
+
+	<h:form>
+		<p:growl id="messages" />
+
+		<p:menubar>
+
+			<p:menuitem value="Retour au menu gestion"
+				action="accueil-admin.xhtml" icon="pi pi-home" />
+				
+			<p:menuitem type="button" value="Se déconnecter" icon="pi pi-times"
+				action="#{authentificationBean.deconnecterUtilisateur()}" />
+				
+
+		</p:menubar>
+		
+		
+	</h:form>
+
+	<h:form enctype="multipart/form-data">
+
+		<p:tab title="Ajouter">
+
+
+			<h:panelGrid columns="2" cellpadding="10">
+			
+				<h:form enctype="multipart/form-data">
+				
+					<h:inputHidden value="#{categorieBean.categorie.idCategorie}" />
+					
+					<h:panelGrid columns="2" border="1">
+					
+						<h:outputLabel value="Nom_Catégorie : " />
+						<h:inputText value="#{categorieBean.categorie.nomCategorie}" />
+
+						<h:outputLabel value="Description : " />
+						<h:inputText
+							value="#{categorieBean.categorie.descriptionCategorie}" />
+
+						<h:outputLabel value="Image_Catégorie : " />
+						
+						<h:panelGroup>
+							<!--  <h:graphicImage
+								value="images/#{categorieBean.categorie.urlImageCategorie}"
+								width="50" height="90"
+								rendered="#{categorieBean.categorie.idCategorie gt 0}" />-->
+							<h:inputFile id="file" value="#{categorieBean.uploadedFile}" mode="simple" />
+						</h:panelGroup>
+
+						<f:facet name="footer">
+							<h:commandButton value="add" action="accueil-admin.xhtml"
+											actionListener="#{categorieBean.saveCat}" />
+						</f:facet>
+
+					</h:panelGrid>
+
+				</h:form>
+
+			</h:panelGrid>
+			
+		</p:tab>
+
+	</h:form>
+
+</h:body>
+</html>

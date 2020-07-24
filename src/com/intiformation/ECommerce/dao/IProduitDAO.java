@@ -6,6 +6,7 @@ import com.intiformation.ECommerce.modele.Produit;
 
 public interface IProduitDAO extends IGenericDAO<Produit> {
 	
+	
 	public List<Produit> getAllProduitByCategorie(long pIdCategorie);
 	
 	public List<Produit> getProduitSelectionne();

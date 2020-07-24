@@ -16,6 +16,10 @@ public class Produit {
 	
 	/* __________________ ctors __________________________ */
 	
+	public Produit() {
+		
+	}
+	
 	
 	public Produit(long idProduit, String nomProduit, String descriptionProduit, double prixProduit, int quantite,
 			boolean selectionne, String urlImageProduit, Long idCategorie) {

@@ -67,7 +67,8 @@ public class ProduitDAOImpl implements IProduitDAO {
 
 		
 		int verif = ps.executeUpdate();
-
+		System.out.println("dans update DAO , req : "+verif);
+		
 		return verif == 0 ? false : true;
 
 	} catch (SQLException e) {
@@ -86,21 +87,29 @@ public class ProduitDAOImpl implements IProduitDAO {
 
 	@Override
 	public boolean delete(long pIdProduit) {
+		
 		PreparedStatement ps = null;
 		PreparedStatement ps1 = null;
 
 		try {
+			System.out.println("Dans DAO SUpp prod...");
+			String ReqDel ="DELETE FROM produits WHERE id_produit=?";
 			
-			String Req ="DELETE FROM produits WHERE id_produit=?";
-			ps = IProduitDAO.connection.prepareStatement(Req);
+			ps = IProduitDAO.connection.prepareStatement(ReqDel);
 			ps.setLong(1, pIdProduit);
 			
-			ps1 = IProduitDAO.connection.prepareStatement("DELETE FROM lignescommandes WHERE id_produit=? ; ");
+			ps1 = IProduitDAO.connection.prepareStatement("DELETE FROM lignescommandes WHERE id_produit=?");
 			ps1.setLong(1, pIdProduit);
 			
 			int verif1 = ps1.executeUpdate();
-			int verif = ps1.executeUpdate();
-			return verif == 0 ? false : true && verif1 == 0 ? false : true;
+			System.out.println("Supp ligne cmd du prod : "+verif1);
+			
+			
+			int verif = ps.executeUpdate();
+			System.out.println("Supp  du prod : "+verif);
+			
+			System.out.println("Dans DAO SUpp prod après req...");
+			return (verif ==1)&&(verif1 == 1);
 
 		} catch (SQLException e) {
 			e.printStackTrace();

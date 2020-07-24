@@ -2,7 +2,12 @@ package com.intiformation.ECommerce.controller;
 
 
 import com.intiformation.ECommerce.modele.Categorie;
+import com.intiformation.ECommerce.modele.Photo;
 import com.intiformation.ECommerce.dao.CategorieDAOImpl;
+import com.intiformation.ECommerce.dao.ICategorieDAO;
+import com.intiformation.ECommerce.dao.IPhotoDAO;
+import com.intiformation.ECommerce.dao.PhotoDAOImpl;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -19,6 +24,8 @@ import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
 import javax.servlet.ServletContext;
 import javax.servlet.http.Part;
+
+import org.primefaces.shaded.commons.io.FilenameUtils;
 
 /**
  * @author INTIFORMATION
@@ -38,7 +45,8 @@ public class GestionCategorieBean implements Serializable {
     private Part uploadedFile;
 
     // dao 
-    CategorieDAOImpl categorieDAO;
+    IPhotoDAO photoDAO;
+    ICategorieDAO categorieDAO;
 
     /*_____________________________ CTORS __________________________________*/
     /**
@@ -46,6 +54,7 @@ public class GestionCategorieBean implements Serializable {
      */
     public GestionCategorieBean() {
     	categorieDAO = new CategorieDAOImpl();
+    	photoDAO = new PhotoDAOImpl();
     }
 
     /*_____________________________ METHODES __________________________________*/
@@ -75,26 +84,29 @@ public class GestionCategorieBean implements Serializable {
      */
     public void selectCat(ActionEvent event) {
 
-        UIParameter cp = (UIParameter) event.getComponent().findComponent("editID");
-        int id = (int) cp.getValue();
-
-        Categorie cat = categorieDAO.getById(id) ;
+        UIParameter cCatUp = (UIParameter) event.getComponent().findComponent("editID");
+        Long idUp = (Long) cCatUp.getValue();
+        System.out.println("id dde la cat a mod : "+idUp);
+        Categorie cat = categorieDAO.getById(idUp) ;
 
         setCategorie(cat);
        
     }
 
     /**
-     * suppression d'une cate
+     * suppression d'une cate => Marche !!
      * @param event
      */
     public void deleteCat(ActionEvent event) {
 
         UIParameter cp = (UIParameter) event.getComponent().findComponent("deleteID");
-        int id = (int) cp.getValue();
-
+        Long id = (long) cp.getValue();
+       
         categorieDAO.delete(id);
-    }
+        
+        categories = getCategories();
+        
+    }//end deleteCat
 
     /**
      * sauvegarder une cate categorie: celui qui est declaré dans les champs du
@@ -113,12 +125,21 @@ public class GestionCategorieBean implements Serializable {
                 // traitement du fileUpload : recup du nom de l'image
                 String fileName = uploadedFile.getSubmittedFileName();
                 
+                System.out.println("... chemin de la photo" +fileName);
+               
+                
                 // affectation du nom à  la prop urlImage de la cate
                 categorie.setUrlImageCategorie(fileName);
                 
-                // ajout de la cate dans la bdd
-                categorieDAO.add(categorie);
-
+                File f = new File(fileName);
+      
+                System.out.println("path : "+f.getPath());
+                System.out.println("name : "+f.getName());
+                
+                ///System.out.println("... nom de la photo" +nomPhoto);
+                
+                //Photo photoToAdd = new Photo(fileName, nomPhoto);
+ 
                 //----------------------------------------------
                 // ajout de la photo dans le dossier images du projet
                 //-----------------------------------------------
@@ -144,8 +165,16 @@ public class GestionCategorieBean implements Serializable {
                     outStream.write(buf, 0, len);
                 }
                 
-                outStream.close();
+                outStream.close();                
+                
+                /*
+                // ajout de l'image dans la bdd
+                photoDAO.add(photoToAdd);
+                
+                // ajout de la cate dans la bdd
+                categorieDAO.add(categorie);
 
+				*/
             } catch (IOException ex) {
                 Logger.getLogger(GestionCategorieBean.class.getName()).log(Level.SEVERE, null, ex);
             }

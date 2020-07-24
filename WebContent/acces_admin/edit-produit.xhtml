@@ -7,7 +7,7 @@
 
 
 <h:head>
-	<title>Page pour admin</title>
+	<title>Modification Produit</title>
 	<link href="resources/styles/accueil.css" rel="stylesheet" />
 	<link href="resources/styles/accueil-admin.css" rel="stylesheet" />
 	<h:outputStylesheet name="primeicons/primeicons.css"
@@ -23,10 +23,14 @@
 
 			<p:menuitem value="Retour au menu gestion"
 				action="accueil-admin.xhtml" icon="pi pi-home" />
+				
 			<p:menuitem type="button" value="Se déconnecter" icon="pi pi-times"
 				action="#{authentificationBean.deconnecterUtilisateur()}" />
+				
 
 		</p:menubar>
+		
+		
 	</h:form>
 
 	<h:form enctype="multipart/form-data">
@@ -35,28 +39,41 @@
 
 
 			<h:panelGrid columns="2" cellpadding="10">
+			
 				<h:form enctype="multipart/form-data">
-					<h:inputHidden value="#{categorieBean.categorie.idCategorie}" />
+				
+					<h:inputHidden value="#{produitBeanBis.produit}" />
+					
 					<h:panelGrid columns="2" border="1">
-						<h:outputLabel value="Nom_Catégorie : " />
-						<h:inputText value="#{categorieBean.categorie.nomCategorie}" />
+					
+						<h:outputLabel value="Nom du produit : " />
+						<h:inputText value="#{produitBeanBis.produit.nomProduit}" />
 
-						<h:outputLabel value="Description : " />
+						<h:outputLabel value="Description du produit : " />
+						<h:inputText	value="#{produitBeanBis.produit.descriptionProduit}" />
+
+						<h:outputLabel value="Prix unitaire du produit : " />
+						<h:inputText	value="#{produitBeanBis.produit.prixProduit}" />
+							
+						<h:outputLabel value="Quantité en stock : " />
+						<h:inputText	value="#{produitBeanBis.produit.quantite}" />							
+							
+						<h:outputLabel value="Id catégorie : " />
 						<h:inputText
-							value="#{categorieBean.categorie.descriptionCategorie}" />
-
+							value="#{produitBeanBis.produit.idCategorie}" />
 						<h:outputLabel value="Image_Catégorie : " />
+						
 						<h:panelGroup>
-							<h:graphicImage
+							<!--  <h:graphicImage
 								value="images/#{categorieBean.categorie.urlImageCategorie}"
 								width="50" height="90"
-								rendered="#{categorieBean.categorie.idCategorie gt 0}" />
-							<h:inputFile id="file" value="#{categorieBean.uploadedFile}" />
+								rendered="#{categorieBean.categorie.idCategorie gt 0}" />-->
+							<h:inputFile id="file" value="#{produitBeanBis.uploadedFile}" mode="simple" />
 						</h:panelGroup>
 
 						<f:facet name="footer">
-							<h:commandButton value="save" action="listeCate"
-								actionListener="#{categorieBean.saveCat}" />
+							<h:commandButton value="add" action="accueil-admin.xhtml"
+											actionListener="#{produitBeanBis.saveProd}" />
 						</f:facet>
 
 					</h:panelGrid>
@@ -64,6 +81,7 @@
 				</h:form>
 
 			</h:panelGrid>
+			
 		</p:tab>
 
 	</h:form>
