@@ -56,10 +56,10 @@
 						<h:outputLabel value="Image_Catégorie : " />
 						
 						<h:panelGroup>
-							<!--  <h:graphicImage
-								value="images/#{categorieBean.categorie.urlImageCategorie}"
+							<h:graphicImage
+								value="../resources/images/#{categorieBean.categorie.urlImageCategorie}"
 								width="50" height="90"
-								rendered="#{categorieBean.categorie.idCategorie gt 0}" />-->
+								rendered="#{categorieBean.categorie.idCategorie gt 0}" />
 							<h:inputFile id="file" value="#{categorieBean.uploadedFile}" mode="simple" />
 						</h:panelGroup>
 

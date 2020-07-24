@@ -122,49 +122,52 @@ public class GestionCategorieBean implements Serializable {
         if (categorie.getIdCategorie() == 0) {
 
             try {
-                // traitement du fileUpload : recup du nom de l'image
-                String fileName = uploadedFile.getSubmittedFileName();
-                
-                System.out.println("... chemin de la photo" +fileName);
-               
-                
-                // affectation du nom à  la prop urlImage de la cate
-                categorie.setUrlImageCategorie(fileName);
-                
-                ///System.out.println("... nom de la photo" +nomPhoto);
-                
-                Photo photoToAdd = new Photo(fileName, fileName);
- 
-                //----------------------------------------------
-                // ajout de la photo dans le dossier images du projet
-                //-----------------------------------------------
-             
-                // recup du contenu de l'image
-                InputStream imageContent = uploadedFile.getInputStream();
-
-                // recup de la valeur du param d'initialisation context-param de web.xml
-                FacesContext fContext = FacesContext.getCurrentInstance();
-                String pathTmp = fContext.getExternalContext().getInitParameter("file-upload");
-                
-                String filePath = fContext.getExternalContext().getRealPath(pathTmp);
-
-                // création du fichier image (conteneur de l'image) 
-                File targetFile = new File(filePath, fileName);
-
-                // instanciation du flux de sortie vers le fichier image
-                OutputStream outStream = new FileOutputStream(targetFile);
-                byte[] buf = new byte[1024];
-                int len;
-
-                while ((len = imageContent.read(buf)) > 0) {
-                    outStream.write(buf, 0, len);
-                }
-                
-                outStream.close();                
-                
-                
-                // ajout de l'image dans la bdd
-                photoDAO.add(photoToAdd);
+            	
+            	if(uploadedFile != null) {
+	                // traitement du fileUpload : recup du nom de l'image
+	                String fileName = uploadedFile.getSubmittedFileName();
+	                
+	                System.out.println("... chemin de la photo" +fileName);
+	               
+	                
+	                // affectation du nom à  la prop urlImage de la cate
+	                categorie.setUrlImageCategorie(fileName);
+	                
+	                ///System.out.println("... nom de la photo" +nomPhoto);
+	                
+	                Photo photoToAdd = new Photo(fileName, fileName);
+	 
+	                //----------------------------------------------
+	                // ajout de la photo dans le dossier images du projet
+	                //-----------------------------------------------
+	             
+	                // recup du contenu de l'image
+	                InputStream imageContent = uploadedFile.getInputStream();
+	
+	                // recup de la valeur du param d'initialisation context-param de web.xml
+	                FacesContext fContext = FacesContext.getCurrentInstance();
+	                String pathTmp = fContext.getExternalContext().getInitParameter("file-upload");
+	                
+	                String filePath = fContext.getExternalContext().getRealPath(pathTmp);
+	
+	                // création du fichier image (conteneur de l'image) 
+	                File targetFile = new File(filePath, fileName);
+	
+	                // instanciation du flux de sortie vers le fichier image
+	                OutputStream outStream = new FileOutputStream(targetFile);
+	                byte[] buf = new byte[1024];
+	                int len;
+	
+	                while ((len = imageContent.read(buf)) > 0) {
+	                    outStream.write(buf, 0, len);
+	                }
+	                
+	                outStream.close();                
+	                
+	                
+	                // ajout de l'image dans la bdd
+	                photoDAO.add(photoToAdd);
+            	}//end if photo entrée
                 
                 // ajout de la cate dans la bdd
                 categorieDAO.add(categorie);

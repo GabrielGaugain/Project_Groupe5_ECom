@@ -26,6 +26,7 @@ import com.intiformation.ECommerce.dao.IProduitDAO;
 import com.intiformation.ECommerce.dao.PhotoDAOImpl;
 import com.intiformation.ECommerce.dao.ProduitDAOImpl;
 import com.intiformation.ECommerce.modele.Categorie;
+import com.intiformation.ECommerce.modele.Photo;
 import com.intiformation.ECommerce.modele.Produit;
 
 @ManagedBean(name = "produitBeanBis")
@@ -122,13 +123,34 @@ public class GestionProduitsBis implements Serializable{
      * @param event
      */
     public void deleteProd(ActionEvent event) {
+    	
+    	FacesContext contextJSF = FacesContext.getCurrentInstance();
+    	
     	System.out.println("Dans deleteProd ....");
+    	
         UIParameter pId = (UIParameter) event.getComponent().findComponent("deleteIDpdt");
         Long idPdtToDel = (long) pId.getValue();
 
         System.out.println("Id prod to del : "+idPdtToDel);
         
-        prodDAO.delete(idPdtToDel);
+        if( prodDAO.delete(idPdtToDel)) {
+        	
+			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO,
+					"Produit supprimé -", 
+					"Le produit a bien été supprimé !");
+			//-> envoi du massage vers la bue via le constex de JSF (l'objet 'FacesContext') et sa méthode addMessage()
+			contextJSF.addMessage(null, message );	     	
+        
+        }else {
+        	
+        	FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_FATAL,
+					"Echec de la suppression -", 
+					"Nous n'avons pas reussi à supprimer le produit  ");
+			
+			//-> envoi du massage vers la bue via le constex de JSF (l'objet 'FacesContext') et sa méthode addMessage()
+			contextJSF.addMessage(null, message );           	
+        	
+        }//end else
         
         listeProdBDD = getListeProd();
         
@@ -142,66 +164,86 @@ public class GestionProduitsBis implements Serializable{
 
     
     public void saveProd(ActionEvent event) {
-    	System.out.println("Dans  saveProd .... id prod : "+produit.getIdProduit());
+    	
+    	FacesContext contextJSF = FacesContext.getCurrentInstance();
+    	
         //-------------------------------------------
         // cas : ajout 
         //-------------------------------------------
         if (produit.getIdProduit() == 0) {
 
             try {
-                // traitement du fileUpload : recup du nom de l'image
-                String fileName = uploadedFile.getSubmittedFileName();
                 
-                System.out.println("... chemin de la photo" +fileName);
-               
+            	if(uploadedFile != null) {
+            		
+            		// traitement du fileUpload : recup du nom de l'image
+	                String fileName = uploadedFile.getSubmittedFileName();
+	                
+	                System.out.println("... chemin de la photo" +fileName);
+	               
+	                
+	                
+	                // affectation du nom à  la prop urlImage de la cate
+	                produit.setUrlImageProduit(fileName);
+	                
+	                File f = new File(fileName);
+	      
+	                System.out.println("path : "+f.getPath());
+	                System.out.println("name : "+f.getName());
                 
-                // affectation du nom à  la prop urlImage de la cate
-                produit.setUrlImageProduit(fileName);
-                
-                File f = new File(fileName);
-      
-                System.out.println("path : "+f.getPath());
-                System.out.println("name : "+f.getName());
-                
-                ///System.out.println("... nom de la photo" +nomPhoto);
-                
-                //Photo photoToAdd = new Photo(fileName, nomPhoto);
- 
-                //----------------------------------------------
-                // ajout de la photo dans le dossier images du projet
-                //-----------------------------------------------
-             
-                // recup du contenu de l'image
-                InputStream imageContent = uploadedFile.getInputStream();
+	                ///System.out.println("... nom de la photo" +nomPhoto);
+	                
+	                Photo photoToAdd = new Photo(fileName, fileName);
+	 
+	                //----------------------------------------------
+	                // ajout de la photo dans le dossier images du projet
+	                //-----------------------------------------------
+	             
+	                // recup du contenu de l'image
+	                InputStream imageContent = uploadedFile.getInputStream();
+	
+	                // recup de la valeur du param d'initialisation context-param de web.xml
+	                FacesContext fContext = FacesContext.getCurrentInstance();
+	                String pathTmp = fContext.getExternalContext().getInitParameter("file-upload");
+	                
+	                String filePath = fContext.getExternalContext().getRealPath(pathTmp);
+	
+	                // création du fichier image (conteneur de l'image) 
+	                File targetFile = new File(filePath, fileName);
+	
+	                // instanciation du flux de sortie vers le fichier image
+	                OutputStream outStream = new FileOutputStream(targetFile);
+	                byte[] buf = new byte[1024];
+	                int len;
+	
+	                while ((len = imageContent.read(buf)) > 0) {
+	                    outStream.write(buf, 0, len);
+	                }
+	                // ajout de l'image dans la bdd
+	                photoDAO.add(photoToAdd);
+	                
+	                outStream.close();    
+            	}//end if photo rentrée
 
-                // recup de la valeur du param d'initialisation context-param de web.xml
-                FacesContext fContext = FacesContext.getCurrentInstance();
-                String pathTmp = fContext.getExternalContext().getInitParameter("file-upload");
-                
-                String filePath = fContext.getExternalContext().getRealPath(pathTmp);
-
-                // création du fichier image (conteneur de l'image) 
-                File targetFile = new File(filePath, fileName);
-
-                // instanciation du flux de sortie vers le fichier image
-                OutputStream outStream = new FileOutputStream(targetFile);
-                byte[] buf = new byte[1024];
-                int len;
-
-                while ((len = imageContent.read(buf)) > 0) {
-                    outStream.write(buf, 0, len);
-                }
-                
-                outStream.close();                
-                
-                /*
-                // ajout de l'image dans la bdd
-                photoDAO.add(photoToAdd);
-                
+            	
                 // ajout de la cate dans la bdd
-                prodDAO.add(produit);
+                if( prodDAO.add(produit)) {
+        			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO,
+        					"Produit créé -", 
+        					"Le produit a bien été créé !");
+        			//-> envoi du massage vers la bue via le constex de JSF (l'objet 'FacesContext') et sa méthode addMessage()
+        			contextJSF.addMessage(null, message );        		
+            	}else {
+                	FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_FATAL,
+        					"Echec de l'ajout  -", 
+        					"Nous n'avons pas reussi à ajouter le produit  ");
+        			
+        			//-> envoi du massage vers la bue via le constex de JSF (l'objet 'FacesContext') et sa méthode addMessage()
+        			contextJSF.addMessage(null, message );         		
+            	}//end else
+            		
 
-				*/
+				
             } catch (IOException ex) {
                 Logger.getLogger(GestionCategorieBean.class.getName()).log(Level.SEVERE, null, ex);
             }
@@ -211,7 +253,9 @@ public class GestionProduitsBis implements Serializable{
         // cas : modif 
         //-------------------------------------------
         if (produit.getIdProduit() != 0) {
+        	
         	System.out.println("Dans modifier prod admin ...");
+        	
             if (uploadedFile != null) {
 
                 String fileNameToUpdate = uploadedFile.getSubmittedFileName();
@@ -221,10 +265,27 @@ public class GestionProduitsBis implements Serializable{
                     // affectation du nouveau nom Ã  la prop urlImage de la cate 
                     produit.setUrlImageProduit(fileNameToUpdate);
                 }
-            }
+            }//end if 
+            
 
-            prodDAO.update(produit);
-        }
+            if( prodDAO.update(produit)) {
+            	
+            }
+    			FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO,
+    					"Produit modifié -", 
+    					"Le produit a bien été modifié !");
+    			//-> envoi du massage vers la bue via le constex de JSF (l'objet 'FacesContext') et sa méthode addMessage()
+    			contextJSF.addMessage(null, message );        		
+    			
+        	}else {
+            	FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_FATAL,
+    					"Echec modification  -", 
+    					"Nous n'avons pas reussi à modifier le produit  ");
+    			
+    			//-> envoi du massage vers la bue via le constex de JSF (l'objet 'FacesContext') et sa méthode addMessage()
+    			contextJSF.addMessage(null, message );         		
+        	}//end else
+        		
 
     }//end saveCat()    
     
