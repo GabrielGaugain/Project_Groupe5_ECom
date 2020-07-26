@@ -1,5 +1,7 @@
 package com.intiformation.ECommerce.modele;
 
+import com.intiformation.ECommerce.dao.ProduitDAOImpl;
+
 public class LigneCommande {
 	
 	/* __________________ props __________________________ */
@@ -10,6 +12,8 @@ public class LigneCommande {
 	private long idProduit;
 	private long idCommande;
 	private long idPanier;
+	
+	private ProduitDAOImpl prodDAO;
 	
 	
 	/* __________________ ctors __________________________ */
@@ -62,6 +66,14 @@ public class LigneCommande {
 
 
 	public void setQuantiteCommande(int quantiteCommande) {
+		
+		prodDAO = new ProduitDAOImpl();
+		Produit pdt = prodDAO.getById(idProduit);
+		double unitPrice = pdt.getPrixProduit();
+		
+		montantCommande = (double) Math.round(100* unitPrice*quantiteCommande)/100;
+		System.out.println("prix montant changé : " + montantCommande);		
+		
 		this.quantiteCommande = quantiteCommande;
 	}
 
@@ -72,6 +84,14 @@ public class LigneCommande {
 
 
 	public void setMontantCommande(double montantCommande) {
+		
+		prodDAO = new ProduitDAOImpl();
+		Produit pdt = prodDAO.getById(idProduit);
+		double unitPrice = pdt.getPrixProduit();
+		
+		montantCommande = (double) Math.round( unitPrice*quantiteCommande *100)/100;
+		System.out.println("prix montant changé : " + montantCommande);
+		
 		this.montantCommande = montantCommande;
 	}
 

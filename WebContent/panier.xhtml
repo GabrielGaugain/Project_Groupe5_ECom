@@ -35,7 +35,7 @@
 	<h3 style="margin-left:5%">Votre panier : </h3>
 	<br/>
 	
-	<h:form style="padding-bottom:50px" >	
+	<h:form style="padding-bottom:50px" styleClass="EntireForm">	
 	
 		<!-- ============================================================== -->
 		<!-- ===========Recap et bouton de cmd ============================ -->
@@ -61,7 +61,7 @@
 	
 		<ui:param name="prod" value="#{panierBean.getCurrentProd(lignesCmd) }"/>
 		
-		<b:row class = "ligne-cmd">
+		<b:row class = "ligne-cmd" >
 			
 			<!-- Image du produit associé à la ligne de cmde -->
 				<b:column col-xs="4" col-md="3">
@@ -80,7 +80,8 @@
 					
 					<b:row>
 						<b:selectOneMenu value="#{lignesCmd.quantiteCommande}" colMd="2" required="true" label="quantité :" labelColMd="3"   
-										 style="float:left;margin-left:5%" > 
+										 style="float:left;margin-left:5%"
+										 ajax="true" process="@this" update="@(.EntireForm)" > 
 										    
 							<f:selectItem itemLabel="Select quantity" itemValue=""/>
 							<f:selectItems value="#{panierBean.listMaxQte()}" var="qute" itemValue="#{qute}" itemLabel="#{qute}" />	
@@ -90,7 +91,7 @@
 						<!--  Séparateur -->
 						<i style="margin-right:5%;margin-left:5%;color:lightgrey">|</i>
 						    
-						<h:commandLink action="#" actionListener="#{panierBean.supprimerArticleDuPanier}" >
+						<h:commandLink  actionListener="#{panierBean.supprimerArticleDuPanier}" ajax="true"  process="@this" update="@(.EntireForm)" >
 							Supprimer
 							<f:param id = "idligneToDel" name="idligneToDel" value="#{lignesCmd.idLigneCommande}" />
 						</h:commandLink>
@@ -101,10 +102,11 @@
 
 
 			<!-- prix de la ligne de commande -->
-			<b:column col-xs="1" col-md="1">
+			<b:column col-xs="1" col-md="1" id="prix-cmde" styleClass="prixCmde">
 					<p style="margin:0;font-weight:300;color:grey "> Prix :</p>
 					<hr style="margin:0" />
-					<p style="margin-top:5px;font-weight:bold;" > #{lignesCmd.montantCommande} € </p>			
+					<p  style="margin-top:5px;font-weight:bold;" > #{lignesCmd.montantCommande} € </p>	
+							
 			</b:column>
 			
 			
