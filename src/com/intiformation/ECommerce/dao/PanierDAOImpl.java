@@ -63,8 +63,8 @@ public class PanierDAOImpl implements IPanierDAO {
 			
 			int verif1 = ps1.executeUpdate();
 			int verif = ps.executeUpdate();
-
-			return (verif == 1)&&(verif1 == 1);
+			System.out.println("requete supp lignes de commande : " +verif1 +"\n\t requete supp panier : "+verif);
+			return (verif == 1);
 
 		} catch (SQLException e) {
 			e.printStackTrace();

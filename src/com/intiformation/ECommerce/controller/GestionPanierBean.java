@@ -217,7 +217,7 @@ public class GestionPanierBean implements Serializable {
 		// 1. recup context
 		FacesContext contextJSF = FacesContext.getCurrentInstance();
 
-		/*
+		
 		// 2. declaration d'un iterateur sur lignesDeCOmmande
 		Iterator<LigneCommande> it = lignesDeCommande.iterator();
 		
@@ -238,7 +238,7 @@ public class GestionPanierBean implements Serializable {
 			it.remove();
 			
 		}//end while
-		*/
+		
 		 
 		
 		// 4. suppression du panier vide
