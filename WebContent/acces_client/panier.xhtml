@@ -44,7 +44,7 @@
 			<h4>Sous-total : <b>#{panierBean.montantTotal} €</b></h4>
 			<br/>
 			<b:button value="Passer la commande" look="success" style="color:#282828"  
-					  outcome="login"/>
+					  outcome="commande.xhtml" actionListener="#{panierBean.passerLaCommande}"/>
 		</b:container>
 
 

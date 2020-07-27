@@ -34,8 +34,23 @@
 		.separator-text::after {
 		    margin-left: .25em;
 		}
-
-
+	
+		.link-accueil a{
+			text-align: center;
+			color:#2ab012;
+			text-decoration: none;
+			font-size: 40px;
+			font-style:italic;
+			font-family: cursive;"	
+			transition: all 0.3s ease;
+		}
+		
+		.link-accueil a:hover{ 
+			color:#0a6f04;
+			transform: scale(1.02);
+	
+		}
+		
     </style>	
 	
 </h:head>
@@ -47,7 +62,11 @@
 	<!-- ============================================================================== -->
 	<!-- ========== Formulaire de connexion =========================================== -->
 	<!-- ============================================================================== -->
-	
+	<div style="text-align: center;margin-top:15px" class="link-accueil">
+		<a href="accueil-gab.xhtml" >
+			Ecolovie
+		</a>
+	</div>
 	
 	<h:form style="padding: 60px 60px;">
 	     <b:container style=" max-width: 400px;border:1px solid lightgrey;border-radius:15px;padding-top: 40px;padding-bottom: 40px;">

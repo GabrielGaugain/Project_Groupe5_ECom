@@ -97,11 +97,14 @@ INSERT INTO photos (url_photo, nom_photo) VALUE ('test.jpg','test');
 INSERT INTO photos (url_photo, nom_photo) VALUE ('asus_rog.jpg','asus');
 INSERT INTO photos (url_photo, nom_photo) VALUE ('macbook.jpg','macbook');
 INSERT INTO photos (url_photo, nom_photo) VALUE ('testbleu.jpg','testbleu');
+INSERT INTO photos (url_photo, nom_photo) VALUE ('machine_a_laver.jpg','machine à laver');
+insert into photos (url_photo, nom_photo) values('machine_a_laver_Candy.jpg', 'lave linge candy');
+insert into photos (url_photo, nom_photo) values('machine_a_laver_Samsung.jpg', 'lave linge samsung');
 
 INSERT INTO categories (nom_categorie,description_categorie,url_photo) VALUES ('Categorie_Test','Cette catégorie a été inventée pour réaliser des tests sur la bdd','testbleu.jpg') ;
 INSERT INTO categories (nom_categorie,description_categorie,url_photo) VALUES ('Categorie_Test2','Cette catégorie a été inventée ','testbleu.jpg') ;
 insert into categories (nom_categorie,description_categorie,url_photo) VALUES ('Ordinateurs portables','Categorie regroupant les laptops ','testbleu.jpg') ;
-insert into categories (nom_categorie,description_categorie) VALUES ('ezgrhe','zegz ') ;
+insert into categories (nom_categorie,description_categorie,url_photo) VALUES ('Machine à laver','Catégorie regroupant toutes les machines a laver/ lave linge','machine_a_laver.jpg') ;
 
 
 
@@ -111,6 +114,12 @@ INSERT INTO produits (nom_produit,description_produit,prix_produit,quantite,url_
 INSERT INTO produits (nom_produit,description_produit,prix_produit,quantite,url_photo,id_categorie) VALUES ('Laptop Asus','Laptot asus de gaming ',899.99,4,'asus_rog.jpg',3);
 INSERT INTO produits (nom_produit,description_produit,prix_produit,quantite,url_photo,id_categorie) VALUES ('Macbook pro','Laptot apple de la game pro ',1499.99,8,'macbook.jpg',3);
 INSERT INTO produits (nom_produit,description_produit,prix_produit,quantite,id_categorie) VALUES ('ezgrhe','Ce produit a été inventé pour réaliser des tests de suppression',3.50,2,1);
+
+INSERT INTO produits (nom_produit,description_produit,prix_produit,quantite,url_photo,id_categorie) VALUES ('Lave linge Hublot Candy CS13102D3147 - Classe A+++ ','Pose libre - capacité : 10 Kg - Vitesse d essorage maxi 1300 tr/min - Classe A+++',399.99,7,'machine_a_laver_Candy.jpg',24);
+INSERT INTO produits (nom_produit,description_produit,prix_produit,quantite,url_photo,id_categorie) VALUES ('Lave linge hublot 9 Kg Samsung WW90K6414QW ','Lave linge Frontal - Essorage 1400 tr/min - Fin différée - Affichage temps restant - Moteur à induction - 74 dB - Pose libre - Classe énergétique A+++ ',499.99,5,'machine_a_laver_Samsung.jpg',24);
+
+
+
 
 delete from lignescommandes where id_produit=6;
 delete from produits where id_produit=6;
